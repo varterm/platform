@@ -5,9 +5,9 @@ import styles from './page.module.css';
 
 // Stripe payment links - UPDATE THESE WITH YOUR LINKS
 const STRIPE_LINKS = {
-  starter: 'https://buy.stripe.com/YOUR_STARTER_LINK',
-  pro: 'https://buy.stripe.com/YOUR_PRO_LINK',
-  unlimited: 'https://buy.stripe.com/YOUR_UNLIMITED_LINK',
+  starter: 'https://buy.stripe.com/00w6oG2Zq23a8al1PB3VC00',
+  pro: 'https://buy.stripe.com/9B628qarSgY4aitgKv3VC01',
+  unlimited: 'https://buy.stripe.com/5kQaEW9nO7nugGRam73VC02',
 };
 
 // Premium voice configurations
