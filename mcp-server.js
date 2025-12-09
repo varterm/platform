@@ -48,7 +48,7 @@ async function generateSpeech(text, voiceId, speed = 1.0) {
       },
       body: JSON.stringify({
         text,
-        model_id: 'eleven_monolingual_v1',
+        model_id: 'eleven_turbo_v2_5',  // Updated: old models deprecated on free tier
         voice_settings: { stability: 0.5, similarity_boost: 0.75, speed },
       }),
     }
