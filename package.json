@@ -14,7 +14,6 @@
   "dependencies": {
     "@andresaya/edge-tts": "^1.8.0",
     "@anthropic-ai/sdk": "^0.24.0",
-    "@mintplex-labs/piper-tts-web": "^1.0.4",
     "next": "^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

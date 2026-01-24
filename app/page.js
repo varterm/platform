@@ -7,6 +7,16 @@ import styles from './page.module.css';
 const DONATION_LINK = 'https://buy.stripe.com/00w6oG2Zq23a8al1PB3VC00';
 
 // Microsoft Edge neural voices (FREE)
+// Piper voices (Offline - runs locally in browser)
+const PIPER_VOICES = [
+  { id: 'en_US-amy-medium', name: 'Amy', desc: 'Female, clear' },
+  { id: 'en_US-ryan-medium', name: 'Ryan', desc: 'Male, natural' },
+  { id: 'en_US-lessac-medium', name: 'Lessac', desc: 'Female, expressive' },
+  { id: 'en_US-libritts-high', name: 'LibriTTS', desc: 'High quality' },
+  { id: 'en_GB-cori-medium', name: 'Cori', desc: 'British female' },
+  { id: 'en_GB-alan-medium', name: 'Alan', desc: 'British male' },
+];
+
 // Microsoft Edge voices (Cloud - requires internet)
 const MICROSOFT_VOICES = [
   { id: 'en-US-AriaNeural', name: 'Aria', desc: 'Friendly, natural' },
@@ -21,16 +31,6 @@ const MICROSOFT_VOICES = [
   { id: 'en-AU-WilliamNeural', name: 'William', desc: 'Australian, clear' },
 ];
 
-// Piper voices (Offline - runs locally in browser)
-// These are valid voice IDs from piper-tts-web
-const PIPER_VOICES = [
-  { id: 'en_US-amy-medium', name: 'Amy', desc: 'Female, clear' },
-  { id: 'en_US-ryan-medium', name: 'Ryan', desc: 'Male, natural' },
-  { id: 'en_US-lessac-medium', name: 'Lessac', desc: 'Female, expressive' },
-  { id: 'en_US-libritts-high', name: 'LibriTTS', desc: 'High quality' },
-  { id: 'en_GB-cori-medium', name: 'Cori', desc: 'British female' },
-  { id: 'en_GB-alan-medium', name: 'Alan', desc: 'British male' },
-];
 
 export default function Home() {
   // State
@@ -194,7 +194,6 @@ export default function Home() {
 
   // Piper TTS (Offline, runs in browser via WASM)
   const speakWithPiper = async () => {
-    // Check browser support
     if (typeof window === 'undefined') {
       showToast('Offline voices only work in browser', 'error');
       return;
@@ -212,19 +211,16 @@ export default function Home() {
         currentText: 'Loading Piper voice model (first time may take a moment)...'
       });
       
-      // Dynamic import for client-side only
-      const { predict } = await import('@mintplex-labs/piper-tts-web');
+      // Load piper-tts-web from CDN (not bundled to avoid webpack issues)
+      const piperModule = await import(/* webpackIgnore: true */ 'https://cdn.jsdelivr.net/npm/@mintplex-labs/piper-tts-web@1.0.12/dist/piper-tts-web.js');
+      const predict = piperModule.predict;
       
-      const voiceId = selectedVoice?.id || 'en_US-hfc_female-medium';
+      const voiceId = selectedVoice?.id || 'en_US-amy-medium';
       const textToSpeak = getTextToSpeak();
       
-      console.log('Piper TTS: Starting synthesis with voice:', voiceId);
-      
-      // Call predict with progress callback
       const wav = await predict(
         { text: textToSpeak, voiceId: voiceId },
         (progress) => {
-          // Update loading message with progress
           if (progress.total > 0) {
             const percent = Math.round((progress.loaded / progress.total) * 100);
             setChunkProgress(prev => prev ? {
@@ -270,23 +266,11 @@ export default function Home() {
       
     } catch (error) {
       console.error('Piper TTS Error:', error);
-      const errorMsg = error.message || String(error);
-      console.error('Full error:', errorMsg);
-      
-      // Show user-friendly error and suggest Cloud
-      showToast('Offline TTS failed. Use Cloud voices instead (they work great!)', 'error');
-      
-      // Clean up state first
+      showToast('Offline TTS failed. Try Cloud voices instead.', 'error');
       setPiperLoading(false);
       setStatus('ready');
       setChunkProgress(null);
       setReadingProgress(0);
-      
-      // Auto-switch to cloud after a brief delay to avoid race conditions
-      setTimeout(() => {
-        setSelectedTier('cloud');
-        setSelectedVoice(null);
-      }, 100);
     }
   };
 
@@ -638,7 +622,7 @@ export default function Home() {
             <span>Your browser&apos;s built-in voices. Fast, works offline, basic quality.</span>
           )}
           {selectedTier === 'offline' && (
-            <span>Piper AI runs locally in your browser. Downloads model on first use (~20MB).</span>
+            <span>Piper AI runs locally in your browser. Downloads ~20MB model on first use.</span>
           )}
         </div>
 
