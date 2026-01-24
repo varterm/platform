@@ -56,9 +56,11 @@ export async function POST(request) {
       );
     }
 
-    if (text.length > 5000) {
+    // Microsoft Edge TTS has practical limits - very long texts may timeout
+    // For extremely long content, consider chunking on the frontend
+    if (text.length > 100000) {
       return NextResponse.json(
-        { success: false, error: 'Text must be under 5000 characters' },
+        { success: false, error: 'Text must be under 100,000 characters. For longer content, try splitting into sections.' },
         { status: 400 }
       );
     }
@@ -78,10 +80,34 @@ export async function POST(request) {
       options.rate = rateValue;
     }
     
-    await tts.synthesize(text, voice, options);
+    try {
+      await tts.synthesize(text, voice, options);
+    } catch (synthError) {
+      console.error('Synthesize error:', synthError);
+      return NextResponse.json(
+        { success: false, error: 'Speech synthesis failed. Please try again.' },
+        { status: 500 }
+      );
+    }
     
-    // Get audio as buffer
-    const audioBuffer = tts.toBuffer();
+    // Get audio as buffer - check if data exists
+    let audioBuffer;
+    try {
+      audioBuffer = tts.toBuffer();
+    } catch (bufferError) {
+      console.error('Buffer error:', bufferError);
+      return NextResponse.json(
+        { success: false, error: 'Failed to generate audio. The text may be too short or contain unsupported characters.' },
+        { status: 500 }
+      );
+    }
+    
+    if (!audioBuffer || audioBuffer.length === 0) {
+      return NextResponse.json(
+        { success: false, error: 'No audio generated. Please try different text.' },
+        { status: 500 }
+      );
+    }
 
     // Return audio
     return new NextResponse(audioBuffer, {
