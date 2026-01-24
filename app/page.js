@@ -211,8 +211,8 @@ export default function Home() {
         currentText: 'Loading Piper voice model (first time may take a moment)...'
       });
       
-      // Load piper-tts-web from CDN (not bundled to avoid webpack issues)
-      const piperModule = await import(/* webpackIgnore: true */ 'https://cdn.jsdelivr.net/npm/@mintplex-labs/piper-tts-web@1.0.12/dist/piper-tts-web.js');
+      // Load piper-tts-web from esm.sh CDN (not bundled to avoid webpack issues)
+      const piperModule = await import(/* webpackIgnore: true */ 'https://esm.sh/@mintplex-labs/piper-tts-web@1.0.4');
       const predict = piperModule.predict;
       
       const voiceId = selectedVoice?.id || 'en_US-amy-medium';
@@ -515,6 +515,16 @@ export default function Home() {
           </button>
         </div>
       </header>
+
+      {/* Hero Section with H1 for SEO */}
+      <section className={styles.heroSection} aria-labelledby="hero-heading">
+        <h1 id="hero-heading" className={styles.heroTitle}>
+          Free Text to Speech Converter Online
+        </h1>
+        <p className={styles.heroSubtitle}>
+          Convert long form text to natural speech. Automatically strips markdown formatting. No login required, unlimited use.
+        </p>
+      </section>
 
       {/* Editor */}
       <section className={styles.section}>
@@ -831,6 +841,74 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      {/* Features Section */}
+      <section className={styles.featuresSection} aria-labelledby="features-heading">
+        <h2 id="features-heading" className={styles.sectionHeading}>Why Choose Varterm?</h2>
+        <div className={styles.featuresGrid}>
+          <article className={styles.featureCard}>
+            <div className={styles.featureIcon}>📄</div>
+            <h3>Long Form TTS Support</h3>
+            <p>Convert entire documents, articles, and ebooks to speech. No character limits — our tool handles texts of any length by intelligently chunking and streaming audio.</p>
+          </article>
+          <article className={styles.featureCard}>
+            <div className={styles.featureIcon}>✨</div>
+            <h3>Strip Markdown Automatically</h3>
+            <p>Paste content from ChatGPT, GitHub, or any markdown source. Our TTS strips headers, links, code blocks, and formatting for clean, natural-sounding audio output.</p>
+          </article>
+          <article className={styles.featureCard}>
+            <div className={styles.featureIcon}>🔓</div>
+            <h3>100% Free, No Login Required</h3>
+            <p>Use our text to speech converter without creating an account. No registration, no tracking, no hidden charges. Your privacy is protected — we never store your text.</p>
+          </article>
+          <article className={styles.featureCard}>
+            <div className={styles.featureIcon}>🎙️</div>
+            <h3>Premium Neural Voices</h3>
+            <p>Access high-quality Microsoft neural voices that sound natural and expressive. Choose from American, British, and Australian accents with adjustable speed.</p>
+          </article>
+          <article className={styles.featureCard}>
+            <div className={styles.featureIcon}>📡</div>
+            <h3>Works Offline Too</h3>
+            <p>Use Piper AI voices that run entirely in your browser — no internet needed after initial download. Perfect for privacy-conscious users and offline reading.</p>
+          </article>
+          <article className={styles.featureCard}>
+            <div className={styles.featureIcon}>⚡</div>
+            <h3>Fast &amp; Reliable</h3>
+            <p>No waiting in queues. Audio generates instantly and starts playing immediately. Built for hackers and power users who value speed and efficiency.</p>
+          </article>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className={styles.faqSection} aria-labelledby="faq-heading">
+        <h2 id="faq-heading" className={styles.sectionHeading}>Frequently Asked Questions</h2>
+        <div className={styles.faqList}>
+          <details className={styles.faqItem}>
+            <summary className={styles.faqQuestion}>Is this text to speech tool really free?</summary>
+            <p className={styles.faqAnswer}>Yes, Varterm is completely free to use with no hidden charges or registration required. You get unlimited access to browser voices and high-quality Microsoft neural voices. We sustain the service through optional donations.</p>
+          </details>
+          <details className={styles.faqItem}>
+            <summary className={styles.faqQuestion}>Can I convert long documents to speech?</summary>
+            <p className={styles.faqAnswer}>Varterm supports long form text to speech conversion for documents of any length. Large texts are automatically split into chunks and played sequentially for seamless listening. There are no character limits.</p>
+          </details>
+          <details className={styles.faqItem}>
+            <summary className={styles.faqQuestion}>Does it strip markdown formatting?</summary>
+            <p className={styles.faqAnswer}>Yes! Enable the &quot;Strip Markdown&quot; option to automatically remove headers (#), bold/italic markers (**), links, code blocks, and other formatting for clean, natural-sounding speech output. Perfect for content from ChatGPT, GitHub, or any markdown source.</p>
+          </details>
+          <details className={styles.faqItem}>
+            <summary className={styles.faqQuestion}>Do I need to create an account?</summary>
+            <p className={styles.faqAnswer}>No account or registration needed. Just paste your text and click play. Your privacy is protected — we don&apos;t store your text, track your usage, or require any personal information.</p>
+          </details>
+          <details className={styles.faqItem}>
+            <summary className={styles.faqQuestion}>What voices are available?</summary>
+            <p className={styles.faqAnswer}>Varterm offers three tiers of voices: Cloud voices (Microsoft neural voices with natural quality and multiple accents), Browser voices (your device&apos;s built-in voices for maximum speed), and Offline voices (Piper AI that runs locally in your browser for complete privacy).</p>
+          </details>
+          <details className={styles.faqItem}>
+            <summary className={styles.faqQuestion}>Can I use this for bulk text to speech conversion?</summary>
+            <p className={styles.faqAnswer}>Yes! Varterm handles bulk text conversion efficiently. Paste any amount of text — articles, documentation, ebooks — and it will be converted to speech. The chunking system ensures smooth playback even for very long content.</p>
+          </details>
+        </div>
+      </section>
 
       {/* Toast */}
       {toast && (

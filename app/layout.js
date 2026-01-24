@@ -9,20 +9,25 @@ export const metadata = {
     default: 'Varterm — Free Text to Speech Reader',
     template: '%s | Varterm',
   },
-  description: 'Convert any text to natural-sounding speech with premium AI voices. Free to use, with optional upgrades for HD quality. Works with ChatGPT and Claude.',
+  description: 'Free online text to speech converter. Convert long form text to natural speech, strip markdown automatically. No login required, unlimited use. Premium AI voices available.',
   keywords: [
-    'text to speech',
-    'TTS',
+    'free tts',
+    'text to speech online',
+    'free text to speech',
+    'long form tts',
+    'strip markdown tts',
+    'markdown to speech',
+    'bulk text to speech',
+    'online tts converter',
+    'tts without login',
+    'unlimited tts',
     'AI voices',
     'speech synthesis',
     'read aloud',
     'accessibility',
-    'ElevenLabs',
     'voice generator',
     'audio reader',
-    'screen reader',
     'text reader online',
-    'free TTS',
   ],
   authors: [{ name: 'Varterm' }],
   creator: 'Varterm',
@@ -34,7 +39,7 @@ export const metadata = {
   },
   openGraph: {
     title: 'Varterm — Free Text to Speech Reader',
-    description: 'Convert any text to natural-sounding speech with premium AI voices. Free to use, with optional upgrades for HD quality.',
+    description: 'Free online text to speech converter. Convert long form text to natural speech, strip markdown automatically. No login required.',
     url: siteUrl,
     siteName: 'Varterm',
     locale: 'en_US',
@@ -79,55 +84,73 @@ export const metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
-  name: 'Varterm',
-  description: 'Convert any text to natural-sounding speech with premium AI voices.',
+  name: 'Varterm - Free Text to Speech Online',
+  description: 'Free online text to speech converter. Convert long form text to natural speech, strip markdown automatically. No login required.',
   url: siteUrl,
   applicationCategory: 'UtilitiesApplication',
   operatingSystem: 'Any',
   offers: {
-    '@type': 'AggregateOffer',
+    '@type': 'Offer',
+    price: '0',
     priceCurrency: 'USD',
-    lowPrice: '0',
-    highPrice: '29',
-    offerCount: '4',
-    offers: [
-      {
-        '@type': 'Offer',
-        name: 'Free',
-        price: '0',
-        priceCurrency: 'USD',
-        description: 'Unlimited browser voices',
-      },
-      {
-        '@type': 'Offer',
-        name: 'Starter',
-        price: '5',
-        priceCurrency: 'USD',
-        description: '50,000 characters/month with 10 premium voices',
-      },
-      {
-        '@type': 'Offer',
-        name: 'Pro',
-        price: '15',
-        priceCurrency: 'USD',
-        description: '200,000 characters/month with 30+ premium voices',
-      },
-      {
-        '@type': 'Offer',
-        name: 'Unlimited',
-        price: '29',
-        priceCurrency: 'USD',
-        description: 'Unlimited characters with all 50+ Ultra HD voices',
-      },
-    ],
+    description: 'Free text to speech conversion with no limits',
   },
   featureList: [
-    'Free browser-native voices',
-    'Premium AI voices via ElevenLabs',
-    'ChatGPT integration',
-    'Claude MCP integration',
-    'Adjustable speed and pitch',
+    'Free text to speech conversion',
+    'Long form document support',
+    'Markdown stripping',
     'Multiple voice options',
+    'No registration required',
+    'Adjustable speed and pitch',
+    'Cloud and offline voices',
+  ],
+};
+
+// FAQ Schema for rich snippets
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Is this text to speech tool free?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes, Varterm is completely free to use with no hidden charges or registration required. You get unlimited access to browser voices and high-quality Microsoft neural voices.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I convert long documents to speech?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes, Varterm supports long form text to speech conversion for documents of any length. Large texts are automatically split into chunks and played sequentially for seamless listening.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does it strip markdown formatting?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes, Varterm can automatically strip markdown formatting (headers, bold, links, code blocks, etc.) for clean, natural-sounding speech output. Just enable the "Strip Markdown" option.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do I need to create an account?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No, Varterm works without any login or registration. Just paste your text and click play. Your privacy is protected - we don\'t store your text or track your usage.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What voices are available?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Varterm offers three tiers of voices: Cloud voices (Microsoft neural voices with natural quality), Browser voices (your device\'s built-in voices), and Offline voices (Piper AI that runs locally in your browser).',
+      },
+    },
   ],
 };
 
@@ -156,6 +179,10 @@ export default function RootLayout({ children }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       </head>
       <body>

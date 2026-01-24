@@ -9,7 +9,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "mcp": "node mcp-server.js"
+    "mcp": "node mcp-server.js",
+    "generate-icons": "node scripts/generate-icons.js"
   },
   "dependencies": {
     "@andresaya/edge-tts": "^1.8.0",
@@ -21,6 +22,7 @@
   "devDependencies": {
     "@types/node": "^20.0.0",
     "@types/react": "^18.2.0",
+    "sharp": "^0.33.2",
     "typescript": "^5.0.0"
   },
   "engines": {

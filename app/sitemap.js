@@ -12,10 +12,16 @@ export default function sitemap() {
       priority: 1,
     },
     {
-      url: `${baseUrl}/api/tts`,
+      url: `${baseUrl}/long-form-tts`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.5,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/markdown-to-speech`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
     },
   ];
 }
