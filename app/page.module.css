@@ -238,6 +238,10 @@
   font-weight: 600;
 }
 
+.microsoftBadge {
+  background: linear-gradient(135deg, var(--accent), #059669);
+}
+
 /* Settings */
 .settingsRow {
   display: grid;
@@ -655,4 +659,105 @@
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+/* Help Link */
+.helpLink {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-left: 12px;
+  text-decoration: underline;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.helpLink:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
+/* Help Modal */
+.helpModal {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+}
+
+.helpModal h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.helpSubtitle {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.helpSteps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.helpStep {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.helpStepNumber {
+  width: 28px;
+  height: 28px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.helpStep strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.helpStep p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.helpStep code {
+  background: var(--bg-elevated);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.helpCloseBtn {
+  width: 100%;
+  padding: 14px;
+  background: var(--accent);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.helpCloseBtn:hover {
+  background: var(--accent-hover);
 }

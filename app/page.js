@@ -28,13 +28,27 @@ const PREMIUM_VOICES = {
   ],
 };
 
+// Microsoft Edge neural voices (FREE)
+const MICROSOFT_VOICES = [
+  { id: 'en-US-AriaNeural', name: 'Aria', desc: 'Friendly, natural' },
+  { id: 'en-US-JennyNeural', name: 'Jenny', desc: 'Warm, clear' },
+  { id: 'en-US-GuyNeural', name: 'Guy', desc: 'Casual, natural' },
+  { id: 'en-US-DavisNeural', name: 'Davis', desc: 'Calm, professional' },
+  { id: 'en-US-TonyNeural', name: 'Tony', desc: 'Friendly, upbeat' },
+  { id: 'en-US-SaraNeural', name: 'Sara', desc: 'Cheerful, expressive' },
+  { id: 'en-GB-SoniaNeural', name: 'Sonia', desc: 'British, warm' },
+  { id: 'en-GB-RyanNeural', name: 'Ryan', desc: 'British, professional' },
+  { id: 'en-AU-NatashaNeural', name: 'Natasha', desc: 'Australian, friendly' },
+  { id: 'en-AU-WilliamNeural', name: 'William', desc: 'Australian, clear' },
+];
+
 export default function Home() {
   // State
   const [text, setText] = useState('');
   const [currentPlan, setCurrentPlan] = useState('free');
   const [apiKey, setApiKey] = useState('');
   const [selectedVoice, setSelectedVoice] = useState(null);
-  const [selectedTier, setSelectedTier] = useState('free');
+  const [selectedTier, setSelectedTier] = useState('microsoft');
   const [browserVoices, setBrowserVoices] = useState([]);
   const [status, setStatus] = useState('ready');
   const [isPaused, setIsPaused] = useState(false);
@@ -43,6 +57,7 @@ export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const [toast, setToast] = useState(null);
   const [usedChars, setUsedChars] = useState(0);
+  const [showHelpModal, setShowHelpModal] = useState(false);
   
   // Refs
   const audioRef = useRef(null);
@@ -91,7 +106,9 @@ export default function Home() {
     
     stop();
     
-    if (selectedVoice?.tier === 'premium' || selectedVoice?.tier === 'ultra') {
+    if (selectedVoice?.tier === 'microsoft') {
+      await speakWithMicrosoft();
+    } else if (selectedVoice?.tier === 'premium' || selectedVoice?.tier === 'ultra') {
       await speakWithAPI();
     } else {
       speakWithBrowser();
@@ -113,6 +130,39 @@ export default function Home() {
     utterance.onerror = () => setStatus('ready');
     
     synthRef.current.speak(utterance);
+  };
+
+  const speakWithMicrosoft = async () => {
+    setStatus('speaking');
+    
+    try {
+      const response = await fetch('/api/edge-tts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text,
+          voice: selectedVoice?.id || 'en-US-AriaNeural',
+          rate,
+        }),
+      });
+      
+      if (!response.ok) throw new Error('API request failed');
+      
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      
+      audioRef.current = new Audio(url);
+      audioRef.current.onended = () => setStatus('ready');
+      audioRef.current.onerror = () => {
+        showToast('Error playing audio', 'error');
+        setStatus('ready');
+      };
+      audioRef.current.play();
+      
+    } catch (error) {
+      showToast('Error generating audio', 'error');
+      setStatus('ready');
+    }
   };
 
   const speakWithAPI = async () => {
@@ -156,7 +206,7 @@ export default function Home() {
   };
 
   const togglePause = () => {
-    if (selectedVoice?.tier === 'premium' || selectedVoice?.tier === 'ultra') {
+    if (selectedVoice?.tier === 'premium' || selectedVoice?.tier === 'ultra' || selectedVoice?.tier === 'microsoft') {
       if (audioRef.current) {
         if (isPaused) {
           audioRef.current.play();
@@ -221,6 +271,13 @@ export default function Home() {
       }));
     }
     
+    if (selectedTier === 'microsoft') {
+      return MICROSOFT_VOICES.map(v => ({
+        ...v,
+        tier: 'microsoft',
+      }));
+    }
+    
     const voices = selectedTier === 'ultra' ? PREMIUM_VOICES.ultra : PREMIUM_VOICES.premium;
     return voices.map(v => ({
       ...v,
@@ -271,22 +328,22 @@ export default function Home() {
       {/* Voice Selection */}
       <section className={styles.section}>
         <div className={styles.voiceTabs}>
-          {['free', 'premium', 'ultra'].map((tier) => (
+          {['microsoft', 'premium', 'ultra'].map((tier) => (
             <button
               key={tier}
               className={`${styles.voiceTab} ${selectedTier === tier ? styles.active : ''} ${
-                tier !== 'free' && !apiKey ? styles.locked : ''
+                (tier === 'premium' || tier === 'ultra') && !apiKey ? styles.locked : ''
               }`}
               onClick={() => {
-                if (tier !== 'free' && !apiKey) {
+                if ((tier === 'premium' || tier === 'ultra') && !apiKey) {
                   setShowModal(true);
                 } else {
                   setSelectedTier(tier);
                 }
               }}
             >
-              {tier.charAt(0).toUpperCase() + tier.slice(1)}
-              {tier !== 'free' && !apiKey && ' 🔒'}
+              {tier === 'microsoft' ? 'Free' : tier.charAt(0).toUpperCase() + tier.slice(1)}
+              {(tier === 'premium' || tier === 'ultra') && !apiKey && ' 🔒'}
             </button>
           ))}
         </div>
@@ -308,7 +365,7 @@ export default function Home() {
             >
               <div className={styles.voiceName}>
                 {voice.name}
-                {voice.tier !== 'free' && (
+                {(voice.tier === 'premium' || voice.tier === 'ultra') && (
                   <span className={styles.premiumBadge}>
                     {voice.tier === 'ultra' ? 'ULTRA' : 'PRO'}
                   </span>
@@ -383,9 +440,17 @@ export default function Home() {
           <span>
             {status === 'speaking' ? 'Speaking...' : status === 'paused' ? 'Paused' : 'Ready to read'}
           </span>
+          {status === 'ready' && (
+            <button 
+              className={styles.helpLink}
+              onClick={() => setShowHelpModal(true)}
+            >
+              No audio?
+            </button>
+          )}
         </div>
         <div className={styles.usageInfo}>
-          <span>{usedChars.toLocaleString()}</span> / {currentPlan === 'unlimited' ? '∞' : currentPlan === 'pro' ? '200,000' : '∞'} chars
+          <span>{text.length.toLocaleString()}</span> characters
         </div>
       </div>
 
@@ -468,6 +533,69 @@ export default function Home() {
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Help Modal */}
+      {showHelpModal && (
+        <div className={styles.modalOverlay} onClick={() => setShowHelpModal(false)}>
+          <div className={styles.helpModal} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.closeModal} onClick={() => setShowHelpModal(false)}>
+              ×
+            </button>
+            
+            <h2>Audio Troubleshooting</h2>
+            <p className={styles.helpSubtitle}>If you&apos;re not hearing any audio, try these fixes:</p>
+            
+            <div className={styles.helpSteps}>
+              <div className={styles.helpStep}>
+                <div className={styles.helpStepNumber}>1</div>
+                <div>
+                  <strong>Check your volume</strong>
+                  <p>Make sure your device volume is turned up and not muted.</p>
+                </div>
+              </div>
+              
+              <div className={styles.helpStep}>
+                <div className={styles.helpStepNumber}>2</div>
+                <div>
+                  <strong>Try a different browser</strong>
+                  <p>Safari and Firefox often work better than Chrome for speech synthesis.</p>
+                </div>
+              </div>
+              
+              <div className={styles.helpStep}>
+                <div className={styles.helpStepNumber}>3</div>
+                <div>
+                  <strong>Chrome users: Reset flags</strong>
+                  <p>Go to <code>chrome://flags</code>, click &quot;Reset all&quot; at the top, then restart Chrome.</p>
+                </div>
+              </div>
+              
+              <div className={styles.helpStep}>
+                <div className={styles.helpStepNumber}>4</div>
+                <div>
+                  <strong>Disable browser extensions</strong>
+                  <p>Ad blockers and privacy extensions can block audio. Try disabling them temporarily.</p>
+                </div>
+              </div>
+              
+              <div className={styles.helpStep}>
+                <div className={styles.helpStepNumber}>5</div>
+                <div>
+                  <strong>Check site permissions</strong>
+                  <p>Click the lock icon in your browser&apos;s address bar and make sure &quot;Sound&quot; is set to &quot;Allow&quot;.</p>
+                </div>
+              </div>
+            </div>
+            
+            <button 
+              className={styles.helpCloseBtn}
+              onClick={() => setShowHelpModal(false)}
+            >
+              Got it
+            </button>
           </div>
         </div>
       )}

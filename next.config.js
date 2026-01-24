@@ -14,6 +14,10 @@ const nextConfig = {
       },
     ];
   },
+  // Fix for ws WebSocket library compatibility with Next.js
+  experimental: {
+    serverComponentsExternalPackages: ['ws', 'bufferutil', 'utf-8-validate', '@andresaya/edge-tts'],
+  },
 };
 
 export default nextConfig;
