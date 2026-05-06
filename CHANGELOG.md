@@ -10,6 +10,22 @@
 - **Loading state for audio generation**: Shows "Generating audio..." with animated loading bar during initial TTS processing.
 - **Toggle to show/hide reading text**: Collapsible "Now Reading" panel with current chunk text.
 - **FAQ schema markup**: Added structured data for rich snippets in search results.
+- **Feedback system**: New feedback modal and `/api/feedback` endpoint for user bug reports and feature requests.
+- **VSCode/Cursor Extension** (`extensions/vscode/`):
+  - Read selected text aloud (`Cmd/Ctrl+Shift+R`)
+  - Read current line (`Cmd/Ctrl+Shift+L`)
+  - Read errors and warnings (`Cmd/Ctrl+Shift+E`)
+  - Read entire document
+  - Context menu integration
+  - Configurable voice tier, voice, rate, and markdown stripping
+  - Auto-read errors option
+- **Chrome Extension** (`extensions/chrome/`):
+  - Floating 🔊 button on text selection
+  - Context menu "Read with Varterm"
+  - Keyboard shortcut `Ctrl/Cmd+Shift+R`
+  - Read entire page option
+  - Popup with voice settings
+  - Cloud and browser voice tiers
 
 ### Changed
 - Simplified pricing model to donation-only (removed paid tiers).

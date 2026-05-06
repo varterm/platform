@@ -1382,3 +1382,133 @@
 .helpCloseBtn:hover {
   background: var(--accent-hover);
 }
+
+/* Feedback Button */
+.feedbackBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.feedbackBtn:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+
+/* Feedback Modal */
+.feedbackModal {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+}
+
+.feedbackModal h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.feedbackSubtitle {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+}
+
+.feedbackForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.feedbackField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.feedbackField label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.feedbackField select,
+.feedbackField textarea,
+.feedbackField input {
+  padding: 12px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.feedbackField select:focus,
+.feedbackField textarea:focus,
+.feedbackField input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.feedbackField textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.feedbackSubmitBtn {
+  padding: 14px;
+  background: linear-gradient(135deg, var(--accent), #8b5cf6);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.feedbackSubmitBtn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.feedbackSubmitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.feedbackSuccess {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.successIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: rgba(34, 197, 94, 0.2);
+  border-radius: 50%;
+  font-size: 28px;
+  color: #22c55e;
+  margin-bottom: 16px;
+}
+
+.feedbackSuccess p {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
