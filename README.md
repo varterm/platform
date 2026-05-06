@@ -40,6 +40,12 @@ Create a `.env.local` file with:
 # Required for premium voices
 ELEVENLABS_API_KEY=your_elevenlabs_api_key
 
+# Optional: AI answers for /api/ask
+ANTHROPIC_API_KEY=your_anthropic_api_key
+
+# Optional: protect /api/ingest and /api/ask with bearer auth
+VARTERM_EXTENSION_API_TOKEN=your_private_token
+
 # Optional: Stripe for billing
 STRIPE_SECRET_KEY=sk_live_...
 STRIPE_WEBHOOK_SECRET=whsec_...
@@ -101,6 +107,40 @@ MCP server info and capabilities.
 
 ### `POST /api/mcp`
 Handle MCP tool calls for Claude integration.
+
+### `POST /api/ingest`
+Create a temporary document session for long text/script ingestion with chunking limits.
+
+**Request:**
+```json
+{
+  "documents": [
+    {
+      "path": "src/app.ts",
+      "content": "very long file text..."
+    }
+  ],
+  "options": {
+    "chunkSize": 1800,
+    "overlap": 250,
+    "maxChunks": 2000,
+    "maxTotalChars": 1000000
+  }
+}
+```
+
+### `POST /api/ask`
+Ask a question against an ingest session.
+
+**Request:**
+```json
+{
+  "sessionId": "uuid",
+  "question": "Where is auth validated?",
+  "maxChunks": 8,
+  "maxContextChars": 15000
+}
+```
 
 ---
 

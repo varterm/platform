@@ -9,6 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "node --test",
     "mcp": "node mcp-server.js",
     "generate-icons": "node scripts/generate-icons.js"
   },
