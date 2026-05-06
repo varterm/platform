@@ -47,6 +47,9 @@ export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const [toast, setToast] = useState(null);
   const [showHelpModal, setShowHelpModal] = useState(false);
+  const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+  const [feedbackForm, setFeedbackForm] = useState({ type: 'general', message: '', email: '' });
+  const [feedbackStatus, setFeedbackStatus] = useState('idle'); // 'idle', 'sending', 'sent', 'error'
   const [chunkProgress, setChunkProgress] = useState(null); // { current: 1, total: 5, chunks: [], currentText: '' }
   const [readingProgress, setReadingProgress] = useState(0); // 0-100 percentage of current chunk read
   const [showReadingText, setShowReadingText] = useState(false); // toggle for showing reading text
@@ -82,6 +85,38 @@ export default function Home() {
       }
     }
   }, []);
+
+  // Submit feedback
+  const submitFeedback = async () => {
+    if (!feedbackForm.message.trim()) {
+      showToast('Please enter your feedback', 'error');
+      return;
+    }
+    
+    setFeedbackStatus('sending');
+    try {
+      const response = await fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(feedbackForm),
+      });
+      
+      if (response.ok) {
+        setFeedbackStatus('sent');
+        setFeedbackForm({ type: 'general', message: '', email: '' });
+        setTimeout(() => {
+          setShowFeedbackModal(false);
+          setFeedbackStatus('idle');
+        }, 2000);
+      } else {
+        throw new Error('Failed to send');
+      }
+    } catch (error) {
+      setFeedbackStatus('error');
+      showToast('Failed to send feedback. Try again later.', 'error');
+      setTimeout(() => setFeedbackStatus('idle'), 2000);
+    }
+  };
 
   // Show toast notification
   const showToast = (message, type = 'success') => {
@@ -510,6 +545,9 @@ export default function Home() {
           </div>
         </div>
         <div className={styles.headerRight}>
+          <button className={styles.feedbackBtn} onClick={() => setShowFeedbackModal(true)}>
+            <span>💬 Feedback</span>
+          </button>
           <button className={styles.upgradeBtn} onClick={() => setShowModal(true)}>
             <span>☕ Support</span>
           </button>
@@ -838,6 +876,70 @@ export default function Home() {
             >
               Got it
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Feedback Modal */}
+      {showFeedbackModal && (
+        <div className={styles.modalOverlay} onClick={() => setShowFeedbackModal(false)}>
+          <div className={styles.feedbackModal} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.closeModal} onClick={() => setShowFeedbackModal(false)}>
+              ×
+            </button>
+            
+            <h2>💬 Send Feedback</h2>
+            <p className={styles.feedbackSubtitle}>Help us improve Varterm. Bug reports, feature requests, and general feedback welcome.</p>
+            
+            {feedbackStatus === 'sent' ? (
+              <div className={styles.feedbackSuccess}>
+                <span className={styles.successIcon}>✓</span>
+                <p>Thanks for your feedback!</p>
+              </div>
+            ) : (
+              <form className={styles.feedbackForm} onSubmit={(e) => { e.preventDefault(); submitFeedback(); }}>
+                <div className={styles.feedbackField}>
+                  <label>Type</label>
+                  <select 
+                    value={feedbackForm.type}
+                    onChange={(e) => setFeedbackForm(f => ({ ...f, type: e.target.value }))}
+                  >
+                    <option value="general">General Feedback</option>
+                    <option value="bug">Bug Report</option>
+                    <option value="feature">Feature Request</option>
+                  </select>
+                </div>
+                
+                <div className={styles.feedbackField}>
+                  <label>Message *</label>
+                  <textarea
+                    value={feedbackForm.message}
+                    onChange={(e) => setFeedbackForm(f => ({ ...f, message: e.target.value }))}
+                    placeholder="Tell us what's on your mind..."
+                    rows={4}
+                    required
+                  />
+                </div>
+                
+                <div className={styles.feedbackField}>
+                  <label>Email (optional)</label>
+                  <input
+                    type="email"
+                    value={feedbackForm.email}
+                    onChange={(e) => setFeedbackForm(f => ({ ...f, email: e.target.value }))}
+                    placeholder="For follow-up (won't be shared)"
+                  />
+                </div>
+                
+                <button 
+                  type="submit" 
+                  className={styles.feedbackSubmitBtn}
+                  disabled={feedbackStatus === 'sending'}
+                >
+                  {feedbackStatus === 'sending' ? 'Sending...' : 'Send Feedback'}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       )}

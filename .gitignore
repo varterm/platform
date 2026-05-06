@@ -45,4 +45,10 @@ coverage/
 # Misc
 *.log
 
+# Extension/release artifacts (do not commit binaries)
+extensions/chrome/dist/
+extensions/chrome/*.zip
+extensions/vscode/*.vsix
+*.crx
+
 

@@ -32,6 +32,19 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) to see the app.
 
+## Open Source Project Setup
+
+- `LICENSE` uses MIT for permissive reuse.
+- `CONTRIBUTING.md` explains setup, checks, and PR expectations.
+- `CODE_OF_CONDUCT.md` sets collaboration standards.
+- `SECURITY.md` explains private vulnerability reporting.
+- `.github/ISSUE_TEMPLATE` includes structured bug and feature forms.
+- `.github/pull_request_template.md` standardizes PR quality.
+- `.github/workflows/ci.yml` runs lint and tests on PRs/pushes.
+- `.github/workflows/release.yml` builds extension artifacts and publishes GitHub Releases from tags.
+
+Binary build artifacts are intentionally not committed to git. Release binaries are generated in CI and attached to GitHub Releases.
+
 ## Environment Variables
 
 Create a `.env.local` file with:
