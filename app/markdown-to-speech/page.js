@@ -221,7 +221,7 @@ export default function MarkdownToSpeech() {
 
       <footer className={styles.footer}>
         <p>
-          <Link href="/">Varterm</Link> — Free text to speech for hackers. Markdown-friendly.
+          <Link href="/">Varterm</Link> — Varterm TTS with markdown cleanup.
         </p>
       </footer>
     </div>

@@ -6,10 +6,10 @@ const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://varterm.com';
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Varterm — Free Text to Speech Reader',
+    default: 'Varterm TTS — Text to Speech for Web, Cursor, VS Code, and Chrome',
     template: '%s | Varterm',
   },
-  description: 'Free online text to speech converter. Convert long form text to natural speech, strip markdown automatically. No login required, unlimited use. Premium AI voices available.',
+  description: 'Varterm TTS helps you read web text, markdown, and AI output aloud across web, Cursor, VS Code, and Chrome. Long-form friendly, natural voices, and markdown cleanup built in.',
   keywords: [
     'free tts',
     'text to speech online',
@@ -28,6 +28,10 @@ export const metadata = {
     'voice generator',
     'audio reader',
     'text reader online',
+    'cursor text to speech',
+    'vscode text to speech',
+    'chrome read aloud extension',
+    'agent readout tts',
   ],
   authors: [{ name: 'Varterm' }],
   creator: 'Varterm',
@@ -38,8 +42,8 @@ export const metadata = {
     telephone: false,
   },
   openGraph: {
-    title: 'Varterm — Free Text to Speech Reader',
-    description: 'Free online text to speech converter. Convert long form text to natural speech, strip markdown automatically. No login required.',
+    title: 'Varterm TTS — Web and Extension Text to Speech',
+    description: 'Read long-form text and AI output aloud on web, Cursor, VS Code, and Chrome with natural voices and markdown cleanup.',
     url: siteUrl,
     siteName: 'Varterm',
     locale: 'en_US',
@@ -49,14 +53,14 @@ export const metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Varterm - Free Text to Speech Reader',
+        alt: 'Varterm TTS',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Varterm — Free Text to Speech Reader',
-    description: 'Convert any text to natural-sounding speech with premium AI voices.',
+    title: 'Varterm TTS — Read Anything Aloud',
+    description: 'Text to speech for web, Cursor, VS Code, and Chrome. Long-form ready with markdown cleanup.',
     images: ['/og-image.png'],
   },
   robots: {
@@ -84,8 +88,8 @@ export const metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
-  name: 'Varterm - Free Text to Speech Online',
-  description: 'Free online text to speech converter. Convert long form text to natural speech, strip markdown automatically. No login required.',
+  name: 'Varterm TTS',
+  description: 'Text to speech for web and developer workflows. Read markdown, docs, and AI output aloud.',
   url: siteUrl,
   applicationCategory: 'UtilitiesApplication',
   operatingSystem: 'Any',
@@ -103,6 +107,7 @@ const jsonLd = {
     'No registration required',
     'Adjustable speed and pitch',
     'Cloud and offline voices',
+    'Cursor and VS Code extension support',
   ],
 };
 

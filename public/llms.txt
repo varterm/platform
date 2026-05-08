@@ -1,0 +1,20 @@
+Varterm TTS
+https://varterm.com
+
+Summary:
+- Text to speech for web, Cursor, VS Code, and Chrome workflows.
+- Long-form support with chunked playback.
+- Markdown cleanup for AI/chat output, docs, and READMEs.
+
+Key pages:
+- Home: https://varterm.com/
+- Long form TTS: https://varterm.com/long-form-tts
+- Markdown to speech: https://varterm.com/markdown-to-speech
+
+Developer/API:
+- OpenAPI schema: https://varterm.com/openapi.json
+- Edge TTS voices endpoint: https://varterm.com/api/edge-tts
+
+Extensions:
+- VS Code / Cursor extension: https://marketplace.visualstudio.com/items?itemName=varterm.varterm-cursor
+- Chrome extension info: https://github.com/cntrlne/varterm
