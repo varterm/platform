@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import styles from './page.module.css';
 
 // Donation link
 const DONATION_LINK = 'https://buy.stripe.com/00w6oG2Zq23a8al1PB3VC00';
 const VSCODE_EXTENSION_LINK = 'https://marketplace.visualstudio.com/items?itemName=varterm.varterm-cursor';
-const CHROME_EXTENSION_INFO_LINK = 'https://github.com/cntrlne/varterm';
+const CHROME_EXTENSION_INSTALL_LINK = 'https://chromewebstore.google.com/';
 
 // Microsoft Edge neural voices (FREE)
 // Piper voices (Offline - runs locally in browser)
@@ -559,24 +560,30 @@ export default function Home() {
       {/* Hero Section with H1 for SEO */}
       <section className={styles.heroSection} aria-labelledby="hero-heading">
         <h1 id="hero-heading" className={styles.heroTitle}>
-          Varterm TTS - Read Anything Aloud
+          Varterm TTS - Read ChatGPT, Docs, and Web Pages Aloud
         </h1>
         <p className={styles.heroSubtitle}>
-          Turn web pages, docs, markdown, and AI output into natural speech. Fast, long-form friendly, and ready for web and editor workflows.
+          Built for ChatGPT and long-form workflows. Turn markdown answers, docs, and web text into natural speech across web, Cursor, VS Code, and Chrome.
+        </p>
+        <p className={styles.heroMeta}>
+          Popular with ChatGPT users who want fast text-to-speech without cleanup or copy/paste friction.
         </p>
       </section>
 
       <section className={styles.platformSection} aria-labelledby="platform-heading">
         <h2 id="platform-heading" className={styles.sectionHeading}>Use Varterm Anywhere</h2>
+        <p className={styles.heroMeta}>
+          Every platform supports long-form playback and markdown-friendly reading, so the same workflow follows you from browser to editor.
+        </p>
         <div className={styles.platformGrid}>
           <article className={styles.platformCard}>
             <h3>Web App</h3>
-            <p>Paste text and listen instantly with cloud, browser, or offline voices.</p>
+            <p>Paste long-form docs, markdown notes, or ChatGPT output and listen instantly with cloud, browser, or offline voices.</p>
             <span className={styles.platformBadge}>You are here</span>
           </article>
           <article className={styles.platformCard}>
             <h3>Cursor &amp; VS Code</h3>
-            <p>Read editor selection, clipboard, and agent output with Varterm TTS.</p>
+            <p>Read long markdown files, editor selections, clipboard, and agent output with the same long-form flow and cleanup controls.</p>
             <a
               className={styles.platformCta}
               href={VSCODE_EXTENSION_LINK}
@@ -585,18 +592,24 @@ export default function Home() {
             >
               Install Extension
             </a>
+            <Link className={styles.platformDocLink} href="/extensions">
+              View setup guide
+            </Link>
           </article>
           <article className={styles.platformCard}>
             <h3>Chrome Extension</h3>
-            <p>Read selected text and pages aloud from your browser workflow.</p>
+            <p>Read selected text, full pages, and markdown-heavy content aloud with long-form playback that stays smooth.</p>
             <a
               className={styles.platformCta}
-              href={CHROME_EXTENSION_INFO_LINK}
+              href={CHROME_EXTENSION_INSTALL_LINK}
               target="_blank"
               rel="noreferrer"
             >
-              Get Chrome Info
+              Install on Chrome
             </a>
+            <Link className={styles.platformDocLink} href="/extensions">
+              Load locally + troubleshooting
+            </Link>
           </article>
         </div>
       </section>

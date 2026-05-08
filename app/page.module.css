@@ -1120,6 +1120,14 @@
   line-height: 1.6;
 }
 
+.heroMeta {
+  margin: 14px auto 0;
+  max-width: 560px;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
 /* Platform Section */
 .platformSection {
   margin-bottom: 32px;
@@ -1153,9 +1161,9 @@
 .platformCta,
 .platformBadge {
   display: inline-block;
-  padding: 8px 12px;
+  padding: 8px 11px;
   border-radius: 8px;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 600;
 }
 
@@ -1173,6 +1181,18 @@
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   color: var(--text-muted);
+}
+
+.platformDocLink {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-decoration: underline;
+}
+
+.platformDocLink:hover {
+  color: var(--accent);
 }
 
 @media (max-width: 600px) {
