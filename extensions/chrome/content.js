@@ -25,23 +25,33 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   switch (request.action) {
     case 'speak':
       speakText(request.text);
+      sendResponse({ success: true });
       break;
     case 'speakSelection':
       speakSelection();
+      sendResponse({ success: true });
       break;
     case 'speakPage':
       speakPage();
+      sendResponse({ success: true });
       break;
     case 'stop':
       stopSpeaking();
+      sendResponse({ success: true });
       break;
     case 'pause':
       togglePause();
+      sendResponse({ success: true });
       break;
     case 'updateSettings':
       settings = { ...settings, ...request.settings };
+      sendResponse({ success: true });
+      break;
+    default:
+      sendResponse({ success: false, error: 'Unknown action' });
       break;
   }
+  return true;
 });
 
 // Show floating button on text selection

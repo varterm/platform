@@ -114,6 +114,9 @@ export default function ExtensionsPage() {
             <li>
               <Link href="/">Open the web app</Link>
             </li>
+            <li>
+              <Link href="/privacy">Privacy policy</Link>
+            </li>
           </ul>
         </section>
       </main>

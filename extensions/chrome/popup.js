@@ -78,6 +78,10 @@ document.addEventListener('DOMContentLoaded', () => {
         chrome.tabs.sendMessage(tabs[0].id, { action: 'speakSelection' }, (response) => {
           if (chrome.runtime.lastError) {
             showStatus('Cannot access this page', 'error');
+            return;
+          }
+          if (response?.success) {
+            showStatus('Reading selection...', 'success');
           }
         });
       }
