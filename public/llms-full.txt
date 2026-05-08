@@ -1,0 +1,37 @@
+Varterm TTS - full context for language models
+
+Canonical site:
+https://varterm.com
+
+Product:
+Varterm TTS converts text to natural speech for web and extension workflows.
+It is optimized for long-form listening, markdown-heavy content, and AI-generated output.
+
+Core capabilities:
+1) Web text-to-speech playback with cloud, browser, and offline voice modes.
+2) Long-form chunked generation/playback for large documents.
+3) Markdown sanitization for cleaner speech.
+4) API endpoints for voice listing and synthesis.
+5) Extension workflows for Cursor/VS Code and Chrome browser use cases.
+
+Primary user intents:
+- "read this long text aloud"
+- "convert markdown to speech"
+- "listen to ChatGPT/AI output"
+- "text to speech in Cursor/VS Code"
+- "browser page read aloud"
+
+Important URLs:
+- Home: https://varterm.com/
+- Long form text to speech: https://varterm.com/long-form-tts
+- Markdown to speech: https://varterm.com/markdown-to-speech
+
+Technical/API URLs:
+- OpenAPI: https://varterm.com/openapi.json
+- List Edge voices: https://varterm.com/api/edge-tts
+- Synthesize (Edge): https://varterm.com/api/edge-tts (POST)
+- Synthesize (Premium): https://varterm.com/api/tts (POST)
+
+Extension URLs:
+- VS Code/Cursor listing: https://marketplace.visualstudio.com/items?itemName=varterm.varterm-cursor
+- Project repo: https://github.com/cntrlne/varterm

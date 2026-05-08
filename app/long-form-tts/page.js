@@ -151,7 +151,7 @@ export default function LongFormTTS() {
 
       <footer className={styles.footer}>
         <p>
-          <Link href="/">Varterm</Link> — Free text to speech for hackers. Long-form ready.
+          <Link href="/">Varterm</Link> — Varterm TTS for long-form listening.
         </p>
       </footer>
     </div>

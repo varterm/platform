@@ -5,6 +5,8 @@ import styles from './page.module.css';
 
 // Donation link
 const DONATION_LINK = 'https://buy.stripe.com/00w6oG2Zq23a8al1PB3VC00';
+const VSCODE_EXTENSION_LINK = 'https://marketplace.visualstudio.com/items?itemName=varterm.varterm-cursor';
+const CHROME_EXTENSION_INFO_LINK = 'https://github.com/cntrlne/varterm';
 
 // Microsoft Edge neural voices (FREE)
 // Piper voices (Offline - runs locally in browser)
@@ -541,7 +543,7 @@ export default function Home() {
           </div>
           <div className={styles.logoWords}>
             <span className={styles.logoText}>varterm</span>
-            <span className={styles.logoTagline}>private tts library for hackers. long-form ready.</span>
+            <span className={styles.logoTagline}>varterm tts for web, cursor, vscode, and chrome</span>
           </div>
         </div>
         <div className={styles.headerRight}>
@@ -557,11 +559,46 @@ export default function Home() {
       {/* Hero Section with H1 for SEO */}
       <section className={styles.heroSection} aria-labelledby="hero-heading">
         <h1 id="hero-heading" className={styles.heroTitle}>
-          Free Text to Speech Converter Online
+          Varterm TTS - Read Anything Aloud
         </h1>
         <p className={styles.heroSubtitle}>
-          Convert long form text to natural speech. Automatically strips markdown formatting. No login required, unlimited use.
+          Turn web pages, docs, markdown, and AI output into natural speech. Fast, long-form friendly, and ready for web and editor workflows.
         </p>
+      </section>
+
+      <section className={styles.platformSection} aria-labelledby="platform-heading">
+        <h2 id="platform-heading" className={styles.sectionHeading}>Use Varterm Anywhere</h2>
+        <div className={styles.platformGrid}>
+          <article className={styles.platformCard}>
+            <h3>Web App</h3>
+            <p>Paste text and listen instantly with cloud, browser, or offline voices.</p>
+            <span className={styles.platformBadge}>You are here</span>
+          </article>
+          <article className={styles.platformCard}>
+            <h3>Cursor &amp; VS Code</h3>
+            <p>Read editor selection, clipboard, and agent output with Varterm TTS.</p>
+            <a
+              className={styles.platformCta}
+              href={VSCODE_EXTENSION_LINK}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Install Extension
+            </a>
+          </article>
+          <article className={styles.platformCard}>
+            <h3>Chrome Extension</h3>
+            <p>Read selected text and pages aloud from your browser workflow.</p>
+            <a
+              className={styles.platformCta}
+              href={CHROME_EXTENSION_INFO_LINK}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Get Chrome Info
+            </a>
+          </article>
+        </div>
       </section>
 
       {/* Editor */}
@@ -946,7 +983,7 @@ export default function Home() {
 
       {/* Features Section */}
       <section className={styles.featuresSection} aria-labelledby="features-heading">
-        <h2 id="features-heading" className={styles.sectionHeading}>Why Choose Varterm?</h2>
+        <h2 id="features-heading" className={styles.sectionHeading}>Why Teams Choose Varterm TTS</h2>
         <div className={styles.featuresGrid}>
           <article className={styles.featureCard}>
             <div className={styles.featureIcon}>📄</div>
