@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Varterm Screenshot 1</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 20% 20%, #1a2630, #0b1015 55%);
+      color: #e5e7eb;
+    }
+    .frame {
+      width: 1240px;
+      height: 760px;
+      margin: 20px auto;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: #0f1720;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      display: grid;
+      grid-template-columns: 1fr 340px;
+    }
+    .content {
+      padding: 28px 32px;
+      position: relative;
+    }
+    .title {
+      font-size: 34px;
+      margin: 0 0 12px;
+      color: #f9fafb;
+    }
+    .subtitle {
+      margin: 0 0 20px;
+      color: #9ca3af;
+      font-size: 16px;
+    }
+    .badge {
+      display: inline-block;
+      margin-right: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #d1fae5;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.5);
+    }
+    .article {
+      margin-top: 24px;
+      line-height: 1.7;
+      color: #d1d5db;
+      font-size: 17px;
+      max-width: 760px;
+    }
+    .selection {
+      background: rgba(16, 185, 129, 0.35);
+      color: #ecfeff;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+    .float-btn {
+      position: absolute;
+      left: 540px;
+      top: 320px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #10b981, #14b8a6);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 16px;
+      box-shadow: 0 12px 24px rgba(16, 185, 129, 0.45);
+    }
+    .popup-wrap {
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(2, 6, 23, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    iframe {
+      width: 320px;
+      height: 620px;
+      border: 0;
+      border-radius: 10px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="content">
+      <h1 class="title">Read Long-Form Content Without Losing Focus</h1>
+      <p class="subtitle">Select any passage and play it with natural voices.</p>
+      <span class="badge">Long-form ready</span>
+      <span class="badge">Chrome extension</span>
+      <div class="article">
+        Modern developers read thousands of lines of docs, release notes, and AI-generated explanations. With Varterm, you can
+        <span class="selection">highlight long passages and listen while you keep working</span> instead of switching contexts.
+        It is built to handle big chunks, technical language, and markdown-heavy text.
+      </div>
+      <div class="float-btn">▶</div>
+    </div>
+    <div class="popup-wrap">
+      <iframe src="../popup.html" title="Varterm popup"></iframe>
+    </div>
+  </div>
+</body>
+</html>
