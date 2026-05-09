@@ -27,7 +27,7 @@ export default function SupportPage() {
         <section>
           <h2>Contact</h2>
           <p>
-            Email: <a href="mailto:jc@jc.io">jc@jc.io</a>
+            Email: <a href="mailto:support@varterm.com">support@varterm.com</a>
           </p>
         </section>
 
@@ -41,7 +41,7 @@ export default function SupportPage() {
               <Link href="/privacy">Privacy policy</Link>
             </li>
             <li>
-              <a href="https://github.com/cntrlne/varterm/issues" target="_blank" rel="noreferrer">
+              <a href="https://github.com/cntrlne/varterm-vscode/issues" target="_blank" rel="noreferrer">
                 Report an issue on GitHub
               </a>
             </li>

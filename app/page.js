@@ -548,6 +548,16 @@ export default function Home() {
           </div>
         </div>
         <div className={styles.headerRight}>
+          <span className={styles.liveBadge}>Long-form + markdown ready</span>
+          <Link className={styles.headerLink} href="/extensions">
+            Extensions
+          </Link>
+          <Link className={styles.headerLink} href="/privacy">
+            Privacy
+          </Link>
+          <Link className={styles.headerLink} href="/support">
+            Support
+          </Link>
           <button className={styles.feedbackBtn} onClick={() => setShowFeedbackModal(true)}>
             <span>💬 Feedback</span>
           </button>
@@ -1068,6 +1078,23 @@ export default function Home() {
           {toast.message}
         </div>
       )}
+
+      <footer className={styles.footer}>
+        <div className={styles.footerTop}>
+          <h2>Varterm TTS</h2>
+          <p>
+            Built for ChatGPT answers, long-form docs, and markdown-heavy content across web,
+            editor, and browser workflows.
+          </p>
+        </div>
+        <div className={styles.footerLinks}>
+          <Link href="/extensions">Extensions</Link>
+          <Link href="/long-form-tts">Long-form guide</Link>
+          <Link href="/markdown-to-speech">Markdown guide</Link>
+          <Link href="/privacy">Privacy</Link>
+          <Link href="/support">Support</Link>
+        </div>
+      </footer>
     </div>
   );
 }
