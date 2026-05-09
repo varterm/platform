@@ -47,3 +47,4 @@ coverage/
 
 # Extension/release artifacts (do not commit binaries)
 *.crx
+varterm-plat.code-workspace
