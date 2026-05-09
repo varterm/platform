@@ -73,29 +73,20 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Read selection button
   readSelectionBtn.addEventListener('click', () => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs[0]) {
-        chrome.tabs.sendMessage(tabs[0].id, { action: 'speakSelection' }, (response) => {
-          if (chrome.runtime.lastError) {
-            showStatus('Cannot access this page', 'error');
-            return;
-          }
-          if (response?.success) {
-            showStatus('Reading selection...', 'success');
-          }
-        });
+    chrome.runtime.sendMessage({ action: 'performTabAction', tabAction: 'speakSelection' }, (response) => {
+      if (!response?.success) {
+        showStatus(response?.error || 'Cannot access this page', 'error');
+        return;
       }
+      showStatus('Reading selection...', 'success');
     });
   });
   
   // Stop button
   stopBtn.addEventListener('click', () => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs[0]) {
-        chrome.tabs.sendMessage(tabs[0].id, { action: 'stop' }, () => {
-          // Ignore pages where content script is unavailable.
-          void chrome.runtime.lastError;
-        });
+    chrome.runtime.sendMessage({ action: 'performTabAction', tabAction: 'stop' }, (response) => {
+      if (!response?.success) {
+        showStatus(response?.error || 'Cannot stop on this page', 'error');
       }
     });
   });

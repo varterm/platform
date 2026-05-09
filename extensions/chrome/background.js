@@ -86,6 +86,36 @@ function sendToTab(tabId, message, retried = false, tabUrl = '') {
   });
 }
 
+function performTabAction(tabAction, sendResponse) {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const tab = tabs[0];
+    if (!tab?.id) {
+      sendResponse({ success: false, error: 'No active tab' });
+      return;
+    }
+
+    if (isRestrictedUrl(tab.url || '')) {
+      sendResponse({ success: false, error: 'Cannot access this page' });
+      return;
+    }
+
+    ensureContentScript(tab.id, (ok) => {
+      if (!ok) {
+        sendResponse({ success: false, error: 'Cannot access this page' });
+        return;
+      }
+
+      chrome.tabs.sendMessage(tab.id, { action: tabAction }, (response) => {
+        if (chrome.runtime.lastError) {
+          sendResponse({ success: false, error: 'Cannot access this page' });
+          return;
+        }
+        sendResponse(response?.success ? response : { success: true });
+      });
+    });
+  });
+}
+
 // Create context menu on install
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
@@ -157,6 +187,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     chrome.storage.sync.set(request.settings, () => {
       sendResponse({ success: true });
     });
+    return true;
+  }
+
+  if (request.action === 'performTabAction') {
+    performTabAction(request.tabAction, sendResponse);
     return true;
   }
 });
