@@ -549,6 +549,21 @@ export default function Home() {
         </div>
         <div className={styles.headerRight}>
           <span className={styles.liveBadge}>Long-form + markdown ready</span>
+          <a
+            className={styles.githubLink}
+            href="https://github.com/varterm"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Varterm GitHub organization"
+            title="Varterm on GitHub"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M12 2C6.48 2 2 6.59 2 12.26c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.46-1.2-1.11-1.52-1.11-1.52-.91-.64.07-.63.07-.63 1 .08 1.54 1.06 1.54 1.06.9 1.58 2.35 1.13 2.92.86.09-.67.35-1.13.63-1.39-2.22-.26-4.56-1.15-4.56-5.11 0-1.13.39-2.05 1.03-2.77-.1-.26-.45-1.31.1-2.73 0 0 .84-.28 2.75 1.06A9.35 9.35 0 0 1 12 6.82c.85 0 1.7.12 2.5.35 1.9-1.34 2.74-1.06 2.74-1.06.55 1.42.2 2.47.1 2.73.64.72 1.03 1.64 1.03 2.77 0 3.97-2.34 4.85-4.57 5.1.36.32.67.95.67 1.92 0 1.39-.01 2.5-.01 2.85 0 .27.18.6.69.49A10.22 10.22 0 0 0 22 12.26C22 6.59 17.52 2 12 2Z"
+              />
+            </svg>
+          </a>
           <Link className={styles.headerLink} href="/extensions">
             Extensions
           </Link>
@@ -863,8 +878,8 @@ export default function Home() {
               <div className={styles.donationEmoji}>☕</div>
               <h3>Keep Varterm Free</h3>
               <p>
-                Varterm is free — no accounts, no tracking, no paywalls. 
-                Servers and bandwidth cost money though. If this tool saves you time, consider throwing us a coffee.
+                Varterm is free — no accounts and no paywalls.
+                We do use basic analytics to understand visits and improve reliability. If this tool saves you time, consider throwing us a coffee.
               </p>
               <button 
                 className={styles.donationBtn}
@@ -1021,7 +1036,7 @@ export default function Home() {
           <article className={styles.featureCard}>
             <div className={styles.featureIcon}>🔓</div>
             <h3>100% Free, No Login Required</h3>
-            <p>Use our text to speech converter without creating an account. No registration, no tracking, no hidden charges. Your privacy is protected — we never store your text.</p>
+            <p>Use our text to speech converter without creating an account. No registration and no hidden charges. We keep data use focused on speech playback and basic product analytics.</p>
           </article>
           <article className={styles.featureCard}>
             <div className={styles.featureIcon}>🎙️</div>
@@ -1031,7 +1046,7 @@ export default function Home() {
           <article className={styles.featureCard}>
             <div className={styles.featureIcon}>📡</div>
             <h3>Works Offline Too</h3>
-            <p>Use Piper AI voices that run entirely in your browser — no internet needed after initial download. Perfect for privacy-conscious users and offline reading.</p>
+            <p>Use Piper AI voices that run entirely in your browser — no internet needed after initial download. Great for offline reading and stronger local privacy.</p>
           </article>
           <article className={styles.featureCard}>
             <div className={styles.featureIcon}>⚡</div>
@@ -1059,7 +1074,7 @@ export default function Home() {
           </details>
           <details className={styles.faqItem}>
             <summary className={styles.faqQuestion}>Do I need to create an account?</summary>
-            <p className={styles.faqAnswer}>No account or registration needed. Just paste your text and click play. Your privacy is protected — we don&apos;t store your text, track your usage, or require any personal information.</p>
+            <p className={styles.faqAnswer}>No account or registration needed. Just paste your text and click play. Your text is used to generate audio, and we collect basic analytics to improve site reliability.</p>
           </details>
           <details className={styles.faqItem}>
             <summary className={styles.faqQuestion}>What voices are available?</summary>

@@ -150,7 +150,7 @@ const faqSchema = {
       name: 'Do I need to create an account?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'No, Varterm works without any login or registration. Just paste your text and click play. Your privacy is protected - we don\'t store your text or track your usage.',
+        text: 'No, Varterm works without any login or registration. Just paste your text and click play. Text is processed to generate audio, and basic analytics help us improve reliability.',
       },
     },
     {

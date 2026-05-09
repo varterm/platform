@@ -44,6 +44,8 @@ export default function PrivacyPage() {
           <ul>
             <li>Text you choose to read aloud (selected text, pasted text, or page content).</li>
             <li>Basic extension/app settings (voice, speed, and markdown preference).</li>
+            <li>Basic analytics data about visits and feature usage trends.</li>
+            <li>Optional feedback details you submit (message, optional email).</li>
             <li>Operational request data needed to deliver audio responses.</li>
           </ul>
         </section>
@@ -53,6 +55,7 @@ export default function PrivacyPage() {
           <ul>
             <li>To generate audio output for text-to-speech playback.</li>
             <li>To apply your saved settings consistently across sessions.</li>
+            <li>To understand aggregate product usage and improve reliability.</li>
             <li>To operate and troubleshoot service reliability.</li>
           </ul>
           <p>

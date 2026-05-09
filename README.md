@@ -17,7 +17,7 @@ Convert any text to natural-sounding speech with premium AI voices. Free to use,
 
 ```bash
 # Clone the repo
-git clone https://github.com/yourusername/varterm.git
+git clone https://github.com/varterm/platform.git
 cd varterm
 
 # Install dependencies
@@ -41,9 +41,9 @@ Open [http://localhost:3000](http://localhost:3000) to see the app.
 - `.github/ISSUE_TEMPLATE` includes structured bug and feature forms.
 - `.github/pull_request_template.md` standardizes PR quality.
 - `.github/workflows/ci.yml` runs lint and tests on PRs/pushes.
-- `.github/workflows/release.yml` builds extension artifacts and publishes GitHub Releases from tags.
+- Extension release automation lives in the `varterm/extensions` repository.
 
-Binary build artifacts are intentionally not committed to git. Release binaries are generated in CI and attached to GitHub Releases.
+Binary build artifacts are intentionally not committed to git.
 
 ## Environment Variables
 
@@ -69,7 +69,7 @@ NEXT_PUBLIC_BASE_URL=https://varterm.com
 
 ## Deploy to Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/varterm)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/varterm/platform)
 
 Or via CLI:
 

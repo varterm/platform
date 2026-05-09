@@ -84,6 +84,30 @@
   color: var(--accent);
 }
 
+.githubLink {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.githubLink svg {
+  width: 16px;
+  height: 16px;
+}
+
+.githubLink:hover {
+  color: var(--text-primary);
+  border-color: var(--accent);
+  background: var(--bg-hover);
+}
+
 .planBadge {
   padding: 6px 12px;
   background: var(--bg-elevated);
