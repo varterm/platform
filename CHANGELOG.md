@@ -5,8 +5,8 @@
 ### Added
 - **First public Varterm 1.0.0 release** across:
   - Web app (`varterm.com`)
-  - Chrome Extension (`extensions/chrome/`)
-  - VS Code / Cursor Extension (`extensions/vscode/`)
+  - Chrome Extension (now maintained in `varterm/extensions`)
+  - VS Code / Cursor Extension (now maintained in `varterm/extensions`)
 - **Cross-platform long-form and markdown-focused experience**:
   - Long-form playback support for large content
   - Markdown-friendly reading cleanup
@@ -27,7 +27,7 @@
 - **Toggle to show/hide reading text**: Collapsible "Now Reading" panel with current chunk text.
 - **FAQ schema markup**: Added structured data for rich snippets in search results.
 - **Feedback system**: New feedback modal and `/api/feedback` endpoint for user bug reports and feature requests.
-- **VSCode/Cursor Extension** (`extensions/vscode/`):
+- **VSCode/Cursor Extension** (maintained in `varterm/extensions`):
   - Read selected text aloud (`Cmd/Ctrl+Shift+R`)
   - Read current line (`Cmd/Ctrl+Shift+L`)
   - Read errors and warnings (`Cmd/Ctrl+Shift+E`)
@@ -35,7 +35,7 @@
   - Context menu integration
   - Configurable voice tier, voice, rate, and markdown stripping
   - Auto-read errors option
-- **Chrome Extension** (`extensions/chrome/`):
+- **Chrome Extension** (maintained in `varterm/extensions`):
   - Floating 🔊 button on text selection
   - Context menu "Read with Varterm"
   - Keyboard shortcut `Ctrl/Cmd+Shift+R`
