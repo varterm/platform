@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.0.0 - 2026-05-08
+
+### Added
+- **First public Varterm 1.0.0 release** across:
+  - Web app (`varterm.com`)
+  - Chrome Extension (`extensions/chrome/`)
+  - VS Code / Cursor Extension (`extensions/vscode/`)
+- **Cross-platform long-form and markdown-focused experience**:
+  - Long-form playback support for large content
+  - Markdown-friendly reading cleanup
+  - Shared messaging and setup flow across web and extensions
+- **Store and compliance foundations for Chrome launch**:
+  - Privacy policy page (`/privacy`)
+  - Extensions setup page (`/extensions`)
+  - Support page (`/support`)
+
 ## 2026-05-06
 
 ### Added
