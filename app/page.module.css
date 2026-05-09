@@ -58,7 +58,30 @@
 .headerRight {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.liveBadge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  background: rgba(16, 185, 129, 0.12);
+  color: #bbf7d0;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+}
+
+.headerLink {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.82rem;
+}
+
+.headerLink:hover {
+  color: var(--accent);
 }
 
 .planBadge {
@@ -1586,4 +1609,41 @@
 .feedbackSuccess p {
   font-size: 1.1rem;
   color: var(--text-primary);
+}
+
+.footer {
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+
+.footerTop h2 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.25rem;
+  margin-bottom: 6px;
+}
+
+.footerTop p {
+  color: var(--text-secondary);
+  max-width: 760px;
+  font-size: 0.94rem;
+}
+
+.footerLinks {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+}
+
+.footerLinks a {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--border-light);
+}
+
+.footerLinks a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
 }
