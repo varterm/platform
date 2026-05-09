@@ -35,6 +35,12 @@ export default function sitemap() {
       changeFrequency: 'yearly',
       priority: 0.4,
     },
+    {
+      url: `${baseUrl}/support`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
   ];
 }
 

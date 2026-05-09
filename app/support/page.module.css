@@ -1,0 +1,60 @@
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.backLink {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.backLink:hover {
+  color: var(--accent);
+}
+
+.main {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+}
+
+.main h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.intro {
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.main section + section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.main h2 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.main p,
+.main li {
+  color: var(--text-secondary);
+}
+
+.main ul {
+  margin-left: 18px;
+}
+
+.main a {
+  color: var(--accent);
+}
