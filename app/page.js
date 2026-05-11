@@ -8,6 +8,7 @@ import styles from './page.module.css';
 const DONATION_LINK = 'https://buy.stripe.com/00w6oG2Zq23a8al1PB3VC00';
 const VSCODE_EXTENSION_LINK = 'https://marketplace.visualstudio.com/items?itemName=varterm.varterm-cursor';
 const CHROME_EXTENSION_INSTALL_LINK = 'https://chromewebstore.google.com/';
+const FORMSPREE_FEEDBACK_ENDPOINT = 'https://formspree.io/f/mojrpewv';
 
 // Microsoft Edge neural voices (FREE)
 // Piper voices (Offline - runs locally in browser)
@@ -39,7 +40,7 @@ export default function Home() {
   // State
   const [text, setText] = useState('');
   const [selectedVoice, setSelectedVoice] = useState(null);
-  const [selectedTier, setSelectedTier] = useState('cloud'); // 'browser', 'cloud', 'offline'
+  const [selectedTier] = useState('cloud'); // keep cloud-only UI for now
   const [browserVoices, setBrowserVoices] = useState([]);
   const [piperLoading, setPiperLoading] = useState(false);
   const [status, setStatus] = useState('ready');
@@ -98,10 +99,16 @@ export default function Home() {
     
     setFeedbackStatus('sending');
     try {
-      const response = await fetch('/api/feedback', {
+      const response = await fetch(FORMSPREE_FEEDBACK_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(feedbackForm),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          ...feedbackForm,
+          source: 'varterm-web-feedback-modal',
+        }),
       });
       
       if (response.ok) {
@@ -544,11 +551,10 @@ export default function Home() {
           </div>
           <div className={styles.logoWords}>
             <span className={styles.logoText}>varterm</span>
-            <span className={styles.logoTagline}>varterm tts for web, cursor, vscode, and chrome</span>
+            <span className={styles.logoTagline}>free text-to-speech for web, cursor, vscode, and chrome</span>
           </div>
         </div>
         <div className={styles.headerRight}>
-          <span className={styles.liveBadge}>Long-form + markdown ready</span>
           <a
             className={styles.githubLink}
             href="https://github.com/varterm"
@@ -574,10 +580,10 @@ export default function Home() {
             Support
           </Link>
           <button className={styles.feedbackBtn} onClick={() => setShowFeedbackModal(true)}>
-            <span>💬 Feedback</span>
+            <span>Feedback</span>
           </button>
           <button className={styles.upgradeBtn} onClick={() => setShowModal(true)}>
-            <span>☕ Support</span>
+            <span>Support</span>
           </button>
         </div>
       </header>
@@ -585,56 +591,74 @@ export default function Home() {
       {/* Hero Section with H1 for SEO */}
       <section className={styles.heroSection} aria-labelledby="hero-heading">
         <h1 id="hero-heading" className={styles.heroTitle}>
-          Varterm TTS - Read ChatGPT, Docs, and Web Pages Aloud
+          Read aloud with natural AI voices.
         </h1>
         <p className={styles.heroSubtitle}>
-          Built for ChatGPT and long-form workflows. Turn markdown answers, docs, and web text into natural speech across web, Cursor, VS Code, and Chrome.
+          Supports Cursor, VS Code, and Chrome.
         </p>
         <p className={styles.heroMeta}>
-          Popular with ChatGPT users who want fast text-to-speech without cleanup or copy/paste friction.
+          Read selections, web pages, and agent output in editors with one click. Free, no signup, unlimited usage.
         </p>
       </section>
 
       <section className={styles.platformSection} aria-labelledby="platform-heading">
-        <h2 id="platform-heading" className={styles.sectionHeading}>Use Varterm Anywhere</h2>
-        <p className={styles.heroMeta}>
-          Every platform supports long-form playback and markdown-friendly reading, so the same workflow follows you from browser to editor.
-        </p>
+        <h2 id="platform-heading" className={styles.sectionHeading}>Extensions</h2>
         <div className={styles.platformGrid}>
           <article className={styles.platformCard}>
-            <h3>Web App</h3>
-            <p>Paste long-form docs, markdown notes, or ChatGPT output and listen instantly with cloud, browser, or offline voices.</p>
-            <span className={styles.platformBadge}>You are here</span>
-          </article>
-          <article className={styles.platformCard}>
-            <h3>Cursor &amp; VS Code</h3>
-            <p>Read long markdown files, editor selections, clipboard, and agent output with the same long-form flow and cleanup controls.</p>
+            <div className={styles.platformTop}>
+              <div className={styles.platformLogos} aria-label="Cursor and VS Code">
+                <span className={styles.platformLogo} title="Cursor">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M12 2 4.5 6.3v8.4L12 19l7.5-4.3V6.3L12 2Zm0 2.3 5.5 3.1v6.2L12 16.7 6.5 13.6V7.4L12 4.3Z"
+                    />
+                    <path fill="currentColor" d="M12 7.5 8.3 9.6v4.8l3.7 2.1 3.7-2.1V9.6L12 7.5Z" />
+                  </svg>
+                </span>
+                <span className={styles.platformLogo} title="VS Code">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M16.9 2.4 9.5 9.5 6.2 6.9 3.5 8.7l3.3 3.3-3.3 3.3 2.7 1.8 3.3-2.6 7.4 7.1 3.6-1.8V4.2l-3.6-1.8Z"
+                    />
+                  </svg>
+                </span>
+              </div>
+              <h3>Cursor &amp; VS Code</h3>
+            </div>
             <a
               className={styles.platformCta}
               href={VSCODE_EXTENSION_LINK}
               target="_blank"
               rel="noreferrer"
             >
-              Install Extension
+              Install
             </a>
-            <Link className={styles.platformDocLink} href="/extensions">
-              View setup guide
-            </Link>
           </article>
           <article className={styles.platformCard}>
-            <h3>Chrome Extension</h3>
-            <p>Read selected text, full pages, and markdown-heavy content aloud with long-form playback that stays smooth.</p>
+            <div className={styles.platformTop}>
+              <div className={styles.platformLogos} aria-label="Chrome">
+                <span className={styles.platformLogo} title="Chrome">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                    <circle cx="12" cy="12" r="3.2" fill="currentColor" />
+                    <path d="M12 2.5h8" stroke="currentColor" strokeWidth="1.8" />
+                    <path d="m7.2 20.4 4.8-8.4" stroke="currentColor" strokeWidth="1.8" />
+                    <path d="m20.8 10.8-8.8 1.2" stroke="currentColor" strokeWidth="1.8" />
+                  </svg>
+                </span>
+              </div>
+              <h3>Chrome Extension</h3>
+            </div>
             <a
               className={styles.platformCta}
               href={CHROME_EXTENSION_INSTALL_LINK}
               target="_blank"
               rel="noreferrer"
             >
-              Install on Chrome
+              Install
             </a>
-            <Link className={styles.platformDocLink} href="/extensions">
-              Load locally + troubleshooting
-            </Link>
           </article>
         </div>
       </section>
@@ -711,44 +735,33 @@ export default function Home() {
         )}
       </section>
 
+      {/* Controls */}
+      <div className={styles.controls}>
+        <button
+          className={styles.playBtn}
+          onClick={speak}
+          disabled={isPlaying && status !== 'paused'}
+        >
+          ▶ Play
+        </button>
+        <button
+          className={styles.controlBtn}
+          onClick={togglePause}
+          disabled={!isPlaying}
+        >
+          {isPaused ? '▶' : '⏸'}
+        </button>
+        <button
+          className={styles.controlBtn}
+          onClick={stop}
+          disabled={!isPlaying}
+        >
+          ⏹
+        </button>
+      </div>
+
       {/* Voice Selection */}
       <section className={styles.section}>
-        <div className={styles.voiceTabs}>
-          {[
-            { id: 'cloud', label: 'Cloud', desc: 'Best Quality' },
-            { id: 'browser', label: 'Browser', desc: 'Built-in' },
-            { id: 'offline', label: 'Offline', desc: 'Local AI' },
-          ].map((tier) => (
-            <button
-              key={tier.id}
-              className={`${styles.voiceTab} ${selectedTier === tier.id ? styles.active : ''}`}
-              onClick={() => {
-                // Stop any playing audio before switching tiers
-                if (status !== 'ready') {
-                  stop();
-                }
-                setSelectedTier(tier.id);
-                setSelectedVoice(null);
-              }}
-            >
-              <span className={styles.tabLabel}>{tier.label}</span>
-              <span className={styles.tabDesc}>{tier.desc}</span>
-            </button>
-          ))}
-        </div>
-        
-        <div className={styles.tierInfo}>
-          {selectedTier === 'cloud' && (
-            <span>✓ Microsoft neural voices. Natural sounding, great for long content.</span>
-          )}
-          {selectedTier === 'browser' && (
-            <span>Your browser&apos;s built-in voices. Fast, works offline, basic quality.</span>
-          )}
-          {selectedTier === 'offline' && (
-            <span>Piper AI runs locally in your browser. Downloads ~20MB model on first use.</span>
-          )}
-        </div>
-
         <div className={styles.voiceGrid}>
           {getVoices().map((voice) => (
             <div
@@ -810,31 +823,6 @@ export default function Home() {
           </label>
         </div>
       </section>
-
-      {/* Controls */}
-      <div className={styles.controls}>
-        <button
-          className={styles.playBtn}
-          onClick={speak}
-          disabled={isPlaying && status !== 'paused'}
-        >
-          ▶ Play
-        </button>
-        <button
-          className={styles.controlBtn}
-          onClick={togglePause}
-          disabled={!isPlaying}
-        >
-          {isPaused ? '▶' : '⏸'}
-        </button>
-        <button
-          className={styles.controlBtn}
-          onClick={stop}
-          disabled={!isPlaying}
-        >
-          ⏹
-        </button>
-      </div>
 
       {/* Status */}
       <div className={styles.statusBar}>
@@ -1031,7 +1019,7 @@ export default function Home() {
           <article className={styles.featureCard}>
             <div className={styles.featureIcon}>✨</div>
             <h3>Strip Markdown Automatically</h3>
-            <p>Paste content from ChatGPT, GitHub, or any markdown source. Our TTS strips headers, links, code blocks, and formatting for clean, natural-sounding audio output.</p>
+            <p>Paste content from GitHub or any markdown source. Our TTS strips headers, links, code blocks, and formatting for clean, natural-sounding audio output.</p>
           </article>
           <article className={styles.featureCard}>
             <div className={styles.featureIcon}>🔓</div>
@@ -1040,18 +1028,13 @@ export default function Home() {
           </article>
           <article className={styles.featureCard}>
             <div className={styles.featureIcon}>🎙️</div>
-            <h3>Premium Neural Voices</h3>
-            <p>Access high-quality Microsoft neural voices that sound natural and expressive. Choose from American, British, and Australian accents with adjustable speed.</p>
-          </article>
-          <article className={styles.featureCard}>
-            <div className={styles.featureIcon}>📡</div>
-            <h3>Works Offline Too</h3>
-            <p>Use Piper AI voices that run entirely in your browser — no internet needed after initial download. Great for offline reading and stronger local privacy.</p>
+            <h3>Natural Voice Quality</h3>
+            <p>Access high-quality voices that sound natural and expressive with adjustable speed for comfortable listening.</p>
           </article>
           <article className={styles.featureCard}>
             <div className={styles.featureIcon}>⚡</div>
             <h3>Fast &amp; Reliable</h3>
-            <p>No waiting in queues. Audio generates instantly and starts playing immediately. Built for hackers and power users who value speed and efficiency.</p>
+            <p>No waiting in queues. Audio generates instantly and starts playing immediately with reliable long-form playback.</p>
           </article>
         </div>
       </section>
@@ -1062,7 +1045,7 @@ export default function Home() {
         <div className={styles.faqList}>
           <details className={styles.faqItem}>
             <summary className={styles.faqQuestion}>Is this text to speech tool really free?</summary>
-            <p className={styles.faqAnswer}>Yes, Varterm is completely free to use with no hidden charges or registration required. You get unlimited access to browser voices and high-quality Microsoft neural voices. We sustain the service through optional donations.</p>
+            <p className={styles.faqAnswer}>Yes. It&apos;s free, requires no signup, and supports unlimited usage. We sustain the service through optional donations.</p>
           </details>
           <details className={styles.faqItem}>
             <summary className={styles.faqQuestion}>Can I convert long documents to speech?</summary>
@@ -1070,7 +1053,7 @@ export default function Home() {
           </details>
           <details className={styles.faqItem}>
             <summary className={styles.faqQuestion}>Does it strip markdown formatting?</summary>
-            <p className={styles.faqAnswer}>Yes! Enable the &quot;Strip Markdown&quot; option to automatically remove headers (#), bold/italic markers (**), links, code blocks, and other formatting for clean, natural-sounding speech output. Perfect for content from ChatGPT, GitHub, or any markdown source.</p>
+            <p className={styles.faqAnswer}>Yes. Enable the &quot;Strip Markdown&quot; option to remove headers (#), bold/italic markers (**), links, code blocks, and other formatting for cleaner speech output.</p>
           </details>
           <details className={styles.faqItem}>
             <summary className={styles.faqQuestion}>Do I need to create an account?</summary>
@@ -1078,7 +1061,7 @@ export default function Home() {
           </details>
           <details className={styles.faqItem}>
             <summary className={styles.faqQuestion}>What voices are available?</summary>
-            <p className={styles.faqAnswer}>Varterm offers three tiers of voices: Cloud voices (Microsoft neural voices with natural quality and multiple accents), Browser voices (your device&apos;s built-in voices for maximum speed), and Offline voices (Piper AI that runs locally in your browser for complete privacy).</p>
+            <p className={styles.faqAnswer}>Varterm provides natural voice options with adjustable speed, tuned for clear long-form playback.</p>
           </details>
           <details className={styles.faqItem}>
             <summary className={styles.faqQuestion}>Can I use this for bulk text to speech conversion?</summary>
@@ -1098,7 +1081,7 @@ export default function Home() {
         <div className={styles.footerTop}>
           <h2>Varterm TTS</h2>
           <p>
-            Built for ChatGPT answers, long-form docs, and markdown-heavy content across web,
+            Built for long-form docs and markdown-heavy content across web,
             editor, and browser workflows.
           </p>
         </div>

@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-05-11
+
+### Added
+- New SEO landing routes for discovery traffic:
+  - `GET /tts` (base text-to-speech landing page)
+  - `GET /tts/[slug]` (dynamic long-tail landing pages such as language/query slugs)
+- Added `/tts` to sitemap generation (`app/sitemap.js`).
+- Added Formspree-backed support form on `/support` using `https://formspree.io/f/mojrpewv`.
+
+### Changed
+- Refined homepage messaging for a more minimal style with clearer emphasis on free usage, no signup, and editor workflows.
+- Simplified homepage extension section UI:
+  - Removed the Web App card from the extensions row.
+  - Reduced extension cards to compact logo + name + install actions.
+- Moved primary playback controls higher in the page layout to reduce scrolling before playback.
+- Switched feedback modal submission from internal `/api/feedback` posting to Formspree endpoint `https://formspree.io/f/mojrpewv`.
+- Updated privacy/support contact copy to direct users to the support form instead of `mailto` links.
+- Extracted extension source ownership to `varterm/extensions` and removed extension source/release workflow from this platform repo.
+
 ## 1.0.0 - 2026-05-08
 
 ### Added

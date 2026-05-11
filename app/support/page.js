@@ -21,14 +21,35 @@ export default function SupportPage() {
       <main className={styles.main}>
         <h1>Support</h1>
         <p className={styles.intro}>
-          Need help with Varterm TTS? Use the links below or contact us directly.
+          Need help with Varterm TTS? Send a message using the support form below.
         </p>
 
         <section>
-          <h2>Contact</h2>
-          <p>
-            Email: <a href="mailto:support@varterm.com">support@varterm.com</a>
-          </p>
+          <h2>Contact Form</h2>
+          <form
+            className={styles.contactForm}
+            action="https://formspree.io/f/mojrpewv"
+            method="POST"
+          >
+            <label>
+              Type
+              <select name="type" defaultValue="general">
+                <option value="general">General</option>
+                <option value="bug">Bug report</option>
+                <option value="feature">Feature request</option>
+              </select>
+            </label>
+            <label>
+              Email (optional)
+              <input type="email" name="email" placeholder="you@example.com" />
+            </label>
+            <label>
+              Message
+              <textarea name="message" rows={5} required placeholder="How can we help?" />
+            </label>
+            <input type="hidden" name="source" value="varterm-support-page" />
+            <button type="submit">Send</button>
+          </form>
         </section>
 
         <section>
@@ -41,7 +62,7 @@ export default function SupportPage() {
               <Link href="/privacy">Privacy policy</Link>
             </li>
             <li>
-              <a href="https://github.com/cntrlne/varterm-vscode/issues" target="_blank" rel="noreferrer">
+              <a href="https://github.com/varterm/extensions/issues" target="_blank" rel="noreferrer">
                 Report an issue on GitHub
               </a>
             </li>
