@@ -117,8 +117,7 @@ export default function PrivacyPage() {
         <section>
           <h2>Contact</h2>
           <p>
-            For privacy questions, contact us at{' '}
-            <a href="mailto:support@varterm.com">support@varterm.com</a>.
+            For privacy questions, use the <Link href="/support">support form</Link>.
           </p>
         </section>
       </main>
