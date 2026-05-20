@@ -1,5 +1,10 @@
 import Link from 'next/link';
 import styles from './page.module.css';
+import {
+  EDITOR_EXTENSION_VERSION,
+  GITHUB_RELEASES_URL,
+  VSIX_DOWNLOAD_URL,
+} from '../../lib/extension-links';
 
 const VSCODE_EXTENSION_LINK = 'https://marketplace.visualstudio.com/items?itemName=varterm.varterm-cursor';
 const CHROME_EXTENSION_LINK = 'https://chromewebstore.google.com/';
@@ -59,19 +64,54 @@ export default function ExtensionsPage() {
         <section className={styles.grid}>
           <article className={styles.card}>
             <h2>Cursor / VS Code Extension</h2>
-            <p>Read editor selection, clipboard, and agent output aloud. Great for long files, docs, and markdown-heavy responses.</p>
-            <a
-              href={VSCODE_EXTENSION_LINK}
-              target="_blank"
-              rel="noreferrer"
-              className={styles.cta}
-            >
-              Install Extension
-            </a>
+            <p>
+              Read editor selection, clipboard, and agent output aloud. Great for long files,
+              docs, and markdown-heavy responses.
+            </p>
+            <p className={styles.note}>
+              Cursor cannot install from the VS Code Marketplace while the listing is pending.
+              Download the{' '}
+              <a href={GITHUB_RELEASES_URL} target="_blank" rel="noreferrer">
+                GitHub Release
+              </a>{' '}
+              <code>.vsix</code> ({EDITOR_EXTENSION_VERSION}) and install manually (steps below).
+            </p>
+            <div className={styles.ctaStack}>
+              <a
+                href={VSIX_DOWNLOAD_URL}
+                target="_blank"
+                rel="noreferrer"
+                className={styles.cta}
+              >
+                Download varterm-cursor-{EDITOR_EXTENSION_VERSION}.vsix
+              </a>
+              <a
+                href={VSCODE_EXTENSION_LINK}
+                target="_blank"
+                rel="noreferrer"
+                className={styles.ctaSecondary}
+              >
+                VS Code Marketplace
+              </a>
+            </div>
             <ol>
-              <li>Install extension from Marketplace.</li>
-              <li>Run `Varterm: Connect` and verify base URL.</li>
-              <li>Run `Varterm: Read Clipboard Aloud` or `Read Editor/Selection Aloud` for long-form docs and markdown files.</li>
+              <li>
+                <strong>Cursor:</strong> Command Palette (<kbd>Cmd+Shift+P</kbd> /{' '}
+                <kbd>Ctrl+Shift+P</kbd>) → <code>Extensions: Install from VSIX...</code> → choose the
+                downloaded file → reload the window when prompted.
+              </li>
+              <li>
+                <strong>VS Code:</strong> Prefer the Marketplace link when the listing shows up there;
+                manual <code>.vsix</code> steps are the same as Cursor.
+              </li>
+              <li>
+                Run <code>Varterm: Connect</code> only if you use a custom server or token.
+              </li>
+              <li>
+                Run <code>Varterm: Read Clipboard Aloud</code> or{' '}
+                <code>Varterm: Read Editor/Selection Aloud</code> for long-form docs and markdown
+                files.
+              </li>
             </ol>
           </article>
 
