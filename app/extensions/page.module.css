@@ -88,9 +88,29 @@
   margin-bottom: 12px;
 }
 
+.note {
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.note code {
+  font-size: 0.82em;
+}
+
+.note a {
+  color: var(--accent);
+}
+
+.ctaStack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
 .cta {
   display: inline-block;
-  margin-bottom: 12px;
   padding: 8px 12px;
   border-radius: 8px;
   text-decoration: none;
@@ -98,6 +118,18 @@
   background: linear-gradient(135deg, var(--accent), #06b6d4);
   font-weight: 600;
   font-size: 0.86rem;
+}
+
+.ctaSecondary {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.86rem;
+  color: var(--accent);
+  border: 1px solid var(--border);
+  background: transparent;
 }
 
 .card ol {
