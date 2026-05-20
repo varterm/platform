@@ -6,8 +6,6 @@ import styles from './page.module.css';
 
 // Donation link
 const DONATION_LINK = 'https://buy.stripe.com/00w6oG2Zq23a8al1PB3VC00';
-const VSCODE_EXTENSION_LINK = 'https://marketplace.visualstudio.com/items?itemName=varterm.varterm-cursor';
-const CHROME_EXTENSION_INSTALL_LINK = 'https://chromewebstore.google.com/';
 const FORMSPREE_FEEDBACK_ENDPOINT = 'https://formspree.io/f/mojrpewv';
 
 // Microsoft Edge neural voices (FREE)
@@ -627,14 +625,9 @@ export default function Home() {
               </div>
               <h3>Cursor &amp; VS Code</h3>
             </div>
-            <a
-              className={styles.platformCta}
-              href={VSCODE_EXTENSION_LINK}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <Link className={styles.platformCta} href="/extensions">
               Install
-            </a>
+            </Link>
           </article>
           <article className={styles.platformCard}>
             <div className={styles.platformTop}>
@@ -651,14 +644,9 @@ export default function Home() {
               </div>
               <h3>Chrome Extension</h3>
             </div>
-            <a
-              className={styles.platformCta}
-              href={CHROME_EXTENSION_INSTALL_LINK}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <Link className={styles.platformCta} href="/extensions">
               Install
-            </a>
+            </Link>
           </article>
         </div>
       </section>
