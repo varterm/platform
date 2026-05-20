@@ -2,6 +2,7 @@ import Link from 'next/link';
 import styles from './page.module.css';
 import {
   EDITOR_EXTENSION_VERSION,
+  GITHUB_EXTENSIONS_REPO,
   GITHUB_RELEASES_URL,
   VSCODE_PACKAGE_README_URL,
   VSIX_DOWNLOAD_URL,
@@ -70,21 +71,25 @@ export default function ExtensionsPage() {
               docs, and markdown-heavy responses.
             </p>
             <p className={styles.note}>
-              Cursor often cannot pull from the VS Code Marketplace while the listing is still
-              pending. The extensions repo{' '}
-              <a href={GITHUB_RELEASES_URL} target="_blank" rel="noreferrer">
-                GitHub Releases
-              </a>{' '}
-              page will host pre-built <code>.vsix</code> files ({EDITOR_EXTENSION_VERSION}) as soon
-              as the first release is published. Until then, package a <code>.vsix</code> locally (
+              Prefer the downloadable <code>.vsix</code> below (GitHub Releases). Cursor may not see
+              the VS Code Marketplace entry yet—that is why manual install matters. If the download
+              link errors,{' '}
               <a href={VSCODE_PACKAGE_README_URL} target="_blank" rel="noreferrer">
-                build steps
-              </a>
-              ).
+                package from source
+              </a>{' '}
+              or pick the Marketplace when it goes live.
             </p>
             <div className={styles.ctaStack}>
-              <a href={VSCODE_PACKAGE_README_URL} target="_blank" rel="noreferrer" className={styles.cta}>
-                Build .vsix from source ({EDITOR_EXTENSION_VERSION})
+              <a href={VSIX_DOWNLOAD_URL} target="_blank" rel="noreferrer" className={styles.cta}>
+                Download varterm-cursor-{EDITOR_EXTENSION_VERSION}.vsix
+              </a>
+              <a
+                href={VSCODE_PACKAGE_README_URL}
+                target="_blank"
+                rel="noreferrer"
+                className={styles.ctaSecondary}
+              >
+                Build .vsix from source
               </a>
               <a href={GITHUB_RELEASES_URL} target="_blank" rel="noreferrer" className={styles.ctaSecondary}>
                 GitHub Releases
@@ -99,26 +104,29 @@ export default function ExtensionsPage() {
               </a>
             </div>
             <p className={styles.directVsixHint}>
-              After Release <code>v{EDITOR_EXTENSION_VERSION}</code> ships with attachable assets,{' '}
-              <a href={VSIX_DOWNLOAD_URL} target="_blank" rel="noreferrer">
-                direct .vsix download
+              The button above resolves after{' '}
+              <a href={GITHUB_RELEASES_URL} target="_blank" rel="noreferrer">
+                GitHub Releases
               </a>{' '}
-              will resolve here instead of returning 404.
+              ships <code>v{EDITOR_EXTENSION_VERSION}</code> with that <code>.vsix</code> attached.
+              Seeing 404? Publish the artifact in{' '}
+              <a href={GITHUB_EXTENSIONS_REPO} target="_blank" rel="noreferrer">
+                varterm/extensions
+              </a>{' '}
+              or use <strong>Build .vsix from source</strong>.
             </p>
             <ol>
               <li>
-                <strong>Get a .vsix:</strong>{' '}
+                <strong>Get a .vsix:</strong> Prefer the{' '}
+                <a href={VSIX_DOWNLOAD_URL} target="_blank" rel="noreferrer">
+                  binary download
+                </a>
+                ; otherwise open the README{' '}
                 <a href={VSCODE_PACKAGE_README_URL} target="_blank" rel="noreferrer">
-                  Open the README “Development” section
-                </a>
-                : from the cloned repo run <code>npm install</code> and{' '}
-                <code>npm run package</code>
-                {' '}inside <code>extensions/vscode</code> to emit the packaged file. Published{' '}
-                <code>.vsix</code> downloads will eventually live on{' '}
-                <a href={GITHUB_RELEASES_URL} target="_blank" rel="noreferrer">
-                  GitHub Releases
-                </a>
-                .
+                  Development
+                </a>{' '}
+                section and run <code>npm install</code> plus <code>npm run package</code> inside{' '}
+                <code>extensions/vscode</code>.
               </li>
               <li>
                 <strong>Install in Cursor:</strong> Command Palette (<kbd>Cmd+Shift+P</kbd> /{' '}
