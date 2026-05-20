@@ -3,6 +3,7 @@ import styles from './page.module.css';
 import {
   EDITOR_EXTENSION_VERSION,
   GITHUB_RELEASES_URL,
+  VSCODE_PACKAGE_README_URL,
   VSIX_DOWNLOAD_URL,
 } from '../../lib/extension-links';
 
@@ -69,21 +70,24 @@ export default function ExtensionsPage() {
               docs, and markdown-heavy responses.
             </p>
             <p className={styles.note}>
-              Cursor cannot install from the VS Code Marketplace while the listing is pending.
-              Download the{' '}
+              Cursor often cannot pull from the VS Code Marketplace while the listing is still
+              pending. The extensions repo{' '}
               <a href={GITHUB_RELEASES_URL} target="_blank" rel="noreferrer">
-                GitHub Release
+                GitHub Releases
               </a>{' '}
-              <code>.vsix</code> ({EDITOR_EXTENSION_VERSION}) and install manually (steps below).
+              page will host pre-built <code>.vsix</code> files ({EDITOR_EXTENSION_VERSION}) as soon
+              as the first release is published. Until then, package a <code>.vsix</code> locally (
+              <a href={VSCODE_PACKAGE_README_URL} target="_blank" rel="noreferrer">
+                build steps
+              </a>
+              ).
             </p>
             <div className={styles.ctaStack}>
-              <a
-                href={VSIX_DOWNLOAD_URL}
-                target="_blank"
-                rel="noreferrer"
-                className={styles.cta}
-              >
-                Download varterm-cursor-{EDITOR_EXTENSION_VERSION}.vsix
+              <a href={VSCODE_PACKAGE_README_URL} target="_blank" rel="noreferrer" className={styles.cta}>
+                Build .vsix from source ({EDITOR_EXTENSION_VERSION})
+              </a>
+              <a href={GITHUB_RELEASES_URL} target="_blank" rel="noreferrer" className={styles.ctaSecondary}>
+                GitHub Releases
               </a>
               <a
                 href={VSCODE_EXTENSION_LINK}
@@ -94,15 +98,37 @@ export default function ExtensionsPage() {
                 VS Code Marketplace
               </a>
             </div>
+            <p className={styles.directVsixHint}>
+              After Release <code>v{EDITOR_EXTENSION_VERSION}</code> ships with attachable assets,{' '}
+              <a href={VSIX_DOWNLOAD_URL} target="_blank" rel="noreferrer">
+                direct .vsix download
+              </a>{' '}
+              will resolve here instead of returning 404.
+            </p>
             <ol>
               <li>
-                <strong>Cursor:</strong> Command Palette (<kbd>Cmd+Shift+P</kbd> /{' '}
-                <kbd>Ctrl+Shift+P</kbd>) → <code>Extensions: Install from VSIX...</code> → choose the
-                downloaded file → reload the window when prompted.
+                <strong>Get a .vsix:</strong>{' '}
+                <a href={VSCODE_PACKAGE_README_URL} target="_blank" rel="noreferrer">
+                  Open the README “Development” section
+                </a>
+                : from the cloned repo run <code>npm install</code> and{' '}
+                <code>npm run package</code>
+                {' '}inside <code>extensions/vscode</code> to emit the packaged file. Published{' '}
+                <code>.vsix</code> downloads will eventually live on{' '}
+                <a href={GITHUB_RELEASES_URL} target="_blank" rel="noreferrer">
+                  GitHub Releases
+                </a>
+                .
               </li>
               <li>
-                <strong>VS Code:</strong> Prefer the Marketplace link when the listing shows up there;
-                manual <code>.vsix</code> steps are the same as Cursor.
+                <strong>Install in Cursor:</strong> Command Palette (<kbd>Cmd+Shift+P</kbd> /{' '}
+                <kbd>Ctrl+Shift+P</kbd>) →{' '}
+                <code>Extensions: Install from VSIX...</code> → choose the package → reload if
+                prompted.
+              </li>
+              <li>
+                <strong>VS Code:</strong> Prefer the Marketplace when the listing is live;{' '}
+                <code>.vsix</code> install uses the same command as Cursor.
               </li>
               <li>
                 Run <code>Varterm: Connect</code> only if you use a custom server or token.
