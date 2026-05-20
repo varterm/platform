@@ -11,7 +11,7 @@ const nextConfig = {
           { key: 'Access-Control-Allow-Methods', value: 'GET,POST,OPTIONS' },
           {
             key: 'Access-Control-Allow-Headers',
-            value: 'Content-Type, Authorization, X-ElevenLabs-Api-Key',
+            value: 'Content-Type, Authorization, Cookie, X-ElevenLabs-Api-Key',
           },
         ],
       },

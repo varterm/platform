@@ -88,9 +88,15 @@
   margin-bottom: 12px;
 }
 
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
 .cta {
   display: inline-block;
-  margin-bottom: 12px;
   padding: 8px 12px;
   border-radius: 8px;
   text-decoration: none;
@@ -98,6 +104,41 @@
   background: linear-gradient(135deg, var(--accent), #06b6d4);
   font-weight: 600;
   font-size: 0.86rem;
+}
+
+.ctaSecondary {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  font-weight: 600;
+  font-size: 0.86rem;
+}
+
+.ctaSecondary:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.note {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.card kbd {
+  font-size: 0.8rem;
+  padding: 2px 5px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+}
+
+.card code {
+  font-size: 0.85em;
 }
 
 .card ol {

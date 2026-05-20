@@ -2,12 +2,10 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import OptionalAccountsSection from './OptionalAccountsSection';
+import { saveRecordingToAccount } from '@/lib/save-recording-client';
 import styles from './page.module.css';
-
-// Donation link
 const DONATION_LINK = 'https://buy.stripe.com/00w6oG2Zq23a8al1PB3VC00';
-const VSCODE_EXTENSION_LINK = 'https://marketplace.visualstudio.com/items?itemName=varterm.varterm-cursor';
-const CHROME_EXTENSION_INSTALL_LINK = 'https://chromewebstore.google.com/';
 const FORMSPREE_FEEDBACK_ENDPOINT = 'https://formspree.io/f/mojrpewv';
 
 // Microsoft Edge neural voices (FREE)
@@ -57,12 +55,17 @@ export default function Home() {
   const [chunkProgress, setChunkProgress] = useState(null); // { current: 1, total: 5, chunks: [], currentText: '' }
   const [readingProgress, setReadingProgress] = useState(0); // 0-100 percentage of current chunk read
   const [showReadingText, setShowReadingText] = useState(false); // toggle for showing reading text
+  const [accountsEnabled, setAccountsEnabled] = useState(false);
+  const [accountUser, setAccountUser] = useState(null);
+  const [canSaveRecording, setCanSaveRecording] = useState(false);
+  const [savingRecording, setSavingRecording] = useState(false);
   
   // Refs
   const audioRef = useRef(null);
   const synthRef = useRef(null);
   const stopRequestedRef = useRef(false);
   const isMountedRef = useRef(true);
+  const lastAudioBlobsRef = useRef([]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -70,6 +73,17 @@ export default function Home() {
     return () => {
       isMountedRef.current = false;
     };
+  }, []);
+
+  useEffect(() => {
+    fetch('/api/auth/me', { credentials: 'include' })
+      .then((res) => res.json())
+      .then((data) => {
+        if (!isMountedRef.current) return;
+        setAccountsEnabled(Boolean(data.enabled));
+        setAccountUser(data.user || null);
+      })
+      .catch(() => {});
   }, []);
 
   // Load browser voices
@@ -358,8 +372,40 @@ export default function Home() {
     return chunks;
   };
 
+  const saveLastRecording = async () => {
+    if (!accountUser || !lastAudioBlobsRef.current.length) {
+      showToast('Nothing to save yet. Play your text first.', 'error');
+      return;
+    }
+
+    setSavingRecording(true);
+    try {
+      const combined = new Blob(lastAudioBlobsRef.current, { type: 'audio/mpeg' });
+      const title =
+        getTextToSpeak().trim().slice(0, 80) || `Recording ${new Date().toLocaleString()}`;
+      const recording = await saveRecordingToAccount({
+        audioBlob: combined,
+        title,
+        visibility: 'unlisted',
+        voiceLabel: selectedVoice?.name || selectedVoice?.id || 'Cloud voice',
+        sourceTextPreview: getTextToSpeak().trim().slice(0, 500),
+      });
+      setCanSaveRecording(false);
+      showToast('Saved to your library.', 'success');
+      if (recording?.listenUrl) {
+        window.open(recording.listenUrl, '_blank', 'noopener,noreferrer');
+      }
+    } catch (error) {
+      showToast(error.message || 'Could not save recording', 'error');
+    } finally {
+      setSavingRecording(false);
+    }
+  };
+
   const speakWithMicrosoft = async () => {
     stopRequestedRef.current = false;
+    lastAudioBlobsRef.current = [];
+    setCanSaveRecording(false);
     const chunks = splitTextIntoChunks(getTextToSpeak());
     const totalChunks = chunks.length;
     
@@ -416,6 +462,7 @@ export default function Home() {
         }
         
         const blob = await response.blob();
+        lastAudioBlobsRef.current.push(blob);
         const url = URL.createObjectURL(blob);
         
         setChunkProgress({ 
@@ -450,6 +497,9 @@ export default function Home() {
       
       setChunkProgress(null);
       setStatus('ready');
+      if (accountsEnabled && accountUser && lastAudioBlobsRef.current.length) {
+        setCanSaveRecording(true);
+      }
       
     } catch (error) {
       console.error('TTS Error:', error);
@@ -459,6 +509,7 @@ export default function Home() {
       setChunkProgress(null);
       setReadingProgress(0);
       setStatus('ready');
+      lastAudioBlobsRef.current = [];
     }
   };
 
@@ -573,6 +624,11 @@ export default function Home() {
           <Link className={styles.headerLink} href="/extensions">
             Extensions
           </Link>
+          {accountsEnabled ? (
+            <Link className={styles.headerLink} href="/account">
+              {accountUser ? 'Library' : 'Account'}
+            </Link>
+          ) : null}
           <Link className={styles.headerLink} href="/privacy">
             Privacy
           </Link>
@@ -601,6 +657,8 @@ export default function Home() {
         </p>
       </section>
 
+      <OptionalAccountsSection />
+
       <section className={styles.platformSection} aria-labelledby="platform-heading">
         <h2 id="platform-heading" className={styles.sectionHeading}>Extensions</h2>
         <div className={styles.platformGrid}>
@@ -627,14 +685,9 @@ export default function Home() {
               </div>
               <h3>Cursor &amp; VS Code</h3>
             </div>
-            <a
-              className={styles.platformCta}
-              href={VSCODE_EXTENSION_LINK}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Install
-            </a>
+            <Link className={styles.platformCta} href="/extensions">
+              Install &amp; setup
+            </Link>
           </article>
           <article className={styles.platformCard}>
             <div className={styles.platformTop}>
@@ -651,14 +704,9 @@ export default function Home() {
               </div>
               <h3>Chrome Extension</h3>
             </div>
-            <a
-              className={styles.platformCta}
-              href={CHROME_EXTENSION_INSTALL_LINK}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Install
-            </a>
+            <Link className={styles.platformCta} href="/extensions#chrome">
+              Install &amp; setup
+            </Link>
           </article>
         </div>
       </section>
@@ -846,11 +894,28 @@ export default function Home() {
             </button>
           )}
         </div>
-        <div className={styles.usageInfo}>
-          <span>{text.length.toLocaleString()}</span> characters
-          {text.length > 10000 && status === 'ready' && (
-            <span className={styles.chunkWarning}> • Will process in {Math.ceil(text.length / 10000)} parts</span>
-          )}
+        <div className={styles.statusBarRight}>
+          <div className={styles.usageInfo}>
+            <span>{text.length.toLocaleString()}</span> characters
+            {text.length > 10000 && status === 'ready' && (
+              <span className={styles.chunkWarning}> • Will process in {Math.ceil(text.length / 10000)} parts</span>
+            )}
+          </div>
+          {canSaveRecording && accountUser ? (
+            <button
+              type="button"
+              className={styles.saveRecordingBtn}
+              onClick={saveLastRecording}
+              disabled={savingRecording}
+            >
+              {savingRecording ? 'Saving…' : 'Save to library'}
+            </button>
+          ) : null}
+          {accountsEnabled && !accountUser && status === 'ready' && !chunkProgress ? (
+            <Link href="/account" className={styles.saveRecordingLink}>
+              Sign in to save
+            </Link>
+          ) : null}
         </div>
       </div>
 
@@ -1091,6 +1156,7 @@ export default function Home() {
           <Link href="/markdown-to-speech">Markdown guide</Link>
           <Link href="/privacy">Privacy</Link>
           <Link href="/support">Support</Link>
+          <Link href="/account">Account</Link>
         </div>
       </footer>
     </div>
