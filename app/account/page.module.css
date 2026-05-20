@@ -1,0 +1,211 @@
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.backLink {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.backLink:hover {
+  color: var(--accent);
+}
+
+.main {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+}
+
+.main h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.pageLead {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.intro {
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.howItWorks {
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+
+.howItWorksEmbedded {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.howItWorksEmbeddedTitle {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.howItWorks h2 {
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+}
+
+.howItWorksIntro {
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+  max-width: 62ch;
+}
+
+.howItWorksList {
+  margin: 0 0 20px 1.1rem;
+  color: var(--text-secondary);
+  display: grid;
+  gap: 8px;
+  max-width: 62ch;
+}
+
+.howItWorksList strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.diagram {
+  overflow-x: auto;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-primary);
+}
+
+.diagram svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.diagramFallback {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.panel {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.form {
+  display: grid;
+  gap: 12px;
+  max-width: 420px;
+}
+
+.form label {
+  display: grid;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.form input,
+.form select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font: inherit;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.button,
+.linkButton {
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.buttonPrimary {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+
+.button:hover,
+.linkButton:hover {
+  border-color: var(--accent);
+}
+
+.error {
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+
+.success {
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+.recordingList {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.recordingItem {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  background: var(--bg-primary);
+}
+
+.recordingTitle {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.recordingMeta {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+
+.recordingActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.recordingActions a {
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+
+.empty {
+  color: var(--text-secondary);
+}

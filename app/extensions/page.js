@@ -1,8 +1,14 @@
 import Link from 'next/link';
 import styles from './page.module.css';
-
-const VSCODE_EXTENSION_LINK = 'https://marketplace.visualstudio.com/items?itemName=varterm.varterm-cursor';
-const CHROME_EXTENSION_LINK = 'https://chromewebstore.google.com/';
+import {
+  CHROME_WEB_STORE_URL,
+  CHROME_ZIP_DOWNLOAD_URL,
+  EDITOR_EXTENSION_VERSION,
+  GITHUB_RELEASES_URL,
+  OPEN_VSX_EXTENSION_URL,
+  VSIX_DOWNLOAD_URL,
+  VSCODE_MARKETPLACE_URL,
+} from '../../lib/extension-links';
 
 export const metadata = {
   title: 'Extensions | Varterm TTS',
@@ -26,6 +32,19 @@ export const metadata = {
   },
 };
 
+function CtaRow({ primaryHref, primaryLabel, secondaryHref, secondaryLabel }) {
+  return (
+    <div className={styles.ctaRow}>
+      <a href={primaryHref} target="_blank" rel="noreferrer" className={styles.cta}>
+        {primaryLabel}
+      </a>
+      <a href={secondaryHref} target="_blank" rel="noreferrer" className={styles.ctaSecondary}>
+        {secondaryLabel}
+      </a>
+    </div>
+  );
+}
+
 export default function ExtensionsPage() {
   return (
     <div className={styles.page}>
@@ -40,7 +59,8 @@ export default function ExtensionsPage() {
           <h1>Varterm Extensions</h1>
           <p>
             Install once, keep the same workflow everywhere. Varterm is built for long-form
-            content and markdown-heavy text across web, Cursor, VS Code, and Chrome.
+            content and markdown-heavy text across web, Cursor, VS Code, and Chrome. No signup
+            required for free Edge voices.
           </p>
           <div className={styles.heroBadges}>
             <span className={styles.badge}>Long-form ready</span>
@@ -52,45 +72,126 @@ export default function ExtensionsPage() {
         <section className={styles.section}>
           <h2>Choose Your Setup</h2>
           <p className={styles.sectionIntro}>
-            Pick the surface you use most. Core behavior stays consistent across all installs.
+            Editor extension v{EDITOR_EXTENSION_VERSION}. Pick your editor or browser below.
           </p>
         </section>
 
         <section className={styles.grid}>
           <article className={styles.card}>
-            <h2>Cursor / VS Code Extension</h2>
-            <p>Read editor selection, clipboard, and agent output aloud. Great for long files, docs, and markdown-heavy responses.</p>
-            <a
-              href={VSCODE_EXTENSION_LINK}
-              target="_blank"
-              rel="noreferrer"
-              className={styles.cta}
-            >
-              Install Extension
-            </a>
+            <h2>Cursor</h2>
+            <p>
+              Cursor uses the Open VSX registry. Search for <strong>Varterm TTS</strong> in the
+              Extensions panel, or open the listing once published.
+            </p>
+            <CtaRow
+              primaryHref={OPEN_VSX_EXTENSION_URL}
+              primaryLabel="Open in Open VSX"
+              secondaryHref={VSIX_DOWNLOAD_URL}
+              secondaryLabel="Download .vsix"
+            />
             <ol>
-              <li>Install extension from Marketplace.</li>
-              <li>Run `Varterm: Connect` and verify base URL.</li>
-              <li>Run `Varterm: Read Clipboard Aloud` or `Read Editor/Selection Aloud` for long-form docs and markdown files.</li>
+              <li>
+                Open Extensions: <kbd>Cmd+Shift+X</kbd> (Mac) or <kbd>Ctrl+Shift+X</kbd>{' '}
+                (Windows/Linux).
+              </li>
+              <li>
+                Search <strong>Varterm TTS</strong> and click <strong>Install</strong>.
+              </li>
+              <li>
+                Open Command Palette (<kbd>Cmd+Shift+P</kbd> / <kbd>Ctrl+Shift+P</kbd>) and run{' '}
+                <code>Varterm: Select Read-Aloud Voice</code>.
+              </li>
+              <li>
+                Select text, then run <code>Varterm: Read Editor/Selection Aloud</code>. For
+                agent output, copy to clipboard and run{' '}
+                <code>Varterm: Read Clipboard Aloud</code>.
+              </li>
+            </ol>
+            <p className={styles.note}>
+              Default API: <code>https://www.varterm.com</code>. Run{' '}
+              <code>Varterm: Connect</code> only if you use a custom server or token.
+            </p>
+          </article>
+
+          <article className={styles.card}>
+            <h2>VS Code</h2>
+            <p>
+              Install from the Visual Studio Marketplace, or use the same Open VSX listing as
+              Cursor.
+            </p>
+            <CtaRow
+              primaryHref={VSCODE_MARKETPLACE_URL}
+              primaryLabel="Install from Marketplace"
+              secondaryHref={OPEN_VSX_EXTENSION_URL}
+              secondaryLabel="Open VSX listing"
+            />
+            <ol>
+              <li>
+                Click <strong>Install from Marketplace</strong> above, or search{' '}
+                <strong>Varterm TTS</strong> in the Extensions view.
+              </li>
+              <li>Reload VS Code if prompted.</li>
+              <li>
+                Run <code>Varterm: Select Read-Aloud Voice</code>, then read selection or
+                clipboard with the Varterm commands.
+              </li>
             </ol>
           </article>
 
           <article className={styles.card}>
-            <h2>Chrome Extension</h2>
-            <p>Read selected text or entire pages directly in your browser, including long-form articles and markdown-style AI outputs.</p>
-            <a href={CHROME_EXTENSION_LINK} target="_blank" rel="noreferrer" className={styles.cta}>
-              Install on Chrome
+            <h2>Manual install (.vsix)</h2>
+            <p>
+              Use this if the store is not available yet, you are on an air-gapped machine, or
+              you need a specific build from GitHub Releases.
+            </p>
+            <a href={VSIX_DOWNLOAD_URL} className={styles.cta}>
+              Download varterm-cursor-{EDITOR_EXTENSION_VERSION}.vsix
             </a>
             <ol>
-              <li>Install extension and pin it to toolbar.</li>
-              <li>Select text and use the floating button or context menu for long passages and markdown blocks.</li>
-              <li>If testing locally: open `chrome://extensions` and use Load unpacked.</li>
+              <li>
+                Download the <code>.vsix</code> file (requires a{' '}
+                <a href={GITHUB_RELEASES_URL}>GitHub release</a> for v{EDITOR_EXTENSION_VERSION}
+                ).
+              </li>
+              <li>
+                In Cursor or VS Code: Command Palette →{' '}
+                <code>Extensions: Install from VSIX...</code>
+              </li>
+              <li>Select the downloaded file and reload the window.</li>
+              <li>Continue with voice selection and read-aloud commands above.</li>
+            </ol>
+          </article>
+
+          <article className={styles.card} id="chrome">
+            <h2>Chrome Extension</h2>
+            <p>
+              Read selected text or entire pages in the browser, including long articles and
+              markdown-style AI output.
+            </p>
+            <CtaRow
+              primaryHref={CHROME_WEB_STORE_URL}
+              primaryLabel="Chrome Web Store"
+              secondaryHref={CHROME_ZIP_DOWNLOAD_URL}
+              secondaryLabel="Download .zip"
+            />
+            <ol>
+              <li>Install from the Chrome Web Store when the listing is live.</li>
+              <li>Pin the extension and select text to use the floating read button or context menu.</li>
+              <li>
+                For local testing: download the <code>.zip</code> from{' '}
+                <a href={GITHUB_RELEASES_URL}>GitHub Releases</a>, then at{' '}
+                <code>chrome://extensions</code> enable Developer mode →{' '}
+                <strong>Load unpacked</strong> (extract the zip first).
+              </li>
             </ol>
           </article>
 
           <article className={styles.card}>
             <h2>Web App</h2>
-            <p>Use Varterm instantly with no setup for long-form docs, markdown cleanup, and ChatGPT-ready playback.</p>
+            <p>
+              Use Varterm in the browser with no extension install—long-form docs, markdown
+              cleanup, and multi-mode voices.
+            </p>
             <Link href="/" className={styles.cta}>
               Open Web App
             </Link>
@@ -110,6 +211,9 @@ export default function ExtensionsPage() {
             </li>
             <li>
               <Link href="/markdown-to-speech">Markdown to speech guide</Link>
+            </li>
+            <li>
+              <a href={GITHUB_RELEASES_URL}>Extension releases on GitHub</a>
             </li>
             <li>
               <Link href="/">Open the web app</Link>

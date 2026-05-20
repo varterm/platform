@@ -764,6 +764,40 @@
   font-size: 0.8rem;
 }
 
+.statusBarRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.saveRecordingBtn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  background: rgba(16, 185, 129, 0.12);
+  color: #bbf7d0;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.saveRecordingBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.saveRecordingLink {
+  font-size: 0.8rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.saveRecordingLink:hover {
+  text-decoration: underline;
+}
+
 /* Modal */
 .modalOverlay {
   position: fixed;
@@ -1165,6 +1199,62 @@
   font-size: 0.92rem;
   color: var(--text-muted);
   line-height: 1.5;
+}
+
+/* Optional accounts */
+.accountsSection {
+  margin-bottom: 36px;
+  padding: 24px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.accountsSectionHeader {
+  margin-bottom: 20px;
+}
+
+.accountsSectionLead {
+  color: var(--text-secondary);
+  max-width: 62ch;
+  margin-top: 8px;
+  margin-bottom: 14px;
+}
+
+.accountsSectionLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.accountsPrimaryLink {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  background: rgba(16, 185, 129, 0.12);
+  color: #bbf7d0;
+  text-decoration: none;
+  font-size: 0.88rem;
+}
+
+.accountsSecondaryLink {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.88rem;
+}
+
+.accountsSecondaryLink:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.accountsDiagramWrap {
+  margin-top: 8px;
 }
 
 /* Platform Section */
