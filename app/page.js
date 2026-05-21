@@ -33,11 +33,13 @@ const MICROSOFT_VOICES = [
   { id: 'en-AU-WilliamNeural', name: 'William', desc: 'Australian, clear' },
 ];
 
+/** Shape matches `getVoices()` when tier is cloud; keeps UI selection in sync with playback default. */
+const DEFAULT_CLOUD_VOICE = { ...MICROSOFT_VOICES[0], tier: 'cloud' };
 
 export default function Home() {
   // State
   const [text, setText] = useState('');
-  const [selectedVoice, setSelectedVoice] = useState(null);
+  const [selectedVoice, setSelectedVoice] = useState(DEFAULT_CLOUD_VOICE);
   const [selectedTier] = useState('cloud'); // keep cloud-only UI for now
   const [browserVoices, setBrowserVoices] = useState([]);
   const [piperLoading, setPiperLoading] = useState(false);
@@ -549,7 +551,8 @@ export default function Home() {
           </div>
           <div className={styles.logoWords}>
             <span className={styles.logoText}>varterm</span>
-            <span className={styles.logoTagline}>free text-to-speech for web, cursor, vscode, and chrome</span>
+            <span className={styles.logoSubheading}>Text to Speech Everywhere</span>
+            <span className={styles.logoSubSubheading}>Web · Cursor · VS Code · Chrome</span>
           </div>
         </div>
         <div className={styles.headerRight}>
@@ -580,8 +583,8 @@ export default function Home() {
           <button className={styles.feedbackBtn} onClick={() => setShowFeedbackModal(true)}>
             <span>Feedback</span>
           </button>
-          <button className={styles.upgradeBtn} onClick={() => setShowModal(true)}>
-            <span>Support</span>
+          <button className={styles.upgradeBtn} onClick={() => setShowModal(true)} type="button">
+            <span>Donate</span>
           </button>
         </div>
       </header>
@@ -589,7 +592,7 @@ export default function Home() {
       {/* Hero Section with H1 for SEO */}
       <section className={styles.heroSection} aria-labelledby="hero-heading">
         <h1 id="hero-heading" className={styles.heroTitle}>
-          Read aloud with natural AI voices.
+          Natural voices for every kind of text.
         </h1>
         <p className={styles.heroSubtitle}>
           Supports Cursor, VS Code, and Chrome.
@@ -599,62 +602,20 @@ export default function Home() {
         </p>
       </section>
 
-      <section className={styles.platformSection} aria-labelledby="platform-heading">
-        <h2 id="platform-heading" className={styles.sectionHeading}>Extensions</h2>
-        <div className={styles.platformGrid}>
-          <article className={styles.platformCard}>
-            <div className={styles.platformTop}>
-              <div className={styles.platformLogos} aria-label="Cursor and VS Code">
-                <span className={styles.platformLogo} title="Cursor">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      fill="currentColor"
-                      d="M12 2 4.5 6.3v8.4L12 19l7.5-4.3V6.3L12 2Zm0 2.3 5.5 3.1v6.2L12 16.7 6.5 13.6V7.4L12 4.3Z"
-                    />
-                    <path fill="currentColor" d="M12 7.5 8.3 9.6v4.8l3.7 2.1 3.7-2.1V9.6L12 7.5Z" />
-                  </svg>
-                </span>
-                <span className={styles.platformLogo} title="VS Code">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      fill="currentColor"
-                      d="M16.9 2.4 9.5 9.5 6.2 6.9 3.5 8.7l3.3 3.3-3.3 3.3 2.7 1.8 3.3-2.6 7.4 7.1 3.6-1.8V4.2l-3.6-1.8Z"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <h3>Cursor &amp; VS Code</h3>
-            </div>
-            <Link className={styles.platformCta} href="/extensions">
-              Install
-            </Link>
-          </article>
-          <article className={styles.platformCard}>
-            <div className={styles.platformTop}>
-              <div className={styles.platformLogos} aria-label="Chrome">
-                <span className={styles.platformLogo} title="Chrome">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-                    <circle cx="12" cy="12" r="3.2" fill="currentColor" />
-                    <path d="M12 2.5h8" stroke="currentColor" strokeWidth="1.8" />
-                    <path d="m7.2 20.4 4.8-8.4" stroke="currentColor" strokeWidth="1.8" />
-                    <path d="m20.8 10.8-8.8 1.2" stroke="currentColor" strokeWidth="1.8" />
-                  </svg>
-                </span>
-              </div>
-              <h3>Chrome Extension</h3>
-            </div>
-            <Link className={styles.platformCta} href="/extensions">
-              Install
-            </Link>
-          </article>
-        </div>
-      </section>
 
-      {/* Editor */}
       <section className={styles.section}>
         <div className={styles.editorHeader}>
-          <span className={styles.sectionTitle}>Your Text</span>
+          <nav className={styles.extensionQuickLinks} aria-label="Extension installs">
+            <Link href="/extensions#editors" className={styles.extensionQuickLink}>
+              Cursor &amp; VS Code
+            </Link>
+            <span className={styles.extensionQuickSep} aria-hidden>
+              ·
+            </span>
+            <Link href="/extensions#chrome" className={styles.extensionQuickLink}>
+              Chrome
+            </Link>
+          </nav>
           <span className={styles.charCount}>
             <span>{text.length.toLocaleString()}</span> characters
           </span>

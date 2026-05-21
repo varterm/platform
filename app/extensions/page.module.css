@@ -157,6 +157,10 @@
   margin: 6px 0;
 }
 
+.card[id] {
+  scroll-margin-top: 88px;
+}
+
 .links {
   margin-top: 28px;
   padding-top: 20px;
