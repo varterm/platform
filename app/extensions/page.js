@@ -64,7 +64,7 @@ export default function ExtensionsPage() {
         </section>
 
         <section className={styles.grid}>
-          <article className={styles.card}>
+          <article className={styles.card} id="editors">
             <h2>Cursor / VS Code Extension</h2>
             <p>
               Read editor selection, clipboard, and agent output aloud. Great for long files,
@@ -149,7 +149,7 @@ export default function ExtensionsPage() {
             </ol>
           </article>
 
-          <article className={styles.card}>
+          <article className={styles.card} id="chrome">
             <h2>Chrome Extension</h2>
             <p>Read selected text or entire pages directly in your browser, including long-form articles and markdown-style AI outputs.</p>
             <a href={CHROME_EXTENSION_LINK} target="_blank" rel="noreferrer" className={styles.cta}>
@@ -179,6 +179,9 @@ export default function ExtensionsPage() {
         <section className={styles.links}>
           <h3>More Guides</h3>
           <ul>
+            <li>
+              <Link href="/install-extensions">How to install each extension type</Link>
+            </li>
             <li>
               <Link href="/long-form-tts">Long-form TTS guide</Link>
             </li>
