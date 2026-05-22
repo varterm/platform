@@ -1203,6 +1203,114 @@
   line-height: 1.5;
 }
 
+/* Homepage — latest news teaser */
+.newsPreview {
+  position: relative;
+  margin: 10px auto 26px;
+  max-width: 560px;
+}
+
+.newsPreviewClose {
+  position: absolute;
+  top: 6px;
+  right: 2px;
+  z-index: 3;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.newsPreviewClose:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.newsPreviewClose:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.newsPreviewCard {
+  display: block;
+  padding: 16px 40px 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: linear-gradient(145deg, var(--bg-secondary), var(--bg-elevated));
+  text-decoration: none;
+  color: inherit;
+}
+
+.newsPreviewCard:hover {
+  border-color: var(--accent);
+}
+
+.newsPreviewEyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.newsPreviewTitle {
+  margin: 0 0 8px;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--text-primary);
+}
+
+.newsPreviewExcerpt {
+  margin: 0 0 14px;
+  font-size: 0.91rem;
+  color: var(--text-secondary);
+  line-height: 1.52;
+}
+
+.newsPreviewMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.newsPreviewCta {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.newsPreviewFooter {
+  text-align: right;
+  margin-top: 8px;
+}
+
+.newsPreviewArchive {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.newsPreviewArchive:hover {
+  color: var(--accent);
+}
+
 
 @media (max-width: 980px) {
   .header {
