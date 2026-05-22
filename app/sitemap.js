@@ -31,6 +31,12 @@ export default async function sitemap() {
       priority: 0.7,
     },
     {
+      url: `${baseUrl}/install-extensions`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.74,
+    },
+    {
       url: `${baseUrl}/tts`,
       lastModified: new Date(),
       changeFrequency: 'monthly',

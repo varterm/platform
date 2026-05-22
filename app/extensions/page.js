@@ -180,6 +180,9 @@ export default function ExtensionsPage() {
           <h3>More Guides</h3>
           <ul>
             <li>
+              <Link href="/install-extensions">How to install each extension type</Link>
+            </li>
+            <li>
               <Link href="/long-form-tts">Long-form TTS guide</Link>
             </li>
             <li>
