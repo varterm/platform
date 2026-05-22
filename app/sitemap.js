@@ -1,10 +1,11 @@
-// app/sitemap.js
+import { getAllNewsPostsMeta } from '../lib/news.js';
+
 // Dynamic sitemap generation for SEO
 
-export default function sitemap() {
+export default async function sitemap() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://varterm.com';
-  
-  return [
+
+  const entries = [
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -47,6 +48,40 @@ export default function sitemap() {
       changeFrequency: 'monthly',
       priority: 0.5,
     },
+    {
+      url: `${baseUrl}/news`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.75,
+    },
   ];
+
+  let postsMeta = [];
+  try {
+    postsMeta = await getAllNewsPostsMeta();
+  } catch {
+    postsMeta = [];
+  }
+
+  for (const post of postsMeta) {
+    entries.push({
+      url: `${baseUrl}/news/${post.slug}`,
+      lastModified: new Date(parseDateFallback(post.date)),
+      changeFrequency: 'monthly',
+      priority: 0.72,
+    });
+  }
+
+  return entries;
 }
 
+function parseDateFallback(isoShort) {
+  if (!isoShort || typeof isoShort !== 'string') return Date.now();
+  const trimmed = isoShort.trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) {
+    const t = Date.parse(`${trimmed}T12:00:00Z`);
+    return Number.isNaN(t) ? Date.now() : t;
+  }
+  const t = Date.parse(trimmed);
+  return Number.isNaN(t) ? Date.now() : t;
+}

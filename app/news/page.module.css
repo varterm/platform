@@ -1,0 +1,122 @@
+.page {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 44px 24px 64px;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.backLink {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.backLink:hover {
+  color: var(--accent);
+}
+
+.main {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  background: var(--bg-secondary);
+}
+
+.intro h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.85rem;
+  margin-bottom: 10px;
+}
+
+.intro p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.feed {
+  margin-top: 26px;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.item {
+  border-top: 1px solid var(--border);
+}
+
+.item:first-of-type {
+  border-top: none;
+}
+
+.itemLink {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 4px;
+  padding: 16px 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.itemLink:hover .itemTitle {
+  color: var(--accent);
+}
+
+.meta {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.itemTitle {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.excerpt {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  grid-column: 1 / -1;
+}
+
+.empty {
+  color: var(--text-muted);
+  margin-top: 12px;
+  font-size: 0.92rem;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+  font-size: 0.8em;
+  color: var(--text-secondary);
+}
+
+.footer {
+  margin-top: 28px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer a {
+  font-size: 0.84rem;
+  color: var(--accent);
+}
+
+@media (max-width: 560px) {
+  .intro h1 {
+    font-size: 1.55rem;
+  }
+}
