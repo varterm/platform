@@ -1,28 +1,37 @@
 import Link from 'next/link';
 
+const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://varterm.com';
+
 export const metadata = {
-  title: 'Free Text to Speech | No Signup, Unlimited Usage',
+  title: 'More Text to Speech Options',
   description:
-    'Free text to speech with no signup and unlimited usage. Read long-form text, docs, and markdown aloud in your browser.',
+    'Supporting pages for Varterm free text to speech. Use the main online reader for the fastest experience.',
   alternates: {
-    canonical: '/tts',
+    canonical: siteUrl,
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
 export default function TtsPage() {
   return (
     <main style={{ maxWidth: 760, margin: '0 auto', padding: '56px 20px' }}>
-      <h1>Free Text to Speech</h1>
+      <h1>Free Text to Speech Options</h1>
       <p>
-        No signup. Unlimited usage. Paste text and listen instantly with cloud, browser, or offline
-        voices.
+        The primary free text to speech reader lives on the{' '}
+        <Link href="/">Varterm homepage</Link>. Paste text there for instant playback — no signup,
+        unlimited use, long-form chunking, and markdown cleanup.
       </p>
       <p>
-        Built for long-form docs and markdown-heavy content, with playback controls and fast
-        generation.
+        For deeper guides, see our{' '}
+        <Link href="/long-form-tts">long-form text to speech guide</Link> and{' '}
+        <Link href="/markdown-to-speech">markdown to speech guide</Link>, or{' '}
+        <Link href="/extensions">install extensions</Link> for Cursor, VS Code, and Chrome.
       </p>
       <p>
-        <Link href="/">Open the reader</Link> or <Link href="/extensions">install extensions</Link>.
+        <Link href="/">Open the free text to speech reader →</Link>
       </p>
     </main>
   );
