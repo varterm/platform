@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { HOMEPAGE_FAQ } from '@/lib/seo-faq';
 import styles from './page.module.css';
 
 // Donation link
@@ -637,14 +638,48 @@ export default function HomeClient({ featuredNews = null }) {
       {/* Hero Section with H1 for SEO */}
       <section className={styles.heroSection} aria-labelledby="hero-heading">
         <h1 id="hero-heading" className={styles.heroTitle}>
-          Natural voices for every kind of text.
+          Free Text to Speech Converter Online
         </h1>
         <p className={styles.heroSubtitle}>
-          Supports Cursor, VS Code, and Chrome.
+          Convert long-form text and markdown to natural speech. Strip formatting automatically — no
+          signup, unlimited use.
         </p>
         <p className={styles.heroMeta}>
-          Read selections, web pages, and agent output in editors with one click. Free, no signup, unlimited usage.
+          Also works in Cursor, VS Code, and Chrome for reading selections, docs, and agent output aloud.
         </p>
+      </section>
+
+      <section className={styles.platformSection} aria-labelledby="platform-heading">
+        <h2 id="platform-heading" className={styles.sectionHeading}>
+          Use Varterm anywhere
+        </h2>
+        <div className={styles.platformGrid}>
+          <article className={styles.platformCard}>
+            <div className={styles.platformCardBody}>
+              <h3>Web reader</h3>
+              <p>Paste text and listen with free cloud neural voices.</p>
+            </div>
+            <span className={styles.platformBadge}>You are here</span>
+          </article>
+          <article className={styles.platformCard}>
+            <div className={styles.platformCardBody}>
+              <h3>Cursor &amp; VS Code</h3>
+              <p>Read selections, clipboard, and agent output in your editor.</p>
+            </div>
+            <Link href="/extensions#editors" className={styles.platformCta}>
+              Install extension
+            </Link>
+          </article>
+          <article className={styles.platformCard}>
+            <div className={styles.platformCardBody}>
+              <h3>Chrome</h3>
+              <p>Read selected text and pages from your browser workflow.</p>
+            </div>
+            <Link href="/extensions#chrome" className={styles.platformCta}>
+              Get Chrome extension
+            </Link>
+          </article>
+        </div>
       </section>
 
       {featuredNews && !newsPreviewHiddenForSession ? (
@@ -1041,17 +1076,34 @@ export default function HomeClient({ featuredNews = null }) {
           <article className={styles.featureCard}>
             <div className={styles.featureIcon}>✨</div>
             <h3>Strip Markdown Automatically</h3>
-            <p>Paste content from GitHub or any markdown source. Our TTS strips headers, links, code blocks, and formatting for clean, natural-sounding audio output.</p>
+            <p>
+              Paste content from ChatGPT, GitHub, or any markdown source. Our TTS strips headers, links,
+              code blocks, and formatting for clean, natural-sounding audio output.
+            </p>
           </article>
           <article className={styles.featureCard}>
             <div className={styles.featureIcon}>🔓</div>
             <h3>100% Free, No Login Required</h3>
-            <p>Use our text to speech converter without creating an account. No registration and no hidden charges. We keep data use focused on speech playback and basic product analytics.</p>
+            <p>
+              Use our text to speech converter without creating an account. No registration and no hidden
+              charges. Text is processed for playback; we use basic analytics to improve reliability.
+            </p>
           </article>
           <article className={styles.featureCard}>
             <div className={styles.featureIcon}>🎙️</div>
-            <h3>Natural Voice Quality</h3>
-            <p>Access high-quality voices that sound natural and expressive with adjustable speed for comfortable listening.</p>
+            <h3>Premium Neural Voices</h3>
+            <p>
+              Access high-quality Microsoft neural voices that sound natural and expressive. Choose from
+              American, British, and Australian accents with adjustable speed.
+            </p>
+          </article>
+          <article className={styles.featureCard}>
+            <div className={styles.featureIcon}>📡</div>
+            <h3>Works Offline Too</h3>
+            <p>
+              Use Piper AI voices that run in your browser — no internet needed after the model loads.
+              Great for privacy-conscious reading sessions.
+            </p>
           </article>
           <article className={styles.featureCard}>
             <div className={styles.featureIcon}>⚡</div>
@@ -1065,30 +1117,12 @@ export default function HomeClient({ featuredNews = null }) {
       <section className={styles.faqSection} aria-labelledby="faq-heading">
         <h2 id="faq-heading" className={styles.sectionHeading}>Frequently Asked Questions</h2>
         <div className={styles.faqList}>
-          <details className={styles.faqItem}>
-            <summary className={styles.faqQuestion}>Is this text to speech tool really free?</summary>
-            <p className={styles.faqAnswer}>Yes. It&apos;s free, requires no signup, and supports unlimited usage. We sustain the service through optional donations.</p>
-          </details>
-          <details className={styles.faqItem}>
-            <summary className={styles.faqQuestion}>Can I convert long documents to speech?</summary>
-            <p className={styles.faqAnswer}>Varterm supports long form text to speech conversion for documents of any length. Large texts are automatically split into chunks and played sequentially for seamless listening. There are no character limits.</p>
-          </details>
-          <details className={styles.faqItem}>
-            <summary className={styles.faqQuestion}>Does it strip markdown formatting?</summary>
-            <p className={styles.faqAnswer}>Yes. Enable the &quot;Strip Markdown&quot; option to remove headers (#), bold/italic markers (**), links, code blocks, and other formatting for cleaner speech output.</p>
-          </details>
-          <details className={styles.faqItem}>
-            <summary className={styles.faqQuestion}>Do I need to create an account?</summary>
-            <p className={styles.faqAnswer}>No account or registration needed. Just paste your text and click play. Your text is used to generate audio, and we collect basic analytics to improve site reliability.</p>
-          </details>
-          <details className={styles.faqItem}>
-            <summary className={styles.faqQuestion}>What voices are available?</summary>
-            <p className={styles.faqAnswer}>Varterm provides natural voice options with adjustable speed, tuned for clear long-form playback.</p>
-          </details>
-          <details className={styles.faqItem}>
-            <summary className={styles.faqQuestion}>Can I use this for bulk text to speech conversion?</summary>
-            <p className={styles.faqAnswer}>Yes! Varterm handles bulk text conversion efficiently. Paste any amount of text — articles, documentation, ebooks — and it will be converted to speech. The chunking system ensures smooth playback even for very long content.</p>
-          </details>
+          {HOMEPAGE_FAQ.map((item) => (
+            <details key={item.question} className={styles.faqItem}>
+              <summary className={styles.faqQuestion}>{item.question}</summary>
+              <p className={styles.faqAnswer}>{item.answer}</p>
+            </details>
+          ))}
         </div>
       </section>
 

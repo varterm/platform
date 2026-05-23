@@ -1,56 +1,58 @@
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { TTS_SEO_SLUGS, getTtsSlugEntry } from '@/lib/tts-seo-slugs';
 
-function toTitleCase(input) {
-  return input
-    .split(' ')
-    .filter(Boolean)
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-}
+const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://varterm.com';
 
-function normalizeSlug(rawSlug) {
-  const safe = (rawSlug || '').toString().toLowerCase().trim();
-  return safe.replace(/[^a-z0-9-]/g, '').replace(/-+/g, '-').replace(/^-|-$/g, '');
-}
-
-function phraseFromSlug(slug) {
-  if (!slug) {
-    return 'Text to Speech';
-  }
-  return toTitleCase(slug.replace(/-/g, ' '));
+export function generateStaticParams() {
+  return TTS_SEO_SLUGS.map((entry) => ({ slug: entry.slug }));
 }
 
 export async function generateMetadata({ params }) {
-  const slug = normalizeSlug(params?.slug);
-  const phrase = phraseFromSlug(slug);
-  const canonicalSlug = slug || 'text-to-speech';
+  const entry = getTtsSlugEntry(params?.slug);
+  if (!entry) {
+    return {
+      title: 'Text to Speech',
+      robots: { index: false, follow: true },
+    };
+  }
 
   return {
-    title: `${phrase} | Free Text to Speech`,
-    description: `Free ${phrase.toLowerCase()} with no signup and unlimited usage. Paste text and listen instantly.`,
+    title: `${entry.phrase} — Free Online Reader`,
+    description: entry.description,
     alternates: {
-      canonical: `/tts/${canonicalSlug}`,
+      canonical: siteUrl,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }
 
 export default function TtsSlugPage({ params }) {
-  const slug = normalizeSlug(params?.slug);
-  const phrase = phraseFromSlug(slug);
+  const entry = getTtsSlugEntry(params?.slug);
+  if (!entry) {
+    notFound();
+  }
 
   return (
     <main style={{ maxWidth: 760, margin: '0 auto', padding: '56px 20px' }}>
-      <h1>{phrase}</h1>
+      <h1>{entry.phrase}</h1>
+      <p>{entry.description}</p>
       <p>
-        Free text to speech with no signup and unlimited usage. Paste text, press play, and listen
-        in seconds.
+        Varterm&apos;s main <Link href="/">free text to speech reader</Link> handles long documents,
+        markdown cleanup, and natural neural voices with no signup required.
       </p>
       <p>
-        Works well for long-form docs, notes, and markdown with cloud, browser, and offline voice
-        options.
+        Related: <Link href="/markdown-to-speech">markdown to speech guide</Link>
+        {' · '}
+        <Link href="/long-form-tts">long-form TTS guide</Link>
+        {' · '}
+        <Link href="/extensions">editor extensions</Link>
       </p>
       <p>
-        <Link href="/">Open the reader</Link> or <Link href="/tts">view all text-to-speech options</Link>.
+        <Link href="/">Open the free text to speech reader →</Link>
       </p>
     </main>
   );

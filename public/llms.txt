@@ -2,14 +2,15 @@ Varterm TTS
 https://varterm.com
 
 Summary:
+- Free online text to speech converter with long-form support and markdown cleanup.
+- No signup required. Unlimited usage on the main web reader.
 - Text to speech for web, Cursor, VS Code, and Chrome workflows.
-- Long-form support with chunked playback.
-- Markdown cleanup for AI/chat output, docs, and READMEs.
 
 Key pages:
-- Home: https://varterm.com/
+- Home (primary reader): https://varterm.com/
 - Long form TTS: https://varterm.com/long-form-tts
 - Markdown to speech: https://varterm.com/markdown-to-speech
+- Extensions: https://varterm.com/extensions
 
 Developer/API:
 - OpenAPI schema: https://varterm.com/openapi.json

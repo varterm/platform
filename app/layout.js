@@ -1,15 +1,17 @@
 import './globals.css';
 import Script from 'next/script';
+import { HOMEPAGE_FAQ, faqSchemaFromEntries } from '@/lib/seo-faq.js';
 
 const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://varterm.com';
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Varterm TTS — Text to Speech for Web, Cursor, VS Code, and Chrome',
+    default: 'Free Text to Speech Online | Varterm TTS',
     template: '%s | Varterm',
   },
-  description: 'Varterm TTS helps you read web text and markdown aloud across web, Cursor, VS Code, and Chrome. Free to use, no signup, unlimited usage.',
+  description:
+    'Free online text to speech converter with long-form support and markdown cleanup. No signup, unlimited use. Also available for Cursor, VS Code, and Chrome.',
   keywords: [
     'free tts',
     'text to speech online',
@@ -42,8 +44,9 @@ export const metadata = {
     telephone: false,
   },
   openGraph: {
-    title: 'Varterm TTS — Web and Extension Text to Speech',
-    description: 'Read long-form text and markdown aloud on web, Cursor, VS Code, and Chrome. Free to use with no signup and unlimited usage.',
+    title: 'Free Text to Speech Online | Varterm',
+    description:
+      'Convert long-form text and markdown to natural speech online. Free, no signup, unlimited usage. Extensions for Cursor, VS Code, and Chrome.',
     url: siteUrl,
     siteName: 'Varterm',
     locale: 'en_US',
@@ -59,8 +62,9 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Varterm TTS — Read Anything Aloud',
-    description: 'Text to speech for web, Cursor, VS Code, and Chrome. Free, no signup, and long-form ready with markdown cleanup.',
+    title: 'Free Text to Speech Online | Varterm',
+    description:
+      'Free text to speech with long-form support, markdown cleanup, and no signup. Web reader plus Cursor, VS Code, and Chrome extensions.',
     images: ['/og-image.png'],
   },
   robots: {
@@ -88,8 +92,9 @@ export const metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
-  name: 'Varterm TTS',
-  description: 'Text to speech for developer workflows. Read markdown, docs, and web text aloud.',
+  name: 'Varterm - Free Text to Speech Online',
+  description:
+    'Free online text to speech converter with long-form document support, markdown stripping, and natural neural voices. No signup required.',
   url: siteUrl,
   applicationCategory: 'UtilitiesApplication',
   operatingSystem: 'Any',
@@ -109,57 +114,12 @@ const jsonLd = {
     'No registration required',
     'Adjustable speed and pitch',
     'Cloud and offline voices',
+    'ChatGPT and markdown to speech',
     'Cursor and VS Code extension support',
   ],
 };
 
-// FAQ Schema for rich snippets
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'Is this text to speech tool free?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes, Varterm is completely free to use with no hidden charges or registration required. You get unlimited access to browser voices and high-quality Microsoft neural voices.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Can I convert long documents to speech?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes, Varterm supports long form text to speech conversion for documents of any length. Large texts are automatically split into chunks and played sequentially for seamless listening.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Does it strip markdown formatting?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes, Varterm can automatically strip markdown formatting (headers, bold, links, code blocks, etc.) for clean, natural-sounding speech output. Just enable the "Strip Markdown" option.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Do I need to create an account?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'No, Varterm works without any login or registration. Just paste your text and click play. Text is processed to generate audio, and basic analytics help us improve reliability.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What voices are available?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Varterm offers three tiers of voices: Cloud voices (Microsoft neural voices with natural quality), Browser voices (your device\'s built-in voices), and Offline voices (Piper AI that runs locally in your browser).',
-      },
-    },
-  ],
-};
+const faqSchema = faqSchemaFromEntries(HOMEPAGE_FAQ);
 
 export default function RootLayout({ children }) {
   return (
