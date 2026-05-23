@@ -1,4 +1,5 @@
 import { getAllNewsPostsMeta } from '../lib/news.js';
+import { TTS_SEO_SLUGS } from '../lib/tts-seo-slugs.js';
 
 // Dynamic sitemap generation for SEO
 
@@ -16,31 +17,31 @@ export default async function sitemap() {
       url: `${baseUrl}/long-form-tts`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.8,
+      priority: 0.85,
     },
     {
       url: `${baseUrl}/markdown-to-speech`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.8,
+      priority: 0.85,
     },
     {
       url: `${baseUrl}/extensions`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.7,
+      priority: 0.75,
     },
     {
       url: `${baseUrl}/install-extensions`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.74,
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/tts`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.8,
+      priority: 0.5,
     },
     {
       url: `${baseUrl}/privacy`,
@@ -58,9 +59,18 @@ export default async function sitemap() {
       url: `${baseUrl}/news`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.75,
+      priority: 0.65,
     },
   ];
+
+  for (const slugEntry of TTS_SEO_SLUGS) {
+    entries.push({
+      url: `${baseUrl}/tts/${slugEntry.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.55,
+    });
+  }
 
   let postsMeta = [];
   try {
