@@ -638,7 +638,7 @@ export default function HomeClient({ featuredNews = null }) {
       {/* Hero Section with H1 for SEO */}
       <section className={styles.heroSection} aria-labelledby="hero-heading">
         <h1 id="hero-heading" className={styles.heroTitle}>
-          Free Text to Speech Converter Online
+          Free Text to Speech Converter
         </h1>
         <p className={styles.heroSubtitle}>
           Convert long-form text and markdown to natural speech. Strip formatting automatically — no
