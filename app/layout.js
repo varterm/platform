@@ -7,11 +7,11 @@ const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://varterm.com';
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Free Text to Speech Online | Varterm TTS',
+    default: 'Free Text to Speech Converter | Varterm TTS',
     template: '%s | Varterm',
   },
   description:
-    'Free online text to speech converter with long-form support and markdown cleanup. No signup, unlimited use. Also available for Cursor, VS Code, and Chrome.',
+    'Free text to speech converter with long-form support and markdown cleanup. No signup, unlimited use. Also available for Cursor, VS Code, and Chrome.',
   keywords: [
     'free tts',
     'text to speech online',
@@ -44,9 +44,9 @@ export const metadata = {
     telephone: false,
   },
   openGraph: {
-    title: 'Free Text to Speech Online | Varterm',
+    title: 'Free Text to Speech Converter | Varterm',
     description:
-      'Convert long-form text and markdown to natural speech online. Free, no signup, unlimited usage. Extensions for Cursor, VS Code, and Chrome.',
+      'Convert long-form text and markdown to natural speech. Free, no signup, unlimited usage. Extensions for Cursor, VS Code, and Chrome.',
     url: siteUrl,
     siteName: 'Varterm',
     locale: 'en_US',
@@ -62,7 +62,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Free Text to Speech Online | Varterm',
+    title: 'Free Text to Speech Converter | Varterm',
     description:
       'Free text to speech with long-form support, markdown cleanup, and no signup. Web reader plus Cursor, VS Code, and Chrome extensions.',
     images: ['/og-image.png'],
@@ -92,9 +92,9 @@ export const metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
-  name: 'Varterm - Free Text to Speech Online',
+  name: 'Varterm - Free Text to Speech Converter',
   description:
-    'Free online text to speech converter with long-form document support, markdown stripping, and natural neural voices. No signup required.',
+    'Free text to speech converter with long-form document support, markdown stripping, and natural neural voices. No signup required.',
   url: siteUrl,
   applicationCategory: 'UtilitiesApplication',
   operatingSystem: 'Any',
