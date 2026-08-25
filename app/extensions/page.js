@@ -4,17 +4,18 @@ import {
   EDITOR_EXTENSION_VERSION,
   GITHUB_EXTENSIONS_REPO,
   GITHUB_RELEASES_URL,
+  OPEN_VSX_EXTENSION_URL,
+  VSCODE_MARKETPLACE_URL,
   VSCODE_PACKAGE_README_URL,
   VSIX_DOWNLOAD_URL,
 } from '../../lib/extension-links';
 
-const VSCODE_EXTENSION_LINK = 'https://marketplace.visualstudio.com/items?itemName=varterm.varterm-cursor';
 const CHROME_EXTENSION_LINK = 'https://chromewebstore.google.com/';
 
 export const metadata = {
   title: 'Extensions | Varterm TTS',
   description:
-    'Install Varterm TTS for Cursor, VS Code, and Chrome. Built for long-form content and markdown-friendly read aloud workflows.',
+    'Install Varterm TTS for Cursor, VS Code, and Chrome. Auto-read the agent window, then play, pause, stop, or jump from the status bar.',
   keywords: [
     'varterm extension',
     'chrome text to speech extension',
@@ -67,79 +68,74 @@ export default function ExtensionsPage() {
           <article className={styles.card} id="editors">
             <h2>Cursor / VS Code Extension</h2>
             <p>
-              Read editor selection, clipboard, and agent output aloud. Great for long files,
-              docs, and markdown-heavy responses.
+              Search <strong>Varterm TTS</strong> in the Extensions panel. It reads the editor,
+              selection, clipboard, and the agent window. Turn on status-bar{' '}
+              <strong>Auto-read</strong> to hear finished replies, then play, pause, stop, or jump.
             </p>
             <p className={styles.note}>
-              Prefer the downloadable <code>.vsix</code> below (GitHub Releases). Cursor may not see
-              the VS Code Marketplace entry yet—that is why manual install matters. If the download
-              link errors,{' '}
-              <a href={VSCODE_PACKAGE_README_URL} target="_blank" rel="noreferrer">
-                package from source
-              </a>{' '}
-              or pick the Marketplace when it goes live.
+              Cursor installs from{' '}
+              <a href={OPEN_VSX_EXTENSION_URL} target="_blank" rel="noreferrer">
+                Open VSX
+              </a>
+              . VS Code can use the same search or the Marketplace. The{' '}
+              <code>.vsix</code> is optional — use it only if search is empty or you want a pinned
+              GitHub build.
             </p>
             <div className={styles.ctaStack}>
-              <a href={VSIX_DOWNLOAD_URL} target="_blank" rel="noreferrer" className={styles.cta}>
-                Download varterm-cursor-{EDITOR_EXTENSION_VERSION}.vsix
+              <a href={OPEN_VSX_EXTENSION_URL} target="_blank" rel="noreferrer" className={styles.cta}>
+                Open VSX listing
               </a>
               <a
-                href={VSCODE_PACKAGE_README_URL}
-                target="_blank"
-                rel="noreferrer"
-                className={styles.ctaSecondary}
-              >
-                Build .vsix from source
-              </a>
-              <a href={GITHUB_RELEASES_URL} target="_blank" rel="noreferrer" className={styles.ctaSecondary}>
-                GitHub Releases
-              </a>
-              <a
-                href={VSCODE_EXTENSION_LINK}
+                href={VSCODE_MARKETPLACE_URL}
                 target="_blank"
                 rel="noreferrer"
                 className={styles.ctaSecondary}
               >
                 VS Code Marketplace
               </a>
+              <a href={VSIX_DOWNLOAD_URL} target="_blank" rel="noreferrer" className={styles.ctaSecondary}>
+                Download varterm-cursor-{EDITOR_EXTENSION_VERSION}.vsix
+              </a>
+              <a href={GITHUB_RELEASES_URL} target="_blank" rel="noreferrer" className={styles.ctaSecondary}>
+                GitHub Releases
+              </a>
             </div>
             <p className={styles.directVsixHint}>
-              The button above resolves after{' '}
+              Manual file is{' '}
+              <a href={VSIX_DOWNLOAD_URL} target="_blank" rel="noreferrer">
+                v{EDITOR_EXTENSION_VERSION}
+              </a>{' '}
+              from{' '}
               <a href={GITHUB_RELEASES_URL} target="_blank" rel="noreferrer">
                 GitHub Releases
+              </a>
+              . To rebuild, see the README{' '}
+              <a href={VSCODE_PACKAGE_README_URL} target="_blank" rel="noreferrer">
+                Development
               </a>{' '}
-              ships <code>v{EDITOR_EXTENSION_VERSION}</code> with that <code>.vsix</code> attached.
-              Seeing 404? Publish the artifact in{' '}
+              section in{' '}
               <a href={GITHUB_EXTENSIONS_REPO} target="_blank" rel="noreferrer">
                 varterm/extensions
-              </a>{' '}
-              or use <strong>Build .vsix from source</strong>.
+              </a>
+              .
             </p>
             <ol>
               <li>
-                <strong>Get a .vsix:</strong> Prefer the{' '}
-                <a href={VSIX_DOWNLOAD_URL} target="_blank" rel="noreferrer">
-                  binary download
-                </a>
-                ; otherwise open the README{' '}
-                <a href={VSCODE_PACKAGE_README_URL} target="_blank" rel="noreferrer">
-                  Development
-                </a>{' '}
-                section and run <code>npm install</code> plus <code>npm run package</code> inside{' '}
-                <code>extensions/vscode</code>.
+                <strong>Install:</strong> Extensions view → search <strong>Varterm TTS</strong> →
+                Install → reload if asked.
               </li>
               <li>
-                <strong>Install in Cursor:</strong> Command Palette (<kbd>Cmd+Shift+P</kbd> /{' '}
-                <kbd>Ctrl+Shift+P</kbd>) →{' '}
-                <code>Extensions: Install from VSIX...</code> → choose the package → reload if
-                prompted.
-              </li>
-              <li>
-                <strong>VS Code:</strong> Prefer the Marketplace when the listing is live;{' '}
-                <code>.vsix</code> install uses the same command as Cursor.
+                <strong>Optional .vsix:</strong> Command Palette →{' '}
+                <code>Extensions: Install from VSIX...</code> → choose the package from GitHub
+                Releases.
               </li>
               <li>
                 Run <code>Varterm: Connect</code> only if you use a custom server or token.
+              </li>
+              <li>
+                Click <strong>Auto-read</strong> in the status bar to play the agent window when a
+                reply finishes. Use play/pause, stop, and jump back or forward. Play reads an
+                editor selection if you have one.
               </li>
               <li>
                 Run <code>Varterm: Read Clipboard Aloud</code> or{' '}

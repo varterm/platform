@@ -1,8 +1,8 @@
 import './globals.css';
-import Script from 'next/script';
 import { HOMEPAGE_FAQ, faqSchemaFromEntries } from '@/lib/seo-faq.js';
 
 const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://varterm.com';
+const GA_MEASUREMENT_ID = 'G-REDTPLJXE9';
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
@@ -11,7 +11,7 @@ export const metadata = {
     template: '%s | Varterm',
   },
   description:
-    'Free text to speech converter with long-form support and markdown cleanup. No signup, unlimited use. Also available for Cursor, VS Code, and Chrome.',
+    'Free text to speech converter with long-form support and markdown cleanup. In Cursor or VS Code, Auto-read plays the agent window; play, pause, stop, and jump from the status bar.',
   keywords: [
     'free tts',
     'text to speech online',
@@ -34,6 +34,8 @@ export const metadata = {
     'vscode text to speech',
     'chrome read aloud extension',
     'agent readout tts',
+    'auto-read agent window',
+    'cursor auto read tts',
   ],
   authors: [{ name: 'Varterm' }],
   creator: 'Varterm',
@@ -116,6 +118,7 @@ const jsonLd = {
     'Cloud and offline voices',
     'ChatGPT and markdown to speech',
     'Cursor and VS Code extension support',
+    'Auto-read the agent window with play, pause, stop, and jump',
   ],
 };
 
@@ -128,7 +131,20 @@ export default function RootLayout({ children }) {
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://beamanalytics.b-cdn.net" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+
+        {/* Google tag (gtag.js) — native head scripts so the ID is in the initial HTML */}
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_MEASUREMENT_ID}');
+            `,
+          }}
+        />
         
         {/* Google Fonts */}
         <link 
@@ -154,13 +170,6 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         {children}
-        
-        {/* Beam Analytics */}
-        <Script
-          src="https://beamanalytics.b-cdn.net/beam.min.js"
-          data-token="37539b5e-edb0-4294-b209-742917e4c6b4"
-          strategy="afterInteractive"
-        />
       </body>
     </html>
   );
