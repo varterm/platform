@@ -118,6 +118,7 @@ const jsonLd = {
     'Cloud and offline voices',
     'ChatGPT and markdown to speech',
     'Cursor and VS Code extension support',
+    'Auto-read the agent window with play, pause, stop, and jump',
   ],
 };
 
