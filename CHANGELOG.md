@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-08-25
+
+### Changed
+- Homepage and extensions copy: search **Varterm TTS**. **Auto-read** plays the agent window when a reply finishes. Play, pause, stop, or jump from the status bar.
+- Pointed the hosted `.vsix` download at release `v0.1.35`.
+
 ## 2026-05-11
 
 ### Added

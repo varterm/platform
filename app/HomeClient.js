@@ -645,7 +645,9 @@ export default function HomeClient({ featuredNews = null }) {
           signup, unlimited use.
         </p>
         <p className={styles.heroMeta}>
-          Also works in Cursor, VS Code, and Chrome for reading selections, docs, and agent output aloud.
+          Also in Cursor, VS Code, and Chrome. Search <strong>Varterm TTS</strong> in Extensions.
+          Turn on <strong>Auto-read</strong> to hear the agent window when a reply finishes. Play,
+          pause, stop, or jump from the status bar.
         </p>
       </section>
 
@@ -664,7 +666,10 @@ export default function HomeClient({ featuredNews = null }) {
           <article className={styles.platformCard}>
             <div className={styles.platformCardBody}>
               <h3>Cursor &amp; VS Code</h3>
-              <p>Read selections, clipboard, and agent output in your editor.</p>
+              <p>
+                Search Varterm TTS, then Auto-read the agent window. Play, pause, stop, or jump
+                without leaving the editor.
+              </p>
             </div>
             <Link href="/extensions#editors" className={styles.platformCta}>
               Install extension
