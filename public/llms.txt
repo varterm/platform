@@ -5,6 +5,7 @@ Summary:
 - Free text to speech converter with long-form support and markdown cleanup.
 - No signup required. Unlimited usage on the main web reader.
 - Text to speech for web, Cursor, VS Code, and Chrome workflows.
+- Editor Auto-read plays the agent window when a reply finishes. Play, pause, stop, and jump from the status bar.
 
 Key pages:
 - Home (primary reader): https://varterm.com/
@@ -17,5 +18,6 @@ Developer/API:
 - Edge TTS voices endpoint: https://varterm.com/api/edge-tts
 
 Extensions:
-- VS Code / Cursor extension: https://marketplace.visualstudio.com/items?itemName=varterm.varterm-cursor
-- Chrome extension info: https://github.com/cntrlne/varterm
+- Open VSX (Cursor): https://open-vsx.org/extension/Varterm/varterm-cursor
+- VS Code Marketplace: https://marketplace.visualstudio.com/items?itemName=Varterm.varterm-cursor
+- Chrome extension info: https://varterm.com/extensions#chrome
