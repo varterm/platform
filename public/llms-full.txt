@@ -13,6 +13,7 @@ Core capabilities:
 3) Markdown sanitization for cleaner speech.
 4) API endpoints for voice listing and synthesis.
 5) Extension workflows for Cursor/VS Code and Chrome browser use cases.
+6) Editor Auto-read for the agent window, with play / pause / stop / jump on the status bar.
 
 Primary user intents:
 - "read this long text aloud"
@@ -33,5 +34,6 @@ Technical/API URLs:
 - Synthesize (Premium): https://varterm.com/api/tts (POST)
 
 Extension URLs:
-- VS Code/Cursor listing: https://marketplace.visualstudio.com/items?itemName=varterm.varterm-cursor
-- Project repo: https://github.com/cntrlne/varterm
+- Open VSX (Cursor): https://open-vsx.org/extension/Varterm/varterm-cursor
+- VS Code Marketplace: https://marketplace.visualstudio.com/items?itemName=Varterm.varterm-cursor
+- Project repo: https://github.com/varterm/extensions

@@ -4,19 +4,19 @@ import {
   EDITOR_EXTENSION_VERSION,
   GITHUB_EXTENSIONS_REPO,
   GITHUB_RELEASES_URL,
+  OPEN_VSX_EXTENSION_URL,
+  VSCODE_MARKETPLACE_URL,
   VSCODE_PACKAGE_README_URL,
   VSIX_DOWNLOAD_URL,
 } from '../../lib/extension-links';
 
-const VSCODE_MARKETPLACE_URL =
-  'https://marketplace.visualstudio.com/items?itemName=varterm.varterm-cursor';
 /** Same baseline as `/extensions`; replace with listing URL when finalized. */
 const CHROME_WEBSTORE_URL = 'https://chromewebstore.google.com/';
 
 export const metadata = {
   title: 'How to install Varterm extensions',
   description:
-    'Step-by-step: install Varterm in Cursor (.vsix), VS Code (Marketplace or .vsix), and Chrome (Web Store or unpacked developer build).',
+    'Install Varterm in Cursor or VS Code, then Auto-read the agent window. Play, pause, stop, and jump from the status bar.',
   keywords: [
     'install cursor extension vsix',
     'vscode extension install vsix',
@@ -57,7 +57,7 @@ export default function InstallExtensionsGuide() {
           <h2>On this page</h2>
           <ul>
             <li>
-              <a href="#cursor-vsix">Cursor — install from .vsix</a>
+              <a href="#cursor-vsix">Cursor — Extensions panel or .vsix</a>
             </li>
             <li>
               <a href="#vscode-marketplace-vsix">VS Code — Marketplace or .vsix</a>
@@ -69,19 +69,21 @@ export default function InstallExtensionsGuide() {
         </nav>
 
         <article className={styles.block} id="cursor-vsix">
-          <h2>Cursor — install the editor extension (.vsix)</h2>
+          <h2>Cursor — Extensions panel or .vsix</h2>
           <p>
-            Cursor sometimes does not list marketplace entries exactly like VS Code yet, so installing from
-            a <code>.vsix</code> file is the most reliable path. The downloadable package name matches the
-            current release (<code>{EDITOR_EXTENSION_VERSION}</code>) on{' '}
+            Search <strong>Varterm TTS</strong> in Cursor Extensions. That listing comes from{' '}
+            <a href={OPEN_VSX_EXTENSION_URL} target="_blank" rel="noreferrer">
+              Open VSX
+            </a>
+            . Use a <code>.vsix</code> only if search misses it; the current file is{' '}
+            <code>{EDITOR_EXTENSION_VERSION}</code> on{' '}
             <a href={GITHUB_RELEASES_URL} target="_blank" rel="noreferrer">
               GitHub Releases
             </a>
             .
           </p>
           <p className={styles.note}>
-            If the hosted <code>.vsix</code> link returns <strong>404</strong>, the release may still be
-            tagging only—either publish the artifact on Releases or{' '}
+            If the hosted <code>.vsix</code> link returns <strong>404</strong>,{' '}
             <a href={VSCODE_PACKAGE_README_URL} target="_blank" rel="noreferrer">
               build from source
             </a>{' '}
@@ -89,42 +91,55 @@ export default function InstallExtensionsGuide() {
             <code>extensions/vscode</code>).
           </p>
           <div className={styles.inlineList}>
-            <a href={VSIX_DOWNLOAD_URL} target="_blank" rel="noreferrer" className={styles.ctaPrimary}>
+            <a
+              href={OPEN_VSX_EXTENSION_URL}
+              target="_blank"
+              rel="noreferrer"
+              className={styles.ctaPrimary}
+            >
+              Open VSX listing
+            </a>
+            <a href={VSIX_DOWNLOAD_URL} target="_blank" rel="noreferrer" className={styles.ctaSecondary}>
               Download varterm-cursor-{EDITOR_EXTENSION_VERSION}.vsix
             </a>
           </div>
+          <h3>From Extensions</h3>
           <ol className={styles.steps}>
             <li>
-              <strong>Download</strong> the <code>.vsix</code> from the button above or from{' '}
+              Open <strong>Extensions</strong> (<kbd className={styles.kbd}>Cmd+Shift+X</kbd> /{' '}
+              <kbd className={styles.kbd}>Ctrl+Shift+X</kbd>).
+            </li>
+            <li>
+              Search <strong>Varterm TTS</strong> and click <strong>Install</strong>.
+            </li>
+            <li>
+              <strong>Reload</strong> if Cursor asks.
+            </li>
+            <li>
+              Click <strong>Auto-read</strong> in the status bar to hear the agent window when a
+              reply finishes. Play, pause, stop, or jump without leaving the editor. Or run{' '}
+              <code>Varterm: Read Clipboard Aloud</code> /{' '}
+              <code>Varterm: Read Editor/Selection Aloud</code>.
+            </li>
+          </ol>
+          <h3>From a .vsix file</h3>
+          <ol className={styles.steps}>
+            <li>
+              Download the <code>.vsix</code> from the button above or from{' '}
               <a href={GITHUB_RELEASES_URL} target="_blank" rel="noreferrer">
                 Releases
               </a>
               .
             </li>
             <li>
-              In Cursor open the <strong>Command Palette</strong>:{' '}
-              <kbd className={styles.kbd}>Cmd+Shift+P</kbd> (macOS) or{' '}
-              <kbd className={styles.kbd}>Ctrl+Shift+P</kbd> (Windows/Linux).
-            </li>
-            <li>
-              Run <code>Extensions: Install from VSIX...</code>.
-            </li>
-            <li>
-              Choose the <code>varterm-cursor-*.vsix</code> file and confirm.
-            </li>
-            <li>
-              <strong>Reload</strong> the window if Cursor prompts you.
-            </li>
-            <li>
-              Use commands such as <code>Varterm: Read Clipboard Aloud</code> or{' '}
-              <code>Varterm: Read Editor/Selection Aloud</code>. Run <code>Varterm: Connect</code> only when
-              you point at a custom server or token.
+              Command Palette (<kbd className={styles.kbd}>Cmd+Shift+P</kbd> /{' '}
+              <kbd className={styles.kbd}>Ctrl+Shift+P</kbd>) →{' '}
+              <code>Extensions: Install from VSIX...</code> → choose the file → reload if asked.
             </li>
           </ol>
           <p>
-            Updating is the same flow: download the newer <code>.vsix</code> and run{' '}
-            <code>Install from VSIX</code> again (or uninstall the old version first if you prefer a clean
-            install—check Cursor&apos;s Extensions view).
+            Store updates come through Extensions. A newer <code>.vsix</code> can be installed the same
+            way if you pin a GitHub build.
           </p>
         </article>
 
