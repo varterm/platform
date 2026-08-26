@@ -15,7 +15,7 @@ const CHROME_EXTENSION_LINK = 'https://chromewebstore.google.com/';
 export const metadata = {
   title: 'Extensions | Varterm TTS',
   description:
-    'Install Varterm TTS for Cursor, VS Code, and Chrome. Auto-read the agent window, then play, pause, stop, or jump from the status bar.',
+    'Install Varterm TTS for Cursor, VS Code, and Chrome. Agent Auto-read speaks finished replies — one install, every window, zero echo.',
   keywords: [
     'varterm extension',
     'chrome text to speech extension',
@@ -47,13 +47,13 @@ export default function ExtensionsPage() {
         <section className={styles.hero}>
           <h1>Varterm Extensions</h1>
           <p>
-            Install once, keep the same workflow everywhere. Varterm is built for long-form
-            content and markdown-heavy text across web, Cursor, VS Code, and Chrome.
+            One install. Every window. Zero echo. <strong>Agent Auto-read</strong> speaks your
+            agent&apos;s replies while you keep working.
           </p>
           <div className={styles.heroBadges}>
-            <span className={styles.badge}>Long-form ready</span>
-            <span className={styles.badge}>Markdown-friendly</span>
-            <span className={styles.badge}>Web + Editor + Browser</span>
+            <span className={styles.badge}>Agent Auto-read</span>
+            <span className={styles.badge}>MIT licensed</span>
+            <span className={styles.badge}>Editor + Browser + Web</span>
           </div>
         </section>
 
@@ -68,9 +68,16 @@ export default function ExtensionsPage() {
           <article className={styles.card} id="editors">
             <h2>Cursor / VS Code Extension</h2>
             <p>
-              Search <strong>Varterm TTS</strong> in the Extensions panel. It reads the editor,
-              selection, clipboard, and the agent window. Turn on status-bar{' '}
-              <strong>Auto-read</strong> to hear finished replies, then play, pause, stop, or jump.
+              Search <strong>Varterm TTS</strong> in Extensions and flip on{' '}
+              <strong>Agent Auto-read</strong>. Send a prompt, go back to your file, and the reply
+              reads itself when it lands — no parking on the chat panel. One install, every window,
+              zero echo.
+            </p>
+            <p>
+              Long answers split into parts, so you jump forward past the preamble or back to the
+              line that mattered instead of scrolling the chat. Same engine handles whole files,
+              RFCs, and multi-page docs — playback starts on part one while the rest generates.
+              Editor, selection, and clipboard work the same way.
             </p>
             <p className={styles.note}>
               Cursor installs from{' '}
@@ -122,7 +129,8 @@ export default function ExtensionsPage() {
             <ol>
               <li>
                 <strong>Install:</strong> Extensions view → search <strong>Varterm TTS</strong> →
-                Install → reload if asked.
+                click <strong>Install</strong> (user), not Install Workspace Extension → reload
+                other Cursor windows.
               </li>
               <li>
                 <strong>Optional .vsix:</strong> Command Palette →{' '}
@@ -133,9 +141,9 @@ export default function ExtensionsPage() {
                 Run <code>Varterm: Connect</code> only if you use a custom server or token.
               </li>
               <li>
-                Click <strong>Auto-read</strong> in the status bar to play the agent window when a
-                reply finishes. Use play/pause, stop, and jump back or forward. Play reads an
-                editor selection if you have one.
+                Click <strong>Agent Auto-read</strong> in the status bar. A finished reply plays in
+                the focused window only — extra Cursor windows stay quiet. Use play/pause, stop,
+                and jump. Play reads an editor selection if you have one.
               </li>
               <li>
                 Run <code>Varterm: Read Clipboard Aloud</code> or{' '}
