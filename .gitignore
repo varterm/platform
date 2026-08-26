@@ -47,4 +47,7 @@ coverage/
 
 # Extension/release artifacts (do not commit binaries)
 *.crx
+
+# Offline voice runtime, staged from node_modules by scripts/copy-piper-assets.mjs
+public/piper/
 varterm-plat.code-workspace

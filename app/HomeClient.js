@@ -3,6 +3,13 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { HOMEPAGE_FAQ } from '@/lib/seo-faq';
+import {
+  flushVoices,
+  isOfflineSupported,
+  prepareVoice,
+  storedVoices,
+  synthesizeOffline,
+} from '@/lib/piper-client';
 import styles from './page.module.css';
 
 // Donation link
@@ -27,15 +34,17 @@ function formatNewsDate(isoDate) {
 }
 
 // Microsoft Edge neural voices (FREE)
-// Piper voices (Offline - runs locally in browser)
+// Piper voices (Offline - synthesized in the browser, model cached after first download)
 const PIPER_VOICES = [
-  { id: 'en_US-amy-medium', name: 'Amy', desc: 'Female, clear' },
-  { id: 'en_US-ryan-medium', name: 'Ryan', desc: 'Male, natural' },
-  { id: 'en_US-lessac-medium', name: 'Lessac', desc: 'Female, expressive' },
-  { id: 'en_US-libritts-high', name: 'LibriTTS', desc: 'High quality' },
-  { id: 'en_GB-cori-medium', name: 'Cori', desc: 'British female' },
-  { id: 'en_GB-alan-medium', name: 'Alan', desc: 'British male' },
+  { id: 'en_US-amy-medium', name: 'Amy', desc: 'Female, clear', sizeMb: 63 },
+  { id: 'en_US-ryan-medium', name: 'Ryan', desc: 'Male, natural', sizeMb: 63 },
+  { id: 'en_US-lessac-medium', name: 'Lessac', desc: 'Female, expressive', sizeMb: 63 },
+  { id: 'en_GB-cori-medium', name: 'Cori', desc: 'British female', sizeMb: 63 },
+  { id: 'en_GB-alan-medium', name: 'Alan', desc: 'British male', sizeMb: 63 },
 ];
+
+/** Piper synthesizes locally, so smaller chunks keep the first words coming quickly. */
+const PIPER_CHUNK_SIZE = 1200;
 
 // Microsoft Edge voices (Cloud - requires internet)
 const MICROSOFT_VOICES = [
@@ -58,9 +67,12 @@ export default function HomeClient({ featuredNews = null }) {
   // State
   const [text, setText] = useState('');
   const [selectedVoice, setSelectedVoice] = useState(DEFAULT_CLOUD_VOICE);
-  const [selectedTier] = useState('cloud'); // keep cloud-only UI for now
+  const [selectedTier, setSelectedTier] = useState('cloud');
   const [browserVoices, setBrowserVoices] = useState([]);
   const [piperLoading, setPiperLoading] = useState(false);
+  const [offlineSupported, setOfflineSupported] = useState(false);
+  const [downloadedVoices, setDownloadedVoices] = useState([]);
+  const [pendingDownload, setPendingDownload] = useState(null);
   const [status, setStatus] = useState('ready');
   const [isPaused, setIsPaused] = useState(false);
   const [rate, setRate] = useState(1);
@@ -104,6 +116,33 @@ export default function HomeClient({ featuredNews = null }) {
       // Private mode / storage blocked
     }
   }, [featuredNews?.slug]);
+
+  useEffect(() => {
+    setOfflineSupported(isOfflineSupported());
+  }, []);
+
+  const refreshDownloadedVoices = async () => {
+    try {
+      setDownloadedVoices(await storedVoices());
+    } catch {
+      setDownloadedVoices([]);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedTier !== 'offline' || !offlineSupported) return;
+    let active = true;
+    storedVoices()
+      .then((voices) => {
+        if (active) setDownloadedVoices(voices);
+      })
+      .catch(() => {
+        if (active) setDownloadedVoices([]);
+      });
+    return () => {
+      active = false;
+    };
+  }, [selectedTier, offlineSupported]);
 
   // Load browser voices
   useEffect(() => {
@@ -245,10 +284,45 @@ export default function HomeClient({ featuredNews = null }) {
     
     if (selectedTier === 'browser') {
       speakWithBrowser();
-    } else if (selectedTier === 'offline') {
+      return;
+    }
+
+    if (selectedTier === 'offline') {
+      const voice = selectedVoice || PIPER_VOICES[0];
+      // Never spend 60MB of someone's data plan without asking first.
+      if (!downloadedVoices.includes(voice.id)) {
+        setPendingDownload(voice);
+        return;
+      }
       await speakWithPiper();
-    } else {
-      await speakWithMicrosoft();
+      return;
+    }
+
+    await speakWithMicrosoft();
+  };
+
+  const confirmOfflineDownload = async () => {
+    setPendingDownload(null);
+    await speakWithPiper();
+  };
+
+  const changeTier = (tier) => {
+    if (tier === selectedTier) return;
+    stop();
+    setSelectedTier(tier);
+    setSelectedVoice(
+      tier === 'offline' ? { ...PIPER_VOICES[0], tier: 'offline' } : DEFAULT_CLOUD_VOICE
+    );
+  };
+
+  const removeOfflineVoices = async () => {
+    try {
+      stop();
+      await flushVoices();
+      await refreshDownloadedVoices();
+      showToast('Offline voices removed', 'success');
+    } catch {
+      showToast('Could not remove offline voices', 'error');
     }
   };
 
@@ -280,85 +354,111 @@ export default function HomeClient({ featuredNews = null }) {
     synthRef.current.speak(utterance);
   };
 
-  // Piper TTS (Offline, runs in browser via WASM)
+  const playAudioUrl = (url) =>
+    new Promise((resolve, reject) => {
+      const audio = new Audio(url);
+      audioRef.current = audio;
+      audio.playbackRate = rate;
+      audio.onended = () => {
+        setReadingProgress(100);
+        resolve();
+      };
+      audio.onerror = () => reject(new Error('Playback failed'));
+      audio.ontimeupdate = () => {
+        if (audio.duration) {
+          setReadingProgress(Math.min((audio.currentTime / audio.duration) * 100, 100));
+        }
+      };
+      setReadingProgress(0);
+      audio.play().catch(reject);
+    });
+
+  // Piper TTS (offline, synthesized in a worker via WASM)
   const speakWithPiper = async () => {
-    if (typeof window === 'undefined') {
-      showToast('Offline voices only work in browser', 'error');
+    if (!offlineSupported) {
+      showToast('This browser cannot store offline voices', 'error');
       return;
     }
-    
+
+    stopRequestedRef.current = false;
+    const voiceId = selectedVoice?.id || PIPER_VOICES[0].id;
+    const chunks = splitTextIntoChunks(getTextToSpeak(), PIPER_CHUNK_SIZE);
+    const totalChunks = chunks.length;
+
+    setStatus('speaking');
+    setPiperLoading(true);
+    setChunkProgress({
+      current: 0,
+      total: totalChunks,
+      status: 'generating',
+      chunks,
+      currentText: 'Warming up the offline voice...',
+    });
+
     try {
-      setPiperLoading(true);
-      setStatus('speaking');
-      
-      setChunkProgress({ 
-        current: 1, 
-        total: 1, 
-        status: 'generating',
-        chunks: [getTextToSpeak()],
-        currentText: 'Loading Piper voice model (first time may take a moment)...'
+      await prepareVoice(voiceId, ({ loaded, total }) => {
+        if (!total) return;
+        const percent = Math.round((loaded / total) * 100);
+        setChunkProgress((prev) =>
+          prev ? { ...prev, currentText: `Downloading voice model... ${percent}%` } : prev
+        );
       });
-      
-      // Load piper-tts-web from esm.sh CDN (not bundled to avoid webpack issues)
-      const piperModule = await import(/* webpackIgnore: true */ 'https://esm.sh/@mintplex-labs/piper-tts-web@1.0.4');
-      const predict = piperModule.predict;
-      
-      const voiceId = selectedVoice?.id || 'en_US-amy-medium';
-      const textToSpeak = getTextToSpeak();
-      
-      const wav = await predict(
-        { text: textToSpeak, voiceId: voiceId },
-        (progress) => {
-          if (progress.total > 0) {
-            const percent = Math.round((progress.loaded / progress.total) * 100);
-            setChunkProgress(prev => prev ? {
-              ...prev,
-              currentText: `Downloading voice model... ${percent}%`
-            } : prev);
-          }
-        }
-      );
-      
-      if (!wav) {
-        throw new Error('No audio generated');
-      }
-      
+
+      if (stopRequestedRef.current) return;
       setPiperLoading(false);
-      
-      setChunkProgress({ 
-        current: 1, 
-        total: 1, 
-        status: 'playing',
-        chunks: [textToSpeak],
-        currentText: textToSpeak
-      });
-      
-      audioRef.current = new Audio();
-      audioRef.current.src = URL.createObjectURL(wav);
-      
-      audioRef.current.onended = () => {
-        setStatus('ready');
-        setChunkProgress(null);
-        setReadingProgress(0);
-      };
-      
-      audioRef.current.ontimeupdate = () => {
-        if (audioRef.current && audioRef.current.duration) {
-          const progress = (audioRef.current.currentTime / audioRef.current.duration) * 100;
-          setReadingProgress(Math.min(progress, 100));
+      await refreshDownloadedVoices();
+
+      // Synthesize the next part while the current one plays.
+      let nextAudio = synthesizeOffline(voiceId, chunks[0]);
+      nextAudio.catch(() => {});
+
+      for (let i = 0; i < totalChunks; i += 1) {
+        if (stopRequestedRef.current) return;
+
+        setChunkProgress({
+          current: i + 1,
+          total: totalChunks,
+          status: 'generating',
+          chunks,
+          currentText: chunks[i],
+        });
+
+        const blob = await nextAudio;
+        if (stopRequestedRef.current) return;
+
+        if (i + 1 < totalChunks) {
+          nextAudio = synthesizeOffline(voiceId, chunks[i + 1]);
+          nextAudio.catch(() => {});
         }
-      };
-      
-      setReadingProgress(0);
-      await audioRef.current.play();
-      
+
+        const url = URL.createObjectURL(blob);
+        setChunkProgress({
+          current: i + 1,
+          total: totalChunks,
+          status: 'playing',
+          chunks,
+          currentText: chunks[i],
+        });
+
+        try {
+          await playAudioUrl(url);
+        } finally {
+          URL.revokeObjectURL(url);
+        }
+      }
+
+      setChunkProgress(null);
+      setStatus('ready');
     } catch (error) {
       console.error('Piper TTS Error:', error);
-      showToast('Offline TTS failed. Try Cloud voices instead.', 'error');
-      setPiperLoading(false);
-      setStatus('ready');
+      if (!stopRequestedRef.current) {
+        showToast(error.message || 'Offline voice failed. Try cloud voices.', 'error');
+      }
       setChunkProgress(null);
       setReadingProgress(0);
+      setStatus('ready');
+    } finally {
+      setPiperLoading(false);
     }
   };
 
@@ -643,6 +743,7 @@ export default function HomeClient({ featuredNews = null }) {
         <p className={styles.heroSubtitle}>
           Paste a paragraph or a 50-page doc. Long text is <strong>split into parts</strong> and
           starts playing while the rest generates. Markdown stripped automatically. No signup.
+          Pick a realistic cloud voice, or one that runs <strong>entirely on your machine</strong>.
         </p>
         <p className={styles.heroMeta}>
           Also a Cursor &amp; VS Code extension: <strong>Agent Auto-read</strong> speaks your
@@ -791,8 +892,68 @@ export default function HomeClient({ featuredNews = null }) {
         </button>
       </div>
 
+      <div className={styles.privacyNote}>
+        <span className={styles.privacyChips}>
+          <span className={styles.privacyChip}>Free forever</span>
+          <span className={styles.privacyChip}>No account</span>
+          <span className={styles.privacyChip}>Nothing you paste is stored</span>
+          <span className={styles.privacyChip}>No ads, no data sales</span>
+        </span>
+        <p className={styles.privacyLine}>
+          Cloud voices send your text to Microsoft neural TTS to make the audio, then drop it. We
+          never save it, sell it, or train on it. Want nothing to leave the machine at all? Switch
+          to offline voices below. Page-visit analytics only — never your content.{' '}
+          <Link href="/privacy" className={styles.privacyLink}>
+            Privacy
+          </Link>
+        </p>
+      </div>
+
       {/* Voice Selection */}
       <section className={styles.section}>
+        {offlineSupported && (
+          <div className={styles.tierRow}>
+            <div className={styles.tierSwitch} role="tablist" aria-label="Voice engine">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={selectedTier === 'cloud'}
+                className={`${styles.tierBtn} ${selectedTier === 'cloud' ? styles.tierBtnActive : ''}`}
+                onClick={() => changeTier('cloud')}
+              >
+                Cloud voices
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={selectedTier === 'offline'}
+                className={`${styles.tierBtn} ${selectedTier === 'offline' ? styles.tierBtnActive : ''}`}
+                onClick={() => changeTier('offline')}
+              >
+                Offline voices
+              </button>
+            </div>
+            {selectedTier === 'cloud' && (
+              <span className={styles.tierHint}>
+                Free Microsoft neural voices, nothing to download.
+              </span>
+            )}
+            {selectedTier === 'offline' && (
+              <span className={styles.tierHint}>
+                Runs in your browser. Your text never leaves this device.
+                {downloadedVoices.length > 0 && (
+                  <>
+                    {' '}
+                    <button type="button" className={styles.tierManage} onClick={removeOfflineVoices}>
+                      Remove downloaded ({downloadedVoices.length})
+                    </button>
+                  </>
+                )}
+              </span>
+            )}
+          </div>
+        )}
+
         <div className={styles.voiceGrid}>
           {getVoices().map((voice) => (
             <div
@@ -804,6 +965,15 @@ export default function HomeClient({ featuredNews = null }) {
             >
               <div className={styles.voiceName}>{voice.name}</div>
               <div className={styles.voiceMeta}>{voice.desc}</div>
+              {voice.tier === 'offline' && (
+                <div
+                  className={`${styles.voiceBadge} ${
+                    downloadedVoices.includes(voice.id) ? styles.voiceBadgeReady : ''
+                  }`}
+                >
+                  {downloadedVoices.includes(voice.id) ? 'Downloaded' : `${voice.sizeMb} MB`}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -832,9 +1002,15 @@ export default function HomeClient({ featuredNews = null }) {
                 max="2"
                 step="0.1"
                 value={pitch}
+                disabled={selectedTier === 'offline'}
+                title={
+                  selectedTier === 'offline' ? 'Offline voices use a fixed pitch' : undefined
+                }
                 onChange={(e) => setPitch(parseFloat(e.target.value))}
               />
-              <span className={styles.sliderValue}>{pitch}x</span>
+              <span className={styles.sliderValue}>
+                {selectedTier === 'offline' ? 'n/a' : `${pitch}x`}
+              </span>
             </div>
           </div>
         </div>
@@ -884,6 +1060,49 @@ export default function HomeClient({ featuredNews = null }) {
           )}
         </div>
       </div>
+
+      <section className={styles.enginesSection} aria-labelledby="engines-heading">
+        <h2 id="engines-heading" className={styles.sectionHeading}>
+          Three engines, one player
+        </h2>
+        <p className={styles.sectionLede}>
+          Varterm is not a single voice. Different text wants a different trade-off — keeping it
+          secret, getting it read now, or sounding convincingly human for an hour — so the same
+          controls drive more than one engine.
+        </p>
+        <div className={styles.engineGrid}>
+          <article className={styles.engineCard}>
+            <span className={`${styles.engineBadge} ${styles.engineBadgeLocal}`}>On device</span>
+            <h3>Local and private</h3>
+            <p>
+              Piper voices synthesise inside the tab. One model download of about 63MB is cached on
+              the device, and after that there is no network call at all — read an unreleased spec
+              or a contract and nothing leaves your machine. No round trip also means it starts
+              fast, and keeps working on a plane.
+            </p>
+          </article>
+          <article className={styles.engineCard}>
+            <span className={`${styles.engineBadge} ${styles.engineBadgeFree}`}>Free · default</span>
+            <h3>Cloud neural</h3>
+            <p>
+              Microsoft neural voices, unmetered and with no account. Genuinely realistic across
+              American, British, and Australian accents, with nothing to download first. Your text
+              goes out only to be turned into audio and is dropped immediately — never stored, never
+              sold, never trained on.
+            </p>
+          </article>
+          <article className={`${styles.engineCard} ${styles.engineCardSoon}`}>
+            <span className={`${styles.engineBadge} ${styles.engineBadgeSoon}`}>Coming · paid</span>
+            <h3>Studio voices</h3>
+            <p>
+              An ElevenLabs integration for the most lifelike delivery we can offer, for the times a
+              voice has to hold your attention through a long document rather than just get the
+              words out. It bills per character upstream, so it will be a paid add-on. The two
+              engines above stay free.
+            </p>
+          </article>
+        </div>
+      </section>
 
       <section className={styles.platformSection} aria-labelledby="platform-heading">
         <h2 id="platform-heading" className={styles.sectionHeading}>
@@ -947,6 +1166,29 @@ export default function HomeClient({ featuredNews = null }) {
                 onClick={() => window.open(DONATION_LINK, '_blank')}
               >
                 ☕ Buy Us a Coffee ($5)
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Offline voice download confirmation */}
+      {pendingDownload && (
+        <div className={styles.modalOverlay} onClick={() => setPendingDownload(null)}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.closeModal} onClick={() => setPendingDownload(null)}>
+              ×
+            </button>
+            <div className={styles.donationSection} style={{ borderTop: 'none', paddingTop: 0, marginTop: 0 }}>
+              <div className={styles.donationEmoji}>⬇️</div>
+              <h3>Download {pendingDownload.name}?</h3>
+              <p>
+                Offline voices run entirely in your browser, so the {pendingDownload.sizeMb} MB
+                voice model has to come down once. After that it is cached on this device and your
+                text never leaves it — no network needed.
+              </p>
+              <button className={styles.donationBtn} onClick={confirmOfflineDownload}>
+                Download and play
               </button>
             </div>
           </div>
@@ -1150,19 +1392,30 @@ export default function HomeClient({ featuredNews = null }) {
             </p>
           </article>
           <article className={styles.featureCard}>
-            <div className={styles.featureIcon}>🎙️</div>
-            <h3>Premium Neural Voices</h3>
+            <div className={styles.featureIcon}>🛡️</div>
+            <h3>Private By Default</h3>
             <p>
-              Access high-quality Microsoft neural voices that sound natural and expressive. Choose from
-              American, British, and Australian accents with adjustable speed.
+              There is no account, so there is nothing to profile. What you paste goes to the voice
+              engine, comes back as audio, and is gone — no database, no history, no training set.
+              We count page visits, never your words.
+            </p>
+          </article>
+          <article className={styles.featureCard}>
+            <div className={styles.featureIcon}>🎙️</div>
+            <h3>Realistic Neural Voices</h3>
+            <p>
+              Microsoft neural voices that sound natural and expressive, in American, British, and
+              Australian accents with adjustable speed — free and unmetered. Studio-grade ElevenLabs
+              voices are coming as a paid add-on for when you need more.
             </p>
           </article>
           <article className={styles.featureCard}>
             <div className={styles.featureIcon}>📡</div>
-            <h3>Works Offline Too</h3>
+            <h3>Secure, Fast, Local Voices</h3>
             <p>
-              Use Piper AI voices that run in your browser — no internet needed after the model loads.
-              Great for privacy-conscious reading sessions.
+              Switch the web reader to Piper voices and synthesis happens on your machine. One 63MB
+              model download, cached on the device, and after that your text never leaves the tab —
+              no server, no network, nothing to leak.
             </p>
           </article>
           <article className={styles.featureCard}>
