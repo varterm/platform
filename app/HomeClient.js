@@ -654,48 +654,6 @@ export default function HomeClient({ featuredNews = null }) {
         </p>
       </section>
 
-      <section className={styles.platformSection} aria-labelledby="platform-heading">
-        <h2 id="platform-heading" className={styles.sectionHeading}>
-          Use Varterm anywhere
-        </h2>
-        <div className={styles.platformGrid}>
-          <article className={styles.platformCard}>
-            <div className={styles.platformCardBody}>
-              <h3>Web reader</h3>
-              <p>
-                Drop in long articles, RFCs, and full chapters. Free cloud neural voices, chunked
-                playback, live part progress.
-              </p>
-            </div>
-            <span className={styles.platformBadge}>You are here</span>
-          </article>
-          <article className={styles.platformCard}>
-            <div className={styles.platformCardBody}>
-              <h3>Cursor &amp; VS Code</h3>
-              <p>
-                <strong>Agent Auto-read</strong> speaks finished replies while you keep coding.
-                Long answers split into parts you can jump through. One install, every window,
-                zero echo.
-              </p>
-            </div>
-            <Link href="/extensions#editors" className={styles.platformCta}>
-              Install extension
-            </Link>
-          </article>
-          <article className={styles.platformCard}>
-            <div className={styles.platformCardBody}>
-              <h3>Chrome</h3>
-              <p>
-                Read a selection or an entire long-form page without leaving the tab you are on.
-              </p>
-            </div>
-            <Link href="/extensions#chrome" className={styles.platformCta}>
-              Get Chrome extension
-            </Link>
-          </article>
-        </div>
-      </section>
-
       {featuredNews && !newsPreviewHiddenForSession ? (
         <aside className={styles.newsPreview} aria-labelledby="news-preview-heading">
           <button
@@ -725,7 +683,7 @@ export default function HomeClient({ featuredNews = null }) {
         </aside>
       ) : null}
 
-      <section className={styles.section}>
+      <section className={`${styles.section} ${styles.editorSection}`}>
         <div className={styles.editorHeader}>
           <nav className={styles.extensionQuickLinks} aria-label="Extension installs">
             <Link href="/extensions#editors" className={styles.extensionQuickLink}>
@@ -816,16 +774,18 @@ export default function HomeClient({ featuredNews = null }) {
           ▶ Play
         </button>
         <button
-          className={styles.controlBtn}
+          className={`${styles.controlBtn} ${styles.controlBtnPause}`}
           onClick={togglePause}
           disabled={!isPlaying}
+          aria-label={isPaused ? 'Resume' : 'Pause'}
         >
           {isPaused ? '▶' : '⏸'}
         </button>
         <button
-          className={styles.controlBtn}
+          className={`${styles.controlBtn} ${styles.controlBtnStop}`}
           onClick={stop}
           disabled={!isPlaying}
+          aria-label="Stop"
         >
           ⏹
         </button>
@@ -924,6 +884,48 @@ export default function HomeClient({ featuredNews = null }) {
           )}
         </div>
       </div>
+
+      <section className={styles.platformSection} aria-labelledby="platform-heading">
+        <h2 id="platform-heading" className={styles.sectionHeading}>
+          Use Varterm anywhere
+        </h2>
+        <div className={styles.platformGrid}>
+          <article className={styles.platformCard}>
+            <div className={styles.platformCardBody}>
+              <h3>Web reader</h3>
+              <p>
+                Drop in long articles, RFCs, and full chapters. Free cloud neural voices, chunked
+                playback, live part progress.
+              </p>
+            </div>
+            <span className={styles.platformBadge}>You are here</span>
+          </article>
+          <article className={styles.platformCard}>
+            <div className={styles.platformCardBody}>
+              <h3>Cursor &amp; VS Code</h3>
+              <p>
+                <strong>Agent Auto-read</strong> speaks finished replies while you keep coding.
+                Long answers split into parts you can jump through. One install, every window,
+                zero echo.
+              </p>
+            </div>
+            <Link href="/extensions#editors" className={styles.platformCta}>
+              Install extension
+            </Link>
+          </article>
+          <article className={styles.platformCard}>
+            <div className={styles.platformCardBody}>
+              <h3>Chrome</h3>
+              <p>
+                Read a selection or an entire long-form page without leaving the tab you are on.
+              </p>
+            </div>
+            <Link href="/extensions#chrome" className={styles.platformCta}>
+              Get Chrome extension
+            </Link>
+          </article>
+        </div>
+      </section>
 
       {/* Modal */}
       {showModal && (
