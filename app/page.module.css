@@ -854,6 +854,123 @@
   }
 }
 
+/* Cloud / Offline voice engine switch */
+.tierRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tierSwitch {
+  display: inline-flex;
+  padding: 4px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.tierBtn {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.tierBtn:hover {
+  color: var(--text-primary);
+}
+
+.tierBtnActive {
+  color: var(--bg-primary);
+  background: var(--accent);
+}
+
+.tierHint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.tierManage {
+  padding: 0;
+  font-size: 0.8rem;
+  color: var(--accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.voiceBadge {
+  margin-top: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+}
+
+.voiceBadgeReady {
+  color: var(--accent);
+}
+
+/* Privacy note under the transport */
+.privacyNote {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: -8px 0 24px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.06), transparent 70%),
+    var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.privacyChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.privacyChip {
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 999px;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.privacyNote:hover .privacyChip {
+  background: rgba(16, 185, 129, 0.14);
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.privacyLine {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.privacyLink {
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.privacyLink:hover {
+  text-decoration: underline;
+}
+
 /* Status */
 .statusBar {
   display: flex;
@@ -1373,6 +1490,81 @@
   background: rgba(16, 185, 129, 0.12);
   border-color: rgba(16, 185, 129, 0.35);
   color: #bbf7d0;
+}
+
+/* Homepage — voice engine tiers */
+.enginesSection {
+  margin-bottom: 40px;
+}
+
+.sectionLede {
+  max-width: 620px;
+  margin: -20px auto 24px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.engineGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.engineCard {
+  position: relative;
+  padding: 18px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+/* Held back visually so an unreleased tier cannot be mistaken for a live one. */
+.engineCardSoon {
+  border-style: dashed;
+  background: transparent;
+}
+
+.engineCard h3 {
+  margin: 10px 0 6px;
+  font-size: 1rem;
+}
+
+.engineCard p {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.engineBadge {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.engineBadgeLocal {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.35);
+  color: #bae6fd;
+}
+
+.engineBadgeFree {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #bbf7d0;
+}
+
+.engineBadgeSoon {
+  background: transparent;
+  border-style: dashed;
+  color: var(--text-muted);
 }
 
 /* Homepage — latest news teaser */

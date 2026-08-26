@@ -2,6 +2,11 @@
 
 ## 2026-08-25
 
+### Added
+- **Offline voices in the web reader.** A Cloud / Offline switch above the voice list runs Piper in a Web Worker, so synthesis happens on the device and the text never leaves the browser. First use of a voice downloads a 63MB model behind an explicit confirmation, caches it in OPFS, and shows a "Downloaded" badge; "Remove downloaded" clears them.
+- The speech runtime (ONNX Runtime and the Piper phonemizer WASM) is staged into `public/piper/` at install and build time by `scripts/copy-piper-assets.mjs`, so playback never reaches for a CDN and the runtime always matches the bundled `onnxruntime-web`.
+- `/privacy` now lists every third party in the request path and documents how offline voices work.
+
 ### Changed
 - Homepage, extensions, and install pages now lead with **Agent Auto-read**: finished Cursor replies play while you keep working, one install covers every window, and only the focused window speaks.
 - Added a "Your Cursor Loop, Hands-Free" section and an Agent Auto-read feature card to the homepage.

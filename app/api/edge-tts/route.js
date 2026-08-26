@@ -10,9 +10,9 @@ export const EDGE_VOICES = [
   { id: 'en-US-AriaNeural', name: 'Aria', lang: 'en-US', gender: 'female', style: 'Friendly, positive' },
   { id: 'en-US-JennyNeural', name: 'Jenny', lang: 'en-US', gender: 'female', style: 'Warm, clear' },
   { id: 'en-US-GuyNeural', name: 'Guy', lang: 'en-US', gender: 'male', style: 'Casual, natural' },
-  { id: 'en-US-DavisNeural', name: 'Davis', lang: 'en-US', gender: 'male', style: 'Calm, professional' },
-  { id: 'en-US-TonyNeural', name: 'Tony', lang: 'en-US', gender: 'male', style: 'Friendly, upbeat' },
-  { id: 'en-US-SaraNeural', name: 'Sara', lang: 'en-US', gender: 'female', style: 'Cheerful, expressive' },
+  { id: 'en-US-AndrewNeural', name: 'Andrew', lang: 'en-US', gender: 'male', style: 'Calm, professional' },
+  { id: 'en-US-ChristopherNeural', name: 'Christopher', lang: 'en-US', gender: 'male', style: 'Friendly, upbeat' },
+  { id: 'en-US-EmmaNeural', name: 'Emma', lang: 'en-US', gender: 'female', style: 'Cheerful, expressive' },
   // English UK
   { id: 'en-GB-SoniaNeural', name: 'Sonia', lang: 'en-GB', gender: 'female', style: 'British, warm' },
   { id: 'en-GB-RyanNeural', name: 'Ryan', lang: 'en-GB', gender: 'male', style: 'British, professional' },
@@ -20,6 +20,14 @@ export const EDGE_VOICES = [
   { id: 'en-AU-NatashaNeural', name: 'Natasha', lang: 'en-AU', gender: 'female', style: 'Australian, friendly' },
   { id: 'en-AU-WilliamNeural', name: 'William', lang: 'en-AU', gender: 'male', style: 'Australian, clear' },
 ];
+
+// Some older voice IDs are no longer returned by Microsoft Edge.
+// Keep aliases so existing extensions/clients still produce audio.
+const EDGE_VOICE_ALIASES = {
+  'en-US-DavisNeural': 'en-US-AndrewNeural',
+  'en-US-TonyNeural': 'en-US-ChristopherNeural',
+  'en-US-SaraNeural': 'en-US-EmmaNeural',
+};
 
 // Handle CORS preflight
 export async function OPTIONS() {
@@ -47,6 +55,8 @@ export async function POST(request) {
   try {
     const body = await request.json();
     const { text, voice = 'en-US-AriaNeural', rate = 1 } = body;
+    const requestedVoice = typeof voice === 'string' ? voice : 'en-US-AriaNeural';
+    const resolvedVoice = EDGE_VOICE_ALIASES[requestedVoice] || requestedVoice;
 
     // Validate input
     if (!text || typeof text !== 'string') {
@@ -81,7 +91,7 @@ export async function POST(request) {
     }
     
     try {
-      await tts.synthesize(text, voice, options);
+      await tts.synthesize(text, resolvedVoice, options);
     } catch (synthError) {
       console.error('Synthesize error:', synthError);
       return NextResponse.json(
