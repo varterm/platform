@@ -11,7 +11,7 @@ export const metadata = {
     template: '%s | Varterm',
   },
   description:
-    'Free text to speech converter with long-form support and markdown cleanup. In Cursor or VS Code, Auto-read plays the agent window; play, pause, stop, and jump from the status bar.',
+    'Free text to speech with long-form support and markdown cleanup. Agent Auto-read speaks your Cursor agent replies — one install, every window, zero echo.',
   keywords: [
     'free tts',
     'text to speech online',

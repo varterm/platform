@@ -18,10 +18,10 @@ excerpt: >-
 2. Search **Varterm TTS**.
 3. Install. Reload if the editor asks.
 
-Turn on **Auto-read** in the status bar to hear the agent window when a reply finishes. While it plays: **play / pause**, **stop**, and **jump** back or forward. You can also run **Varterm: Read Editor/Selection Aloud** or **Varterm: Read Clipboard Aloud**.
+Turn on **Agent Auto-read** in the status bar and finished replies play while you keep working. Run a fleet of Cursor windows — one user install covers all of them and only the focused window speaks, so nothing echoes. While it plays: **play / pause**, **stop**, and **jump** through parts. You can also run **Varterm: Read Editor/Selection Aloud** or **Varterm: Read Clipboard Aloud**.
 
 - Cursor uses [Open VSX](https://open-vsx.org/extension/Varterm/varterm-cursor).
 - VS Code can use the [Marketplace listing](https://marketplace.visualstudio.com/items?itemName=Varterm.varterm-cursor) or the same Extensions search.
-- Want a file? [GitHub Release v0.1.35](https://github.com/varterm/extensions/releases/tag/v0.1.35) has the `.vsix`.
+- Want a file? [GitHub Release v0.1.37](https://github.com/varterm/extensions/releases/tag/v0.1.37) has the `.vsix`.
 
 Setup notes live on the [extensions page](/extensions#editors).
