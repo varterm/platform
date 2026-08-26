@@ -3,8 +3,10 @@
 ## 2026-08-25
 
 ### Changed
-- Homepage and extensions copy: search **Varterm TTS**. **Auto-read** plays the agent window when a reply finishes. Play, pause, stop, or jump from the status bar.
-- Pointed the hosted `.vsix` download at release `v0.1.35`.
+- Homepage, extensions, and install pages now lead with **Agent Auto-read**: finished Cursor replies play while you keep working, one install covers every window, and only the focused window speaks.
+- Added a "Your Cursor Loop, Hands-Free" section and an Agent Auto-read feature card to the homepage.
+- Sharpened long-form copy to what the reader actually does — text splits into parts and playback starts on part one while the rest generates. Dropped the unsupported "any length / no character cap" claim.
+- Pointed the hosted `.vsix` download at release `v0.1.37`.
 
 ## 2026-05-11
 
