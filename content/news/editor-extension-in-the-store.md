@@ -22,6 +22,6 @@ Turn on **Agent Auto-read** in the status bar and finished replies play while yo
 
 - Cursor uses [Open VSX](https://open-vsx.org/extension/Varterm/varterm-cursor).
 - VS Code can use the [Marketplace listing](https://marketplace.visualstudio.com/items?itemName=Varterm.varterm-cursor) or the same Extensions search.
-- Want a file? [GitHub Release v0.1.37](https://github.com/varterm/extensions/releases/tag/v0.1.37) has the `.vsix`.
+- Want a file? [GitHub Release v0.1.38](https://github.com/varterm/extensions/releases/tag/v0.1.38) has the `.vsix`.
 
 Setup notes live on the [extensions page](/extensions#editors).
