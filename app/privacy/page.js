@@ -51,6 +51,53 @@ export default function PrivacyPage() {
         </section>
 
         <section>
+          <h2>Offline Voices</h2>
+          <p>
+            The web reader offers an offline voice option. When you select it, speech is
+            synthesized by Piper inside your browser and the text you paste never leaves your
+            device. The first time you use a given offline voice, the browser downloads that
+            voice model (about 63MB) from Hugging Face and caches it locally; the download
+            request reveals your IP address and which voice you chose to Hugging Face, but not
+            your text. The speech runtime itself is served from varterm.com. You can delete
+            cached voice models at any time with the &quot;Remove downloaded&quot; control next
+            to the voice list.
+          </p>
+        </section>
+
+        <section>
+          <h2>Third Parties</h2>
+          <ul>
+            <li>
+              <strong>Microsoft:</strong> cloud voices are synthesized by the Microsoft Edge
+              neural speech service, so the text you submit is sent there to produce audio.
+            </li>
+            <li>
+              <strong>Google Analytics and Google Fonts:</strong> page-visit measurement and web
+              fonts. These receive request metadata such as IP address and user agent. They do
+              not receive the text you submit.
+            </li>
+            <li>
+              <strong>Vercel:</strong> hosting, so all requests to this site transit their
+              infrastructure.
+            </li>
+            <li>
+              <strong>Hugging Face:</strong> only when you download an offline voice model.
+            </li>
+            <li>
+              <strong>Formspree:</strong> only if you submit the feedback or support form.
+            </li>
+            <li>
+              <strong>Stripe:</strong> only if you choose to donate; payment happens on their
+              site.
+            </li>
+            <li>
+              <strong>ElevenLabs and Anthropic:</strong> used by the premium API and the
+              extension document question feature, not by the web reader.
+            </li>
+          </ul>
+        </section>
+
+        <section>
           <h2>How Data Is Used</h2>
           <ul>
             <li>To generate audio output for text-to-speech playback.</li>
