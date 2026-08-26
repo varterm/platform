@@ -116,8 +116,9 @@ export default function InstallExtensionsGuide() {
               <strong>Reload</strong> if Cursor asks.
             </li>
             <li>
-              Click <strong>Auto-read</strong> in the status bar to hear the agent window when a
-              reply finishes. Play, pause, stop, or jump without leaving the editor. Or run{' '}
+              Click <strong>Install</strong> (user), not Install Workspace Extension. Flip on{' '}
+              <strong>Agent Auto-read</strong> — one install, every window, zero echo. Play, pause,
+              stop, jump. Or run{' '}
               <code>Varterm: Read Clipboard Aloud</code> /{' '}
               <code>Varterm: Read Editor/Selection Aloud</code>.
             </li>

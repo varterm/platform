@@ -594,7 +594,7 @@ export default function HomeClient({ featuredNews = null }) {
           </div>
           <div className={styles.logoWords}>
             <span className={styles.logoText}>varterm</span>
-            <span className={styles.logoSubheading}>Text to Speech Everywhere</span>
+            <span className={styles.logoSubheading}>Long-Form Text to Speech Everywhere</span>
             <span className={styles.logoSubSubheading}>Web · Cursor · VS Code · Chrome</span>
           </div>
         </div>
@@ -641,13 +641,16 @@ export default function HomeClient({ featuredNews = null }) {
           Free Text to Speech Converter
         </h1>
         <p className={styles.heroSubtitle}>
-          Convert long-form text and markdown to natural speech. Strip formatting automatically — no
-          signup, unlimited use.
+          Paste a paragraph or a 50-page doc. Long text is <strong>split into parts</strong> and
+          starts playing while the rest generates. Markdown stripped automatically. No signup.
         </p>
         <p className={styles.heroMeta}>
-          Also in Cursor, VS Code, and Chrome. Search <strong>Varterm TTS</strong> in Extensions.
-          Turn on <strong>Auto-read</strong> to hear the agent window when a reply finishes. Play,
-          pause, stop, or jump from the status bar.
+          Also a Cursor &amp; VS Code extension: <strong>Agent Auto-read</strong> speaks your
+          agent&apos;s replies. One install, every window, zero echo. MIT on{' '}
+          <a href="https://github.com/varterm/extensions" target="_blank" rel="noreferrer">
+            GitHub
+          </a>
+          .
         </p>
       </section>
 
@@ -659,7 +662,10 @@ export default function HomeClient({ featuredNews = null }) {
           <article className={styles.platformCard}>
             <div className={styles.platformCardBody}>
               <h3>Web reader</h3>
-              <p>Paste text and listen with free cloud neural voices.</p>
+              <p>
+                Drop in long articles, RFCs, and full chapters. Free cloud neural voices, chunked
+                playback, live part progress.
+              </p>
             </div>
             <span className={styles.platformBadge}>You are here</span>
           </article>
@@ -667,8 +673,9 @@ export default function HomeClient({ featuredNews = null }) {
             <div className={styles.platformCardBody}>
               <h3>Cursor &amp; VS Code</h3>
               <p>
-                Search Varterm TTS, then Auto-read the agent window. Play, pause, stop, or jump
-                without leaving the editor.
+                <strong>Agent Auto-read</strong> speaks finished replies while you keep coding.
+                Long answers split into parts you can jump through. One install, every window,
+                zero echo.
               </p>
             </div>
             <Link href="/extensions#editors" className={styles.platformCta}>
@@ -678,7 +685,9 @@ export default function HomeClient({ featuredNews = null }) {
           <article className={styles.platformCard}>
             <div className={styles.platformCardBody}>
               <h3>Chrome</h3>
-              <p>Read selected text and pages from your browser workflow.</p>
+              <p>
+                Read a selection or an entire long-form page without leaving the tab you are on.
+              </p>
             </div>
             <Link href="/extensions#chrome" className={styles.platformCta}>
               Get Chrome extension
@@ -1069,14 +1078,58 @@ export default function HomeClient({ featuredNews = null }) {
         </div>
       )}
 
-      {/* Features Section */}
-      <section className={styles.featuresSection} aria-labelledby="features-heading">
-        <h2 id="features-heading" className={styles.sectionHeading}>Why Teams Choose Varterm TTS</h2>
+      {/* Cursor workflow Section */}
+      <section className={styles.featuresSection} aria-labelledby="flow-heading">
+        <h2 id="flow-heading" className={styles.sectionHeading}>Your Cursor Loop, Hands-Free</h2>
         <div className={styles.featuresGrid}>
           <article className={styles.featureCard}>
+            <div className={styles.featureIcon}>⌨️</div>
+            <h3>Ask, then keep typing</h3>
+            <p>
+              Send the prompt and go back to your file. When the agent finishes, the reply reads
+              itself — you stop parking on the chat panel watching tokens stream in.
+            </p>
+          </article>
+          <article className={styles.featureCard}>
+            <div className={styles.featureIcon}>⏭️</div>
+            <h3>Skim with your ears</h3>
+            <p>
+              Long replies split into parts. Jump forward past the preamble, jump back to re-hear
+              the one line that mattered. No scrolling up through the chat to find it again.
+            </p>
+          </article>
+          <article className={styles.featureCard}>
+            <div className={styles.featureIcon}>🪟</div>
+            <h3>Ten windows, one voice</h3>
+            <p>
+              Run a fleet of Cursor windows across repos. One user install covers all of them and
+              only the focused window speaks, so parallel agents never talk over each other.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className={styles.featuresSection} aria-labelledby="features-heading">
+        <h2 id="features-heading" className={styles.sectionHeading}>Why Developers Pick Varterm TTS</h2>
+        <div className={styles.featuresGrid}>
+          <article className={styles.featureCard}>
+            <div className={styles.featureIcon}>🎧</div>
+            <h3>Agent Auto-read</h3>
+            <p>
+              Flip it on in Cursor and finished agent replies just play. One install covers every
+              window and only the focused one speaks, so ten windows never echo. Play, pause, stop,
+              and jump live in the status bar.
+            </p>
+          </article>
+          <article className={styles.featureCard}>
             <div className={styles.featureIcon}>📄</div>
-            <h3>Long Form TTS Support</h3>
-            <p>Convert entire documents, articles, and ebooks to speech. No character limits — our tool handles texts of any length by intelligently chunking and streaming audio.</p>
+            <h3>Built For Long Form</h3>
+            <p>
+              Long articles, RFCs, and 40-page agent dumps. Varterm splits text into parts, plays
+              part one while the rest still generates, and keeps going — no single-request timeout
+              wall. Watch it track part 3 of 12 as it reads.
+            </p>
           </article>
           <article className={styles.featureCard}>
             <div className={styles.featureIcon}>✨</div>
@@ -1088,10 +1141,10 @@ export default function HomeClient({ featuredNews = null }) {
           </article>
           <article className={styles.featureCard}>
             <div className={styles.featureIcon}>🔓</div>
-            <h3>100% Free, No Login Required</h3>
+            <h3>Free, No Login, MIT Source</h3>
             <p>
-              Use our text to speech converter without creating an account. No registration and no hidden
-              charges. Text is processed for playback; we use basic analytics to improve reliability.
+              No account, no paywall, no trial. The editor extension is MIT licensed and the source
+              is on GitHub — read it, fork it, build the VSIX yourself.
             </p>
           </article>
           <article className={styles.featureCard}>
