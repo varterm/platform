@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Breadcrumbs from '../Breadcrumbs';
 import styles from './page.module.css';
 import {
   EDITOR_EXTENSION_VERSION,
@@ -13,17 +14,9 @@ import {
 const CHROME_EXTENSION_LINK = 'https://chromewebstore.google.com/';
 
 export const metadata = {
-  title: 'Extensions | Varterm TTS',
+  title: 'Extensions',
   description:
     'Install Varterm TTS for Cursor, VS Code, and Chrome. Agent Auto-read speaks finished replies — one install, every window, zero echo.',
-  keywords: [
-    'varterm extension',
-    'chrome text to speech extension',
-    'vscode text to speech extension',
-    'cursor text to speech extension',
-    'long form text to speech',
-    'markdown text to speech',
-  ],
   alternates: {
     canonical: '/extensions',
   },
@@ -41,6 +34,12 @@ export default function ExtensionsPage() {
         <Link href="/" className={styles.backLink}>
           ← Back to Varterm TTS
         </Link>
+        <Breadcrumbs
+          items={[
+            { name: 'Home', path: '/' },
+            { name: 'Extensions', path: '/extensions' },
+          ]}
+        />
       </header>
 
       <main className={styles.main}>
@@ -183,6 +182,15 @@ export default function ExtensionsPage() {
         <section className={styles.links}>
           <h3>More Guides</h3>
           <ul>
+            <li>
+              <Link href="/extensions/cursor">Cursor text to speech</Link>
+            </li>
+            <li>
+              <Link href="/extensions/vscode">VS Code text to speech</Link>
+            </li>
+            <li>
+              <Link href="/extensions/chrome">Chrome text to speech extension</Link>
+            </li>
             <li>
               <Link href="/install-extensions">How to install each extension type</Link>
             </li>

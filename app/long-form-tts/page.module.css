@@ -68,6 +68,17 @@
 }
 
 /* Sections */
+.features p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0 0 16px;
+}
+
+.features a,
+.cta a {
+  color: var(--accent);
+}
+
 .features h2,
 .useCases h2,
 .howItWorks h2,

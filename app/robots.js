@@ -1,8 +1,10 @@
+import { getSiteUrl } from '../lib/site-url.js';
+
 // app/robots.js
 // Dynamic robots.txt generation for SEO
 
 export default function robots() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://varterm.com';
+  const baseUrl = getSiteUrl();
   
   return {
     rules: [

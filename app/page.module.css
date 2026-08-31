@@ -897,6 +897,39 @@
   color: var(--text-muted);
 }
 
+.languageRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.languageLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.languageSelect {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.languageSelect:hover {
+  border-color: var(--accent);
+}
+
+.languageHint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
 .tierManage {
   padding: 0;
   font-size: 0.8rem;
@@ -1751,6 +1784,10 @@
   color: var(--text-secondary);
   line-height: 1.6;
   margin: 0;
+}
+
+.featureCard a {
+  color: var(--accent);
 }
 
 /* FAQ Section */

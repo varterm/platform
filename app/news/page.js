@@ -1,8 +1,10 @@
 import Link from 'next/link';
+import Breadcrumbs from '../Breadcrumbs';
 import { getAllNewsPostsMeta } from '@/lib/news';
+import { getSiteUrl } from '@/lib/site-url';
 import styles from './page.module.css';
 
-const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://varterm.com';
+const siteUrl = getSiteUrl();
 
 export const metadata = {
   title: 'News',
@@ -39,6 +41,12 @@ export default async function NewsIndexPage() {
         <Link href="/" className={styles.backLink}>
           ← Varterm TTS
         </Link>
+        <Breadcrumbs
+          items={[
+            { name: 'Home', path: '/' },
+            { name: 'News', path: '/news' },
+          ]}
+        />
       </header>
       <main className={styles.main}>
         <header className={styles.intro}>

@@ -1,8 +1,9 @@
 import Link from 'next/link';
+import Breadcrumbs from '../Breadcrumbs';
 import styles from './page.module.css';
 
 export const metadata = {
-  title: 'Privacy Policy | Varterm TTS',
+  title: 'Privacy Policy',
   description:
     'Privacy policy for Varterm TTS web app and Chrome extension, including data handling and permissions usage.',
   alternates: {
@@ -24,6 +25,12 @@ export default function PrivacyPage() {
         <Link href="/" className={styles.backLink}>
           ← Back to Varterm
         </Link>
+        <Breadcrumbs
+          items={[
+            { name: 'Home', path: '/' },
+            { name: 'Privacy', path: '/privacy' },
+          ]}
+        />
       </header>
 
       <main className={styles.main}>
@@ -106,8 +113,8 @@ export default function PrivacyPage() {
             <li>To operate and troubleshoot service reliability.</li>
           </ul>
           <p>
-            We do not sell personal data and do not use your content for unrelated advertising
-            purposes.
+            We do not sell personal data, do not use your content for unrelated advertising
+            purposes, and do not use the text you submit to train models.
           </p>
         </section>
 

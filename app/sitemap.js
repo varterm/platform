@@ -1,10 +1,10 @@
 import { getAllNewsPostsMeta } from '../lib/news.js';
-import { TTS_SEO_SLUGS } from '../lib/tts-seo-slugs.js';
+import { getSiteUrl } from '../lib/site-url.js';
 
 // Dynamic sitemap generation for SEO
 
 export default async function sitemap() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://varterm.com';
+  const baseUrl = getSiteUrl();
 
   const entries = [
     {
@@ -38,10 +38,46 @@ export default async function sitemap() {
       priority: 0.7,
     },
     {
+      url: `${baseUrl}/about`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/extensions/cursor`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/extensions/vscode`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/extensions/chrome`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.75,
+    },
+    {
+      url: `${baseUrl}/chatgpt-to-speech`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/github-readme-to-speech`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.65,
+    },
+    {
       url: `${baseUrl}/tts`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.5,
+      priority: 0.4,
     },
     {
       url: `${baseUrl}/privacy`,
@@ -62,15 +98,6 @@ export default async function sitemap() {
       priority: 0.65,
     },
   ];
-
-  for (const slugEntry of TTS_SEO_SLUGS) {
-    entries.push({
-      url: `${baseUrl}/tts/${slugEntry.slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.55,
-    });
-  }
 
   let postsMeta = [];
   try {

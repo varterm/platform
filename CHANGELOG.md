@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-08-31
+
+### Added
+- Organization JSON-LD (GitHub `sameAs`) sitewide; WebApplication and FAQPage schema only on the homepage.
+- NewsArticle schema, visible author, and breadcrumbs on news posts.
+- Dedicated landing pages: `/about`, `/extensions/cursor`, `/extensions/vscode`, `/extensions/chrome`, `/chatgpt-to-speech`, `/github-readme-to-speech`.
+- Homepage body links to the long-form guide, markdown guide, and Cursor extension page.
+- Cloud voice language picker for Microsoft neural voices outside the English list.
+
+### Changed
+- Title template is `| Varterm TTS` only. Page titles no longer bake in a second brand suffix.
+- Removed `meta keywords`.
+- `/tts/[slug]` stubs 308 to real landing pages instead of canonicalizing to the homepage.
+
+### Fixed
+- Canonical, sitemap, robots, and Open Graph URLs now stay on `https://varterm.com`.
+- `varterm.vercel.app` 308s to `https://varterm.com` and preview `*.vercel.app` hosts send `X-Robots-Tag: noindex`.
+
 ## 2026-08-25
 
 ### Added
