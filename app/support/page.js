@@ -1,8 +1,9 @@
 import Link from 'next/link';
+import Breadcrumbs from '../Breadcrumbs';
 import styles from './page.module.css';
 
 export const metadata = {
-  title: 'Support | Varterm TTS',
+  title: 'Support',
   description: 'Get help for Varterm TTS web app and Chrome extension.',
   alternates: {
     canonical: '/support',
@@ -16,6 +17,12 @@ export default function SupportPage() {
         <Link href="/" className={styles.backLink}>
           ← Back to Varterm
         </Link>
+        <Breadcrumbs
+          items={[
+            { name: 'Home', path: '/' },
+            { name: 'Support', path: '/support' },
+          ]}
+        />
       </header>
 
       <main className={styles.main}>

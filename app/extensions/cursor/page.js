@@ -1,0 +1,19 @@
+import ExtensionProductPage from '../ExtensionProductPage';
+import { EXTENSION_PRODUCTS } from '../product-content';
+
+const product = EXTENSION_PRODUCTS.cursor;
+
+export const metadata = {
+  title: product.title,
+  description: product.description,
+  alternates: { canonical: product.path },
+  openGraph: {
+    title: product.title,
+    description: product.description,
+    url: product.path,
+  },
+};
+
+export default function CursorExtensionPage() {
+  return <ExtensionProductPage productKey="cursor" />;
+}

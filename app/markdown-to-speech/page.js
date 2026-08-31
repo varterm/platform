@@ -1,10 +1,10 @@
 import Link from 'next/link';
+import Breadcrumbs from '../Breadcrumbs';
 import styles from './page.module.css';
 
 export const metadata = {
   title: 'Markdown to Speech | Strip Markdown TTS Converter Free',
   description: 'Convert markdown files to clean speech. Automatically strips headers, bold, links, code blocks for natural audio. Free markdown to speech converter online.',
-  keywords: ['markdown to speech', 'strip markdown tts', 'markdown tts converter', 'chatgpt to speech', 'github readme to audio', 'markdown audio'],
   alternates: {
     canonical: '/markdown-to-speech',
   },
@@ -46,6 +46,12 @@ export default function MarkdownToSpeech() {
         <Link href="/" className={styles.backLink}>
           ← Back to Varterm
         </Link>
+        <Breadcrumbs
+          items={[
+            { name: 'Home', path: '/' },
+            { name: 'Markdown to speech', path: '/markdown-to-speech' },
+          ]}
+        />
       </header>
 
       <main className={styles.main}>

@@ -63,7 +63,7 @@ VARTERM_EXTENSION_API_TOKEN=your_private_token
 STRIPE_SECRET_KEY=sk_live_...
 STRIPE_WEBHOOK_SECRET=whsec_...
 
-# Your domain
+# Public site origin (must be varterm.com, never *.vercel.app)
 NEXT_PUBLIC_BASE_URL=https://varterm.com
 ```
 

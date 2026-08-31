@@ -11,7 +11,13 @@ Key pages:
 - Home (primary reader): https://varterm.com/
 - Long form TTS: https://varterm.com/long-form-tts
 - Markdown to speech: https://varterm.com/markdown-to-speech
+- About: https://varterm.com/about
 - Extensions: https://varterm.com/extensions
+- Cursor text to speech: https://varterm.com/extensions/cursor
+- VS Code text to speech: https://varterm.com/extensions/vscode
+- Chrome extension: https://varterm.com/extensions/chrome
+- ChatGPT to speech: https://varterm.com/chatgpt-to-speech
+- GitHub README to speech: https://varterm.com/github-readme-to-speech
 
 Developer/API:
 - OpenAPI schema: https://varterm.com/openapi.json
@@ -20,4 +26,4 @@ Developer/API:
 Extensions:
 - Open VSX (Cursor): https://open-vsx.org/extension/Varterm/varterm-cursor
 - VS Code Marketplace: https://marketplace.visualstudio.com/items?itemName=Varterm.varterm-cursor
-- Chrome extension info: https://varterm.com/extensions#chrome
+- Chrome extension info: https://varterm.com/extensions/chrome

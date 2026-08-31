@@ -1,7 +1,31 @@
+import { ttsRedirects } from './lib/tts-seo-slugs.js';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/',
+        has: [{ type: 'host', value: 'varterm.vercel.app' }],
+        destination: 'https://varterm.com/',
+        permanent: true,
+      },
+      {
+        source: '/:path+',
+        has: [{ type: 'host', value: 'varterm.vercel.app' }],
+        destination: 'https://varterm.com/:path+',
+        permanent: true,
+      },
+      ...ttsRedirects(),
+    ];
+  },
   async headers() {
     return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: '(?<host>.+\\.vercel\\.app)' }],
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+      },
       {
         // Allow CORS for API routes (needed for GPT Actions)
         source: '/api/:path*',

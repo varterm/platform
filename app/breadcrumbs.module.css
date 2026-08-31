@@ -1,0 +1,32 @@
+.nav {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0 0 16px;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sep {
+  opacity: 0.45;
+}
+
+.link {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--accent);
+}
+
+.current {
+  color: var(--text-secondary);
+}

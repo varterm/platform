@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Breadcrumbs from '../Breadcrumbs';
 import styles from './page.module.css';
 import {
   EDITOR_EXTENSION_VERSION,
@@ -17,12 +18,6 @@ export const metadata = {
   title: 'How to install Varterm extensions',
   description:
     'Install Varterm in Cursor or VS Code, then Auto-read the agent window. Play, pause, stop, and jump from the status bar.',
-  keywords: [
-    'install cursor extension vsix',
-    'vscode extension install vsix',
-    'varterm chrome extension install',
-    'varterm extensions',
-  ],
   alternates: {
     canonical: '/install-extensions',
   },
@@ -42,6 +37,13 @@ export default function InstallExtensionsGuide() {
         <Link href="/extensions" className={styles.backLink}>
           ← Extensions overview
         </Link>
+        <Breadcrumbs
+          items={[
+            { name: 'Home', path: '/' },
+            { name: 'Extensions', path: '/extensions' },
+            { name: 'Install', path: '/install-extensions' },
+          ]}
+        />
       </header>
 
       <main>

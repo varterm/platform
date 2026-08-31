@@ -1,13 +1,17 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import Breadcrumbs from '../../Breadcrumbs';
+import JsonLd from '../../JsonLd';
 import {
   getAllSlugs,
   getPostBySlug,
   markdownBodyToHtml,
 } from '@/lib/news';
+import { NEWS_AUTHOR, newsArticleSchema } from '@/lib/seo-schema';
+import { getSiteUrl } from '@/lib/site-url';
 import styles from './page.module.css';
 
-const siteUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://varterm.com';
+const siteUrl = getSiteUrl();
 
 export async function generateStaticParams() {
   const slugs = await getAllSlugs();
@@ -25,6 +29,7 @@ export async function generateMetadata({ params }) {
   return {
     title: post.title,
     description: post.description,
+    authors: [{ name: post.author || NEWS_AUTHOR }],
     alternates: { canonical: url },
     openGraph: {
       title: post.title,
@@ -57,18 +62,38 @@ export default async function NewsPostPage({ params }) {
   }
 
   const html = await markdownBodyToHtml(post.body);
+  const url = `${siteUrl}/news/${post.slug}`;
+  const author = post.author || NEWS_AUTHOR;
 
   return (
     <div className={styles.page}>
+      <JsonLd
+        data={newsArticleSchema({
+          title: post.title,
+          description: post.description,
+          url,
+          date: post.date,
+          author,
+        })}
+      />
       <header className={styles.header}>
         <Link href="/news" className={styles.backLink}>
           ← News
         </Link>
+        <Breadcrumbs
+          items={[
+            { name: 'Home', path: '/' },
+            { name: 'News', path: '/news' },
+            { name: post.title, path: `/news/${post.slug}` },
+          ]}
+        />
       </header>
       <article className={styles.article}>
-        <time dateTime={post.date} className={styles.meta}>
-          {formatNewsDate(post.date)}
-        </time>
+        <p className={styles.meta}>
+          <time dateTime={post.date}>{formatNewsDate(post.date)}</time>
+          {' · '}
+          <span>{author}</span>
+        </p>
         <h1>{post.title}</h1>
         {post.tags.length > 0 && (
           <ul className={styles.tags} aria-label="Topics">
@@ -84,6 +109,7 @@ export default async function NewsPostPage({ params }) {
       <footer className={styles.footer}>
         <Link href="/">Web app</Link>
         <Link href="/extensions">Extensions</Link>
+        <Link href="/about">About</Link>
       </footer>
     </div>
   );

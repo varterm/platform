@@ -5,6 +5,14 @@
   "installCommand": "npm install",
   "framework": "nextjs",
   "regions": ["iad1"],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "varterm.vercel.app" }],
+      "destination": "https://varterm.com/$1",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/api/(.*)",
@@ -14,6 +22,11 @@
         { "key": "Access-Control-Allow-Methods", "value": "GET,POST,OPTIONS" },
         { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization, X-ElevenLabs-Api-Key" }
       ]
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "(?<host>.+\\.vercel\\.app)" }],
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
     }
   ]
 }

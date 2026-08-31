@@ -1,10 +1,10 @@
 import Link from 'next/link';
+import Breadcrumbs from '../Breadcrumbs';
 import styles from './page.module.css';
 
 export const metadata = {
   title: 'Long Form Text to Speech | Convert Documents to Audio Free',
   description: 'Convert long documents, articles, and ebooks to natural speech. Our long form TTS handles unlimited text length with automatic chunking. Free, no signup required.',
-  keywords: ['long form tts', 'document to speech', 'ebook to audio', 'long text to speech', 'bulk text to speech', 'article to audio'],
   alternates: {
     canonical: '/long-form-tts',
   },
@@ -46,6 +46,12 @@ export default function LongFormTTS() {
         <Link href="/" className={styles.backLink}>
           ← Back to Varterm
         </Link>
+        <Breadcrumbs
+          items={[
+            { name: 'Home', path: '/' },
+            { name: 'Long-form TTS', path: '/long-form-tts' },
+          ]}
+        />
       </header>
 
       <main className={styles.main}>
