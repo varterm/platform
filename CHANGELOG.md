@@ -7,7 +7,10 @@
 - NewsArticle schema, visible author, and breadcrumbs on news posts.
 - Dedicated landing pages: `/about`, `/extensions/cursor`, `/extensions/vscode`, `/extensions/chrome`, `/chatgpt-to-speech`, `/github-readme-to-speech`.
 - Homepage body links to the long-form guide, markdown guide, and Cursor extension page.
-- Cloud voice language picker for Microsoft neural voices outside the English list.
+- **The reader speaks 29 languages.** A language picker above the voice list adds 56 cloud voices across 28 languages beyond English, one female and one male each: Arabic, Bengali, Chinese, Chinese (Traditional), Dutch, Farsi, French, German, Hebrew, Hindi, Indonesian, Italian, Japanese, Korean, Malayalam, Polish, Portuguese, Romanian, Russian, Spanish, Swahili, Tamil, Telugu, Thai, Turkish, Ukrainian, Urdu, and Vietnamese. English stays the default and its voice list is unchanged. Varterm reads what you paste; it does not translate it.
+- The language set tracks the languages YouTube's automatic dubbing covers, so a transcript taken from a video always has a voice able to read it back. Punjabi is the one language in that set we cannot offer, because Microsoft publishes no Punjabi neural voice.
+- `scripts/build-voice-catalog.mjs` regenerates `lib/cloud-languages.js` from Microsoft's live voice list. Voice names are not permanent, so the catalog is generated rather than hand-kept, and re-running the script is the fix when a voice is retired.
+- Offline Piper voices remain English-only, so the picker appears on the cloud tier only.
 
 ### Changed
 - Title template is `| Varterm TTS` only. Page titles no longer bake in a second brand suffix.
