@@ -1,6 +1,6 @@
 # Marketing Sync Matrix
 
-Last updated: 2026-08-25  
+Last updated: 2026-08-31  
 Reference strategy: `marketing-strategy-canonical.md`
 
 Status legend:
@@ -16,6 +16,7 @@ Status legend:
 - `P4` Cross-platform support
 - `P5` Listener experience quality
 - `P6` Mission and partner alignment
+- `P7` Language reach (29 languages on the cloud tier; reading, not translation)
 
 ## Pages and assets
 
@@ -34,6 +35,8 @@ Status legend:
 | `README.md` | Partial | Partial | Partial | Aligned | Partial | Gap | Developer-focused docs; not a full messaging source. |
 | `public/llms.txt` + `public/llms-full.txt` | Partial | Aligned | Partial | Aligned | Partial | Gap | Useful machine-readable summary, but mission can be clearer. |
 
+`P7` is a gap on every surface: the capability shipped, nothing points at it.
+
 ## Immediate sync actions
 
 1. Add explicit mission sentence on homepage and extension landing content.
@@ -41,3 +44,4 @@ Status legend:
 3. Add a partner-facing block/page for archives, libraries, and publishers.
 4. Update metadata snippets to include privacy-conscious and listener-quality framing where accurate.
 5. Refresh this matrix after each content release.
+6. Give language reach a surface. Nothing currently says the reader speaks 29 languages, so the search demand for "text to speech in \<language\>" goes unclaimed. Keep the claim to reading, not translation.

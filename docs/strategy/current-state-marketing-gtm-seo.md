@@ -1,6 +1,6 @@
 # Varterm Current-State Marketing, GTM, and SEO
 
-Last updated: 2026-08-25  
+Last updated: 2026-08-31  
 Scope: current live messaging and repo-backed strategy before additional copy/site changes.
 
 Companion docs:
@@ -52,6 +52,7 @@ Primary live claims:
 - Multi-platform support (Web, Cursor, VS Code, Chrome).
 - Editor **Auto-read** for the agent window, plus play / pause / stop / jump on the status bar.
 - Multiple voice modes (cloud neural, browser, offline/local via Piper in browser).
+- 29 languages on the cloud tier (English plus 28), 56 voices. Reading only — Varterm does not translate.
 
 Current tone:
 - Practical, tool-first, developer-friendly.
@@ -97,6 +98,7 @@ Current tone:
 ### Keyword posture
 - Strong on: free/no signup, long-form, markdown, read aloud, editor/browser extension terms.
 - Present but underemphasized in copy: privacy-first for hackers, special-character robustness, mission narrative.
+- Shipped but not yet targeted at all: non-English reading. 29 languages are live with no page, slug, or metadata pointing at them.
 
 ## 5) Gap analysis vs desired direction
 
@@ -114,6 +116,7 @@ Current gaps:
 - **Special-character handling is functionally present but not named as a first-class benefit.**
 - **Listener experience language is diffuse.** Features exist (chunking/progress/controls), but not grouped into one narrative.
 - **Partner-facing GTM copy is not formalized.** No dedicated “for publishers/archives/libraries” messaging block yet.
+- **Language reach is invisible.** The reader speaks 29 languages, but every page still reads as English-only. No landing page, long-tail slug, or `hreflang` signal exists for “text to speech in \<language\>”, which is high-volume search we currently forfeit.
 
 ## 6) Recommended unified messaging architecture (before more edits)
 
