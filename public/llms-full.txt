@@ -13,7 +13,7 @@ Core capabilities:
 3) Markdown sanitization for cleaner speech.
 4) API endpoints for voice listing and synthesis.
 5) Extension workflows for Cursor/VS Code and Chrome browser use cases.
-6) Editor Auto-read for the agent window, with play / pause / stop / jump on the status bar. Highlight text to hear it. Speed (0.75×–2×) and voice preview from the status bar. Current editor build: 0.1.49.
+6) Editor Auto-read for the agent window, with play / pause / stop / jump on the status bar. Highlight text to hear it. Speed (0.75×–2×) and voice preview from the status bar. A listen queue holds the next reply instead of cutting you off. Current editor build: 0.1.55.
 7) Chrome page, video-transcript, and optional AI-chat auto-read. Search a transcript, jump to a line, change speed, and hear new replies only after you grant that site.
 
 Primary user intents:
