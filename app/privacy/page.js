@@ -138,7 +138,12 @@ export default function PrivacyPage() {
             </li>
             <li>
               <strong>Host permissions:</strong> Allows requests to Varterm API endpoints for
-              speech generation.
+              speech generation (<code>www.varterm.com/api</code> only at install).
+            </li>
+            <li>
+              <strong>Optional site access:</strong> Asked only if you turn on auto-read for an AI
+              chat you already have open. Each grant is that one site. Revoking it in Chrome turns
+              the feature off.
             </li>
           </ul>
         </section>

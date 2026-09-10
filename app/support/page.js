@@ -66,6 +66,9 @@ export default function SupportPage() {
               <Link href="/extensions">Extension setup guide</Link>
             </li>
             <li>
+              <Link href="/extensions/chrome">Chrome: transcripts, jump, optional chat auto-read</Link>
+            </li>
+            <li>
               <Link href="/privacy">Privacy policy</Link>
             </li>
             <li>

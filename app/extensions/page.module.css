@@ -50,6 +50,16 @@
   font-size: 0.8rem;
 }
 
+.kbd {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  font-family: inherit;
+  font-size: 0.85em;
+}
+
 .section {
   margin-bottom: 16px;
 }
@@ -68,6 +78,19 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 16px;
+}
+
+.featureList {
+  margin: 0 0 22px;
+  padding-left: 20px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  max-width: 760px;
+}
+
+.featureList li {
+  margin: 8px 0;
 }
 
 .card {

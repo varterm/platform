@@ -48,7 +48,8 @@ export default function AboutPage() {
             <Link href="/extensions/cursor">Cursor</Link>,{' '}
             <Link href="/extensions/vscode">VS Code</Link>, and{' '}
             <Link href="/extensions/chrome">Chrome</Link> extensions — including Agent Auto-read for
-            finished Cursor replies.
+            finished Cursor replies, and in Chrome a searchable video transcript plus optional
+            auto-read of AI chat replies you grant.
           </p>
           <p>
             Source for the editor and browser extensions is MIT licensed on{' '}

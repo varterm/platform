@@ -16,14 +16,14 @@ const CHROME_EXTENSION_LINK = 'https://chromewebstore.google.com/';
 export const metadata = {
   title: 'Extensions',
   description:
-    'Install Varterm TTS for Cursor, VS Code, and Chrome. Agent Auto-read speaks finished replies — one install, every window, zero echo.',
+    'Install Varterm TTS for Cursor, VS Code, and Chrome. Auto-read editor replies, or in Chrome listen to pages, video transcripts, and optional new chat replies.',
   alternates: {
     canonical: '/extensions',
   },
   openGraph: {
     title: 'Varterm Extensions',
     description:
-      'Install Varterm TTS across Cursor, VS Code, and Chrome with long-form and markdown-friendly playback.',
+      'Install Varterm TTS for Cursor, VS Code, and Chrome. Editor auto-read, searchable video transcripts, jump, speed, and optional chat auto-read.',
   },
 };
 
@@ -46,8 +46,9 @@ export default function ExtensionsPage() {
         <section className={styles.hero}>
           <h1>Varterm Extensions</h1>
           <p>
-            One install. Every window. Zero echo. <strong>Agent Auto-read</strong> speaks your
-            agent&apos;s replies while you keep working.
+            One install. Every window. Zero echo. <strong>Agent Auto-read</strong> speaks finished
+            editor replies. In Chrome, listen to a page or a video transcript, search the words,
+            jump, change speed, and optionally hear new chat replies as they finish.
           </p>
           <div className={styles.heroBadges}>
             <span className={styles.badge}>Agent Auto-read</span>
@@ -67,10 +68,10 @@ export default function ExtensionsPage() {
           <article className={styles.card} id="editors">
             <h2>Cursor / VS Code Extension</h2>
             <p>
-              Search <strong>Varterm TTS</strong> in Extensions and flip on{' '}
-              <strong>Agent Auto-read</strong>. Send a prompt, go back to your file, and the reply
-              reads itself when it lands — no parking on the chat panel. One install, every window,
-              zero echo.
+              Search <strong>Varterm TTS</strong> in Extensions. Highlight text to hear it —
+              nothing is copied. Flip on <strong>Agent Auto-read</strong> and a finished reply
+              plays while you keep working. One install, every window, zero echo. Change speed
+              (0.75×–2×) or voice from the status bar.
             </p>
             <p>
               Long answers split into parts, so you jump forward past the preamble or back to the
@@ -154,14 +155,29 @@ export default function ExtensionsPage() {
 
           <article className={styles.card} id="chrome">
             <h2>Chrome Extension</h2>
-            <p>Read selected text or entire pages directly in your browser, including long-form articles and markdown-style AI outputs.</p>
+            <p>
+              Read a selection, a long page, or a video transcript without leaving the tab. Search
+              the words, jump back or ahead, and change speed from the popup. Optionally hear new
+              AI chat replies as they finish — off until you grant that site.
+            </p>
             <a href={CHROME_EXTENSION_LINK} target="_blank" rel="noreferrer" className={styles.cta}>
               Install on Chrome
             </a>
             <ol>
-              <li>Install extension and pin it to toolbar.</li>
-              <li>Select text and use the floating button or context menu for long passages and markdown blocks.</li>
-              <li>If testing locally: open `chrome://extensions` and use Load unpacked.</li>
+              <li>Install the extension and pin it to the toolbar.</li>
+              <li>
+                Select text and use the floating button, the context menu, or{' '}
+                <kbd className={styles.kbd}>Alt+Shift+R</kbd>. Chrome uses Ctrl+Shift+R to reload.
+              </li>
+              <li>
+                On a video with captions, press <strong>Read Video Transcript</strong>. Search the
+                panel, then click a timestamp to jump the video.
+              </li>
+              <li>
+                To auto-read new chat replies, tick a site under <strong>Read AI replies</strong>{' '}
+                and approve Chrome’s prompt.
+              </li>
+              <li>For local testing: open <code>chrome://extensions</code> and use Load unpacked.</li>
             </ol>
           </article>
 

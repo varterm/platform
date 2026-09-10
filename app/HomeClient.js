@@ -1175,9 +1175,9 @@ export default function HomeClient({ featuredNews = null }) {
             <div className={styles.platformCardBody}>
               <h3>Cursor &amp; VS Code</h3>
               <p>
-                <strong>Agent Auto-read</strong> speaks finished replies while you keep coding.
-                Long answers split into parts you can jump through. One install, every window,
-                zero echo.
+                Highlight text to hear it. <strong>Agent Auto-read</strong> speaks finished
+                replies while you keep coding. Change speed or voice from the status bar. One
+                install, every window, zero echo.
               </p>
             </div>
             <Link href="/extensions#editors" className={styles.platformCta}>
@@ -1188,7 +1188,8 @@ export default function HomeClient({ featuredNews = null }) {
             <div className={styles.platformCardBody}>
               <h3>Chrome</h3>
               <p>
-                Read a selection or an entire long-form page without leaving the tab you are on.
+                Read a selection, a page, or a video transcript. Search the words, jump, change
+                speed, and optionally hear new AI chat replies as they arrive.
               </p>
             </div>
             <Link href="/extensions#chrome" className={styles.platformCta}>

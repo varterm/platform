@@ -17,7 +17,7 @@ const CHROME_WEBSTORE_URL = 'https://chromewebstore.google.com/';
 export const metadata = {
   title: 'How to install Varterm extensions',
   description:
-    'Install Varterm in Cursor or VS Code, then Auto-read the agent window. Play, pause, stop, and jump from the status bar.',
+    'Install Varterm in Cursor, VS Code, or Chrome. Auto-read the editor agent window, or in Chrome listen to pages, video transcripts, and optional new chat replies.',
   alternates: {
     canonical: '/install-extensions',
   },
@@ -118,11 +118,12 @@ export default function InstallExtensionsGuide() {
               <strong>Reload</strong> if Cursor asks.
             </li>
             <li>
-              Click <strong>Install</strong> (user), not Install Workspace Extension. Flip on{' '}
+              Click <strong>Install</strong> (user), not Install Workspace Extension. Highlight
+              text and click the status bar icon to hear it — nothing is copied. Flip on{' '}
               <strong>Agent Auto-read</strong> — one install, every window, zero echo. Play, pause,
-              stop, jump. Or run{' '}
-              <code>Varterm: Read Clipboard Aloud</code> /{' '}
-              <code>Varterm: Read Editor/Selection Aloud</code>.
+              stop, jump. The <strong>1×</strong> chip opens speed and voice. Or run{' '}
+              <code>Varterm: Read Selection Aloud</code> /{' '}
+              <code>Varterm: Read Clipboard Aloud</code>.
             </li>
           </ol>
           <h3>From a .vsix file</h3>
@@ -203,7 +204,9 @@ export default function InstallExtensionsGuide() {
         <article className={styles.block} id="chrome-web-store">
           <h2>Chrome extension — Chrome Web Store (or unpacked)</h2>
           <p>
-            The browser extension reads selection and pages in Chrome. Prefer the packaged listing unless you
+            The browser extension reads a selection, a long page, or a video transcript in Chrome.
+            You can search the transcript, jump, and change speed from the popup. Auto-read of AI
+            chat replies is optional and asked for per site. Prefer the packaged listing unless you
             are developing or QA&apos;ing a local build. Until a single stable listing URL is finalized,{' '}
             use the Chrome Web Store home and search <strong>Varterm</strong>, or{' '}
             <Link href="/extensions#chrome">extensions hub → Chrome</Link> when we publish the direct listing
@@ -226,12 +229,17 @@ export default function InstallExtensionsGuide() {
               Pin the extension (puzzle icon → pin) so the toolbar control is visible.
             </li>
             <li>
-              On a page, <strong>select text</strong> and use the in-page controls or context menu commands
-              (wording varies by version) for passages and markdown-heavy blocks.
+              On a page, <strong>select text</strong> and use the floating button, the context menu, or{' '}
+              <kbd className={styles.kbd}>Alt+Shift+R</kbd>. Chrome uses Ctrl+Shift+R to reload.
             </li>
             <li>
-              Grant any permission prompts Chrome shows for the sites where you want read-aloud—extensions can
-              only act where the browser allows.
+              On a video with captions, open <strong>Read Video Transcript</strong>. Search the
+              reader panel, then click a timestamp to jump the video.
+            </li>
+            <li>
+              To hear new AI chat replies as they finish, tick that site under{' '}
+              <strong>Read AI replies</strong> and approve Chrome’s prompt. Existing replies stay
+              quiet. Revoking Site access turns that site off.
             </li>
           </ol>
           <h3>Unpacked install (contributors / QA)</h3>

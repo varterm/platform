@@ -13,7 +13,8 @@ Core capabilities:
 3) Markdown sanitization for cleaner speech.
 4) API endpoints for voice listing and synthesis.
 5) Extension workflows for Cursor/VS Code and Chrome browser use cases.
-6) Editor Auto-read for the agent window, with play / pause / stop / jump on the status bar.
+6) Editor Auto-read for the agent window, with play / pause / stop / jump on the status bar. Highlight text to hear it. Speed (0.75×–2×) and voice preview from the status bar. Current editor build: 0.1.49.
+7) Chrome page, video-transcript, and optional AI-chat auto-read. Search a transcript, jump to a line, change speed, and hear new replies only after you grant that site.
 
 Primary user intents:
 - "read this long text aloud"
@@ -21,6 +22,8 @@ Primary user intents:
 - "listen to ChatGPT/AI output"
 - "text to speech in Cursor/VS Code"
 - "browser page read aloud"
+- "listen to a video transcript"
+- "auto-read AI chat replies in the browser"
 
 Important URLs:
 - Home: https://varterm.com/

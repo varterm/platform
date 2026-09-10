@@ -1,6 +1,6 @@
 # Marketing Sync Matrix
 
-Last updated: 2026-08-31  
+Last updated: 2026-09-08  
 Reference strategy: `marketing-strategy-canonical.md`
 
 Status legend:
@@ -26,8 +26,8 @@ Status legend:
 | `app/layout.js` | Aligned | Aligned | Partial | Aligned | Partial | Gap | Metadata good; limited mission language. |
 | `app/long-form-tts/page.js` | Aligned | Aligned | Partial | Partial | Aligned | Gap | Great long-form messaging; partner framing absent. |
 | `app/markdown-to-speech/page.js` | Aligned | Partial | Aligned | Partial | Aligned | Gap | Strong markdown positioning; special-character story can be stronger. |
-| `app/extensions/page.js` | Partial | Aligned | Partial | Aligned | Partial | Gap | Platform story strong; privacy mission underemphasized. |
-| `app/install-extensions/page.js` | Partial | Partial | Partial | Aligned | Partial | Gap | Procedural install content; strategic framing minimal. |
+| `app/extensions/page.js` | Partial | Aligned | Partial | Aligned | Aligned | Gap | Chrome now names transcript search, jump/speed, and optional chat auto-read. |
+| `app/install-extensions/page.js` | Partial | Partial | Partial | Aligned | Aligned | Gap | Chrome install steps cover transcripts, Alt+Shift+R, and per-site auto-read. |
 | `app/privacy/page.js` | Aligned | Partial | Partial | Partial | Partial | Gap | Policy support is solid; could connect to mission language elsewhere. |
 | `app/support/page.js` | Partial | Gap | Gap | Partial | Partial | Gap | Primarily functional support contact page. |
 | `app/tts/page.js` + `app/tts/[slug]/page.js` | Aligned | Aligned | Aligned | Aligned | Partial | Gap | Good SEO bridge; mission line not explicit. |

@@ -33,6 +33,14 @@ export default function ExtensionProductPage({ productKey }) {
           </div>
         </section>
 
+        {product.features?.length ? (
+          <ul className={styles.featureList}>
+            {product.features.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        ) : null}
+
         <article className={styles.card}>
           <div className={styles.ctaStack}>
             <a href={product.storeHref} target="_blank" rel="noreferrer" className={styles.cta}>

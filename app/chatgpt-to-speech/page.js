@@ -5,12 +5,12 @@ import styles from '../long-form-tts/page.module.css';
 export const metadata = {
   title: 'ChatGPT to Speech',
   description:
-    'Listen to ChatGPT answers aloud. Paste AI output, strip markdown, and play natural speech — free, no signup.',
+    'Listen to ChatGPT answers aloud. Paste AI output, or stay in Chrome and auto-read each new reply. Markdown stripped — free, no signup.',
   alternates: { canonical: '/chatgpt-to-speech' },
   openGraph: {
     title: 'ChatGPT to Speech',
     description:
-      'Turn ChatGPT and other AI answers into clean audio. Markdown stripped, long replies chunked.',
+      'Paste a ChatGPT answer or stay in Chrome and auto-read each new reply. Markdown stripped, long replies chunked.',
     url: '/chatgpt-to-speech',
   },
 };
@@ -65,6 +65,14 @@ export default function ChatGptToSpeechPage() {
               <p>
                 Skip the paste step: Agent Auto-read speaks finished replies in the editor.{' '}
                 <Link href="/extensions/cursor">Cursor text to speech extension</Link>.
+              </p>
+            </article>
+            <article className={styles.feature}>
+              <h3>In Chrome</h3>
+              <p>
+                Stay on the chat tab. Optionally auto-read each new reply as it finishes, or press
+                the listen button on one reply. Jump and search work the same as on a page.{' '}
+                <Link href="/extensions/chrome">Chrome text to speech extension</Link>.
               </p>
             </article>
           </div>

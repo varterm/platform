@@ -13,7 +13,7 @@ export const metadata = {
     template: '%s | Varterm TTS',
   },
   description:
-    'Free text to speech with long-form support and markdown cleanup. Agent Auto-read speaks your Cursor agent replies — one install, every window, zero echo.',
+    'Free text to speech with long-form support and markdown cleanup. Agent Auto-read speaks Cursor replies. Chrome reads pages, video transcripts, and optional chat replies.',
   authors: [{ name: 'Varterm' }],
   creator: 'Varterm',
   publisher: 'Varterm',
