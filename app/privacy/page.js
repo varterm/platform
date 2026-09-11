@@ -101,6 +101,12 @@ export default function PrivacyPage() {
               <strong>ElevenLabs and Anthropic:</strong> used by the premium API and the
               extension document question feature, not by the web reader.
             </li>
+            <li>
+              <strong>Sentry:</strong> the editor extension may send crash and failed-read
+              reports (error type, editor version, OS). It does not send the text you
+              listen to. Off if you disable editor telemetry or{' '}
+              <code>vartermCursor.telemetry</code>.
+            </li>
           </ul>
         </section>
 

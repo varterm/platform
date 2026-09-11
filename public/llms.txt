@@ -5,7 +5,7 @@ Summary:
 - Free text to speech converter with long-form support and markdown cleanup.
 - No signup required. Unlimited usage on the main web reader.
 - Text to speech for web, Cursor, VS Code, and Chrome workflows.
-- Editor Auto-read plays the agent window when a reply finishes. Highlight text to hear it. Play, pause, stop, jump, and change speed or voice from the status bar. A listen queue holds the next reply. Current editor build: 0.1.55.
+- Editor Auto-read plays the agent window when a reply finishes. Highlight text to hear it. Play, pause, stop, jump, and change speed or voice from the status bar. A listen queue holds the next reply. Current editor build: 0.1.62.
 - Chrome reads a selection, a page, or a video transcript. Search the words, jump, change speed, and optionally hear new AI chat replies as they finish.
 
 Key pages:
