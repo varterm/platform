@@ -52,7 +52,7 @@ Primary live claims:
 - Multi-platform support (Web, Cursor, VS Code, Chrome).
 - Editor **Auto-read** for the agent window, plus play / pause / stop / jump on the status bar.
 - Multiple voice modes (cloud neural, browser, offline/local via Piper in browser).
-- 29 languages on the cloud tier (English plus 28), 56 voices. Reading only — Varterm does not translate.
+- 29 languages on the cloud tier (English plus 28), 66 voices across 31 locales. Reading only — Varterm does not translate.
 
 Current tone:
 - Practical, tool-first, developer-friendly.

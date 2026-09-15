@@ -1,6 +1,6 @@
 # Marketing Sync Matrix
 
-Last updated: 2026-09-08  
+Last updated: 2026-09-15  
 Reference strategy: `marketing-strategy-canonical.md`
 
 Status legend:
@@ -34,8 +34,9 @@ Status legend:
 | `content/news/*.md` + `app/news/*` | Partial | Aligned | Partial | Aligned | Partial | Partial | Good launch narrative; add more mission/partner stories. |
 | `README.md` | Partial | Partial | Partial | Aligned | Partial | Gap | Developer-focused docs; not a full messaging source. |
 | `public/llms.txt` + `public/llms-full.txt` | Partial | Aligned | Partial | Aligned | Partial | Gap | Useful machine-readable summary, but mission can be clearer. |
+| Editor store listing (`extensions/vscode/README.md`) | Aligned | Aligned | Partial | Aligned | Aligned | Gap | Names all 29 languages and the 66 voices as of 0.1.64. The only surface that does. |
 
-`P7` is a gap on every surface: the capability shipped, nothing points at it.
+`P7` is now claimed on the editor store listing and nowhere else. Every site surface still omits it, so the search demand for "text to speech in \<language\>" is still unclaimed on pages we control and rank with. The editor picker is served from `/api/edge-tts`, so the language set is the same 29 everywhere and the site can make the claim without any further build work.
 
 ## Immediate sync actions
 
@@ -44,4 +45,4 @@ Status legend:
 3. Add a partner-facing block/page for archives, libraries, and publishers.
 4. Update metadata snippets to include privacy-conscious and listener-quality framing where accurate.
 5. Refresh this matrix after each content release.
-6. Give language reach a surface. Nothing currently says the reader speaks 29 languages, so the search demand for "text to speech in \<language\>" goes unclaimed. Keep the claim to reading, not translation.
+6. Give language reach a site surface. The editor store listing now names the 29 languages and 66 voices; the homepage, `/extensions`, and `/tts/*` still do not, so the search demand for "text to speech in \<language\>" goes unclaimed where we rank. Keep the claim to reading, not translation.
