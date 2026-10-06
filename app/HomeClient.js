@@ -1176,8 +1176,8 @@ export default function HomeClient({ featuredNews = null }) {
             <div className={styles.platformCardBody}>
               <h3>Cursor &amp; VS Code</h3>
               <p>
-                Highlight text to hear it. <strong>Agent Auto-read</strong> speaks finished
-                replies while you keep coding. Change speed or voice from the status bar. One
+                Hear agent replies read aloud as they finish with <strong>Agent Auto-read</strong>,
+                or highlight any text and listen. Change speed or voice from the status bar. One
                 install, every window, zero echo.
               </p>
             </div>

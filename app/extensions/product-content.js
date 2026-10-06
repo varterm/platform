@@ -13,10 +13,10 @@ export const EXTENSION_PRODUCTS = {
     path: '/extensions/cursor',
     title: 'Cursor Text to Speech',
     description:
-      'Cursor text to speech: highlight to listen, Agent Auto-read, and a status-bar speed and voice menu. One install, every window, zero echo.',
+      'Text to speech for Cursor. Hear agent replies read aloud as they finish, or highlight any text and listen. Speed, voice, and playback from the status bar. Free, MIT, no account.',
     h1: 'Cursor Text to Speech',
     lede:
-      'Install Varterm TTS in Cursor. Highlight text to hear it — nothing is copied. Flip on Agent Auto-read and finished replies play while you keep working. Change speed or voice from the status bar.',
+      'Varterm reads Cursor aloud. Turn on Agent Auto-read and finished agent replies play while you keep working. Highlight text in any file and hear it. Jump through long replies part by part. Change speed or voice from the status bar.',
     storeLabel: 'Open VSX listing',
     storeHref: OPEN_VSX_EXTENSION_URL,
     secondary: [
@@ -39,7 +39,7 @@ export const EXTENSION_PRODUCTS = {
       'VS Code text to speech: highlight to listen, jump through long files, and change speed or voice from the status bar — free, MIT licensed.',
     h1: 'VS Code Text to Speech',
     lede:
-      'Search Varterm TTS in the VS Code Marketplace or Open VSX. Highlight text to hear it. Read the editor, a selection, or the clipboard without leaving the file.',
+      'Varterm reads VS Code aloud. Highlight text in any file and hear it, or read the whole editor or the clipboard without leaving the file. Long files split into parts you can jump through. Search Varterm TTS in the Marketplace or Open VSX.',
     storeLabel: 'VS Code Marketplace',
     storeHref: VSCODE_MARKETPLACE_URL,
     secondary: [

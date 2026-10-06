@@ -68,10 +68,10 @@ export default function ExtensionsPage() {
           <article className={styles.card} id="editors">
             <h2>Cursor / VS Code Extension</h2>
             <p>
-              Search <strong>Varterm TTS</strong> in Extensions. Highlight text to hear it —
-              nothing is copied. Flip on <strong>Agent Auto-read</strong> and a finished reply
-              plays while you keep working. One install, every window, zero echo. Change speed
-              (0.75×–2×) or voice from the status bar.
+              Text to speech for Cursor and VS Code. Turn on <strong>Agent Auto-read</strong> and
+              finished agent replies play while you keep working. Highlight text in any file and
+              hear it. One install, every window, zero echo. Change speed (0.75×–2×) or voice
+              from the status bar. Search <strong>Varterm TTS</strong> in Extensions.
             </p>
             <p>
               Long answers split into parts, so you jump forward past the preamble or back to the
