@@ -1149,8 +1149,9 @@ export default function HomeClient({ featuredNews = null }) {
             <p>
               An ElevenLabs integration for the most lifelike delivery we can offer, for the times a
               voice has to hold your attention through a long document rather than just get the
-              words out. It bills per character upstream, so it will be a paid add-on. The two
-              engines above stay free.
+              words out. It bills per character upstream, so the hosted version will be a paid
+              add-on. The two engines above stay free. Already have an ElevenLabs account? The
+              Cursor / VS Code extension takes your own key today.
             </p>
           </article>
         </div>
@@ -1399,8 +1400,9 @@ export default function HomeClient({ featuredNews = null }) {
             <div className={styles.featureIcon}>🪟</div>
             <h3>Ten windows, one voice</h3>
             <p>
-              Run a fleet of Cursor windows across repos. One user install covers all of them and
-              only the focused window speaks, so parallel agents never talk over each other.
+              Run a fleet of Cursor windows across repos. One user install covers all of them.
+              Finished replies join one queue and are read in the order they arrived, so parallel
+              agents never talk over each other.
             </p>
           </article>
         </div>
@@ -1415,8 +1417,9 @@ export default function HomeClient({ featuredNews = null }) {
             <h3>Agent Auto-read</h3>
             <p>
               Flip it on in Cursor and finished agent replies just play. One install covers every
-              window and only the focused one speaks, so ten windows never echo. Play, pause, stop,
-              and jump live in the status bar.{' '}
+              window, and replies from all of them are read one at a time in the order they
+              arrived, so ten windows never echo. Play, pause, stop, and jump live in the status
+              bar.{' '}
               <Link href="/extensions/cursor">Cursor text to speech extension</Link>.
             </p>
           </article>
@@ -1462,7 +1465,8 @@ export default function HomeClient({ featuredNews = null }) {
             <p>
               Microsoft neural voices that sound natural and expressive, in American, British, and
               Australian accents with adjustable speed — free and unmetered. Studio-grade ElevenLabs
-              voices are coming as a paid add-on for when you need more.
+              voices are coming as a paid add-on here; the editor extension already accepts your
+              own ElevenLabs key.
             </p>
           </article>
           <article className={styles.featureCard}>

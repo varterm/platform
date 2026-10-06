@@ -26,8 +26,9 @@ export const EXTENSION_PRODUCTS = {
     steps: [
       'Extensions view → search Varterm TTS → Install (user), then reload other Cursor windows.',
       'Highlight text and click the status bar icon, or right-click Read Selection Aloud. Nothing is copied.',
-      'Click Agent Auto-read in the status bar. A finished reply plays in the focused window only.',
-      'Use play, pause, stop, and jump. The 1× chip opens speed (0.75×–2×) and voice. Click the speaker on a voice to preview.',
+      'Click Agent Auto-read in the status bar. Finished replies from every open window join one queue and are read in the order they arrived, so parallel agents never talk over each other.',
+      'Markdown is stripped before speech, so headings, code fences, and links are not read out as punctuation.',
+      'Use play, pause, stop, and jump. The 1× chip opens speed (0.75×–2×) and voice. Click the speaker on a voice to preview. 66 free neural voices across 29 languages, or set your own ElevenLabs key for Premium voices.',
       'Optional .vsix from GitHub Releases if search is empty or you want a pinned build.',
     ],
   },
@@ -48,7 +49,7 @@ export const EXTENSION_PRODUCTS = {
     steps: [
       'Extensions view → search Varterm TTS → Install.',
       'Highlight text and click the status bar icon, or run Varterm: Read Selection Aloud. Nothing is copied.',
-      'Use the 1× chip for speed (0.75×–2×) and voice. Long files split into parts so playback starts on part one.',
+      'Use the 1× chip for speed (0.75×–2×) and voice. Long files split into parts so playback starts on part one. Markdown is stripped before speech.',
     ],
   },
   chrome: {

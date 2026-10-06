@@ -1,7 +1,7 @@
 ---
 title: Editor 0.1.66 — one queue across every window
 slug: editor-0-1-66
-date: 2026-09-17
+date: 2026-09-18
 tags:
   - extensions
   - vscode

@@ -75,9 +75,10 @@ export default function ExtensionsPage() {
             </p>
             <p>
               Long answers split into parts, so you jump forward past the preamble or back to the
-              line that mattered instead of scrolling the chat. Same engine handles whole files,
-              RFCs, and multi-page docs — playback starts on part one while the rest generates.
-              Editor, selection, and clipboard work the same way.
+              line that mattered instead of scrolling the chat. Markdown is stripped before speech.
+              Same engine handles whole files, RFCs, and multi-page docs — playback starts on part
+              one while the rest generates. Editor, selection, and clipboard work the same way. 66
+              free neural voices across 29 languages, or bring your own ElevenLabs key.
             </p>
             <p className={styles.note}>
               Cursor installs from{' '}
@@ -141,9 +142,10 @@ export default function ExtensionsPage() {
                 Run <code>Varterm: Connect</code> only if you use a custom server or token.
               </li>
               <li>
-                Click <strong>Agent Auto-read</strong> in the status bar. A finished reply plays in
-                the focused window only — extra Cursor windows stay quiet. Use play/pause, stop,
-                and jump. Play reads an editor selection if you have one.
+                Click <strong>Agent Auto-read</strong> in the status bar. Finished replies from
+                every open Cursor window join one queue and are read in the order they arrived, so
+                parallel agents never talk over each other. Use play/pause, stop, and jump. Play
+                reads an editor selection if you have one.
               </li>
               <li>
                 Run <code>Varterm: Read Clipboard Aloud</code> or{' '}
