@@ -2,7 +2,7 @@
 // Microsoft Edge TTS API endpoint - FREE neural voices
 
 import { NextResponse } from 'next/server';
-import { EdgeTTS } from '@andresaya/edge-tts';
+import { CloudEdgeTTS } from '@/lib/edge-tts-client';
 import { CLOUD_LANGUAGES } from '@/lib/cloud-languages';
 
 // Popular Microsoft Edge neural voices
@@ -165,7 +165,7 @@ export async function POST(request) {
     }
 
     // Create TTS instance and synthesize
-    const tts = new EdgeTTS();
+    const tts = new CloudEdgeTTS();
     
     const options = {};
     if (rateValue !== undefined) {
