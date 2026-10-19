@@ -2,7 +2,7 @@
 // Microsoft Edge TTS API endpoint - FREE neural voices
 
 import { NextResponse } from 'next/server';
-import { CloudEdgeTTS } from '@/lib/edge-tts-client';
+import { CloudEdgeTTS, synthesizeWithRetries } from '@/lib/edge-tts-client';
 import { CLOUD_LANGUAGES } from '@/lib/cloud-languages';
 
 // Popular Microsoft Edge neural voices
@@ -164,32 +164,26 @@ export async function POST(request) {
       rateValue = Math.round((rate - 1) * 100);
     }
 
-    // Create TTS instance and synthesize
-    const tts = new CloudEdgeTTS();
-    
     const options = {};
     if (rateValue !== undefined) {
       options.rate = rateValue;
     }
-    
+
+    // A 403 on the token window, or a socket that closes before audio, fails
+    // the whole read today. Retry the neighbouring windows before telling the
+    // user it failed. The message stays generic: the socket detail is a
+    // Microsoft response, not something the reader can act on.
+    let audioBuffer;
     try {
-      await tts.synthesize(text, resolvedVoice, options);
+      audioBuffer = await synthesizeWithRetries(async (clockSkewSeconds) => {
+        const tts = new CloudEdgeTTS();
+        await tts.synthesize(text, resolvedVoice, { ...options, clockSkewSeconds });
+        return tts.toBuffer();
+      });
     } catch (synthError) {
       console.error('Synthesize error:', synthError);
       return NextResponse.json(
         { success: false, error: 'Speech synthesis failed. Please try again.' },
-        { status: 500 }
-      );
-    }
-    
-    // Get audio as buffer - check if data exists
-    let audioBuffer;
-    try {
-      audioBuffer = tts.toBuffer();
-    } catch (bufferError) {
-      console.error('Buffer error:', bufferError);
-      return NextResponse.json(
-        { success: false, error: 'Failed to generate audio. The text may be too short or contain unsupported characters.' },
         { status: 500 }
       );
     }
